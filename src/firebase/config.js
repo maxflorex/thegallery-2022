@@ -11,3 +11,15 @@ const firebaseConfig = {
 
 // INITIALIZE FIREBASE
 const app = initializeApp(firebaseConfig);
+
+// INIT SERVICES
+export const db = getFirestore()
+
+// FIREBASE CLOUD STORAGE
+export const storage = getStorage(app)
+
+// AUTHENTIFICATION
+export const auth = getAuth(app)
+
+// COLLECTIONS REF
+export const colRefCollections = collection(db, 'collections')

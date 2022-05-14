@@ -1,0 +1,1 @@
+export const inputtw = 'py-3 px-4 bg-slate-100 focus:bg-transparent rounded-lg focus:outline-none outline-none w-96 place-self-center border-transparent focus:border-slate-400 border-[1px] box-content active:scale-105 text-lg hover:border-slate-400'
