@@ -10,14 +10,16 @@ import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import { onAuthStateChanged } from 'firebase/auth';
 import { auth } from './firebase/config';
-import { useDispatch, useSelector } from 'react-redux';
-import { useEffect } from 'react';
-import { login, logout, selectUser } from './redux/userSlice';
+import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { login, logout } from './redux/userSlice';
+import axios from 'axios';
+import { AppContext } from './context/appContext'
 
 
 function App() {
-  // const [user, setUser] = useState('')  
   const dispatch = useDispatch();
+  const [dataArtists, setDataArtists] = useState({})
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -36,20 +38,35 @@ function App() {
     });
   }, []);
 
+
+  useEffect(() => {
+    axios.get(`https://api.artic.edu/api/v1/artworks`)
+      .then(res => {
+        const art = res.data.data;
+        setDataArtists(art)
+      }).catch((error) => {
+        console.log(error);
+      });
+  }, [])
+
+  console.log(dataArtists);
+
   return (
-    <Router>
-      <Navbar />
-      <Routes>
-        <Route exact path={'/'} element={<Home />} />
-        <Route path={'/contact'} element={<Contact />} />
-        <Route path={'/artworks'} element={<Artworks />} />
-        <Route path={'/about'} element={<About />} />
-        <Route path={'/login'} element={<Account />} />
-        <Route path={'/dashboard'} element={<Dashboard />} />
-        <Route path='*' element={<NotFound />} />
-      </Routes>
-      <Footer />
-    </Router>
+    <AppContext.Provider value={{ dataArtists }}>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route exact path={'/'} element={<Home />} />
+          <Route path={'/contact'} element={<Contact />} />
+          <Route path={'/artworks'} element={<Artworks />} />
+          <Route path={'/about'} element={<About />} />
+          <Route path={'/login'} element={<Account />} />
+          <Route path={'/dashboard'} element={<Dashboard />} />
+          <Route path='*' element={<NotFound />} />
+        </Routes>
+        <Footer />
+      </Router>
+    </AppContext.Provider>
   );
 }
 

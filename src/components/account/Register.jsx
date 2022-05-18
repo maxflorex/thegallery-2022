@@ -38,8 +38,7 @@ const Register = ({ show, setShow }) => {
                     console.log(error);
                 }
             } catch (error) {
-                console.log(error.message);
-                alert('Wrong Credentials!');
+                console.log('Profile was not updated' + '' + error.message);
             }
         } catch (error) {
             console.log(error.message);

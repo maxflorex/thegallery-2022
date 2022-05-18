@@ -1,34 +1,39 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import logo from '../assets/logo-typo-line-01.svg';
+import ModalMenu from './ModalMenu';
 
 const Navbar = () => {
-    const user = useSelector((state) => state.user.user);
+    const [showMenu, setShowMenu] = useState(false);
+
+    // HANDLE CLICK
+    const handleClick = (e) => {
+        if (e.target.classList.contains('dismiss')) {
+            setShowMenu(!showMenu);
+        }
+    };
 
     return (
-        <nav className="bg-blue-500 p-8">
-            <div className="flex gap-4 justify-between items-center h-16">
-                <div className="flex gap-4">
-                    <Link to="/">Home</Link>
-                    <Link to="/contact">Contact</Link>
-                    <Link to="/artworks">Artworks</Link>
-                    <Link to="/about">About</Link>
-                </div>
-                {user !== null ? (
-                    <div className='flex items-center gap-4'>
-                        <Link to="/dashboard">Dashboard</Link>
-                        <div className="flex gap-4 items-center p-2 rounded-lg hover:bg-cream-500 cursor-pointer">
-                            <h1>Hello, {user.displayName}</h1>
-                            <img
-                                src={user.photoUrl}
-                                alt="Profile"
-                                className="w-12 h-12 rounded-full object-cover"
-                            />
-                        </div>
-                    </div>
-                ) : (
-                    <Link to="/login">Login</Link>
-                )}
+        <nav
+            className="px-8 py-4 fixed top-0 w-full text-blue-500 z-[50] font-semibold flex justify-between dismiss"
+            onClick={handleClick}
+        >
+            <Link className="hover:scale-125" to="/">
+                <img src={logo} alt="" className="w-32" />
+            </Link>
+            <div className="burger">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    className="bg-cream-100 p-2 rounded-lg fill-navy-500 hover:scale-110 cursor-pointer"
+                    onClick={() => setShowMenu(!showMenu)}
+                >
+                    <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
+                </svg>
+
+                {showMenu && <ModalMenu handleClick={handleClick} />}
             </div>
         </nav>
     );
