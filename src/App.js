@@ -19,7 +19,8 @@ import { AppContext } from './context/appContext'
 
 function App() {
   const dispatch = useDispatch();
-  const [dataArtists, setDataArtists] = useState({})
+  const [dataArtists, setDataArtists] = useState({})  
+  const [w, setW] = useState('');
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -49,10 +50,8 @@ function App() {
       });
   }, [])
 
-  console.log(dataArtists);
-
   return (
-    <AppContext.Provider value={{ dataArtists }}>
+    <AppContext.Provider value={{ dataArtists, setW, w }}>
       <Router>
         <Navbar />
         <Routes>
