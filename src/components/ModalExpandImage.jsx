@@ -54,7 +54,7 @@ const ModalExpandImage = ({ data, setClicked }) => {
                 className="fixed top-8 right-8 px-4 py-2 bg-off-1 rounded-full font-semibold hover:bg-pink-500 cursor-pointer dismiss duration-700 transition-all"
                 onClick={ModalExpandImage}
             >
-                x
+                Close
             </span>
         </div>
     );

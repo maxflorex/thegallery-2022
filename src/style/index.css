@@ -1,5 +1,5 @@
 * {
-  transition: 0.4s ease-in-out;
+    transition: 0.4s ease-in-out;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:wght@100;200;300;400;500;600;700;800;900&display=swap');
@@ -15,6 +15,11 @@
 
 /* Hide scrollbar for IE, Edge and Firefox */
 .no-scrollbar {
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+}
+
+#root {
+    min-height: 100vh;
+    overflow: auto;
 }

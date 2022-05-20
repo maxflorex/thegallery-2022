@@ -15,12 +15,9 @@ const Navbar = () => {
 
     return (
         <nav
-            className="px-8 py-4 fixed top-0 w-full text-blue-500 z-[50] font-semibold flex justify-between dismiss"
+            className="px-8 py-4 fixed top-4 w-full text-blue-500 z-[50] font-semibold flex justify-between dismiss"
             onClick={handleClick}
         >
-            <Link className="hover:scale-125" to="/">
-                <img src={logo} alt="" className="w-32" />
-            </Link>
             <div className="burger">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -35,6 +32,9 @@ const Navbar = () => {
 
                 {showMenu && <ModalMenu handleClick={handleClick} />}
             </div>
+            <Link className="hover:scale-125" to="/">
+                <img src={logo} alt="" className="w-32" />
+            </Link>
         </nav>
     );
 };

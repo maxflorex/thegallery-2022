@@ -19,7 +19,7 @@ import { AppContext } from './context/appContext'
 
 function App() {
   const dispatch = useDispatch();
-  const [dataArtists, setDataArtists] = useState({})  
+  const [dataArtists, setDataArtists] = useState({})
   const [w, setW] = useState('');
 
   useEffect(() => {
@@ -53,17 +53,17 @@ function App() {
   return (
     <AppContext.Provider value={{ dataArtists, setW, w }}>
       <Router>
-        <Navbar />
-        <Routes>
-          <Route exact path={'/'} element={<Home />} />
-          <Route path={'/contact'} element={<Contact />} />
-          <Route path={'/artworks'} element={<Artworks />} />
-          <Route path={'/about'} element={<About />} />
-          <Route path={'/login'} element={<Account />} />
-          <Route path={'/dashboard'} element={<Dashboard />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-        <Footer />
+          <Navbar />
+          <Routes>
+            <Route exact path={'/'} element={<Home />} />
+            <Route path={'/contact'} element={<Contact />} />
+            <Route path={'/artworks'} element={<Artworks />} />
+            <Route path={'/about'} element={<About />} />
+            <Route path={'/login'} element={<Account />} />
+            <Route path={'/dashboard'} element={<Dashboard />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+          <Footer />
       </Router>
     </AppContext.Provider>
   );

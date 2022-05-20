@@ -2,9 +2,10 @@ import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/appContext';
 import ModalExpandImage from './ModalExpandImage';
 
-const DataArtists = () => {
+const ArtworkGallery = () => {
     const { dataArtists } = useContext(AppContext);
     const [clickedItem, setClickedItem] = useState('');
+    // const [showDetails, setShowDetails] = useState(false);
 
     const handleClick = (data) => {
         setClickedItem(data);
@@ -15,7 +16,7 @@ const DataArtists = () => {
 
     return (
         <div className="container mx-auto">
-            <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-6 gap-8 m-8">
+            <div className="grid grid-cols-1 lg:grid-cols-3 2xl:grid-cols-6 gap-8 m-8 py-16">
                 {dataArtists.length > 0 &&
                     dataArtists.slice(0, 6).map((data, index) => (
                         <div
@@ -26,19 +27,30 @@ const DataArtists = () => {
                             <img
                                 src={`https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`}
                                 onError={(event) =>
-                                    (event.target.src = 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
+                                    (event.target.src =
+                                        'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
                                 }
                                 alt="Artwork"
                                 className="w-full h-80 object-cover rounded-md my-4 overflow-hidden opacity-50 hover:opacity-100"
                             />
-                            <div className="flex justify-between flex-wrap gap-4">
-                                <p className="text-sm">{data.artist_title}</p>
-                                <p className="text-xs">{data.date_end}</p>
-                            </div>
-                            <h1 className="text-lg font-semibold">
-                                {data.title}
-                            </h1>
-                            <p className="text-xs">{data.medium_display}</p>
+                            {/* {showDetails && (
+                                <>
+                                    <div className="flex justify-between flex-wrap gap-4">
+                                        <p className="text-sm">
+                                            {data.artist_title}
+                                        </p>
+                                        <p className="text-xs">
+                                            {data.date_end}
+                                        </p>
+                                    </div>
+                                    <h1 className="text-lg font-semibold">
+                                        {data.title}
+                                    </h1>
+                                    <p className="text-xs">
+                                        {data.medium_display}
+                                    </p>
+                                </>
+                            )} */}
                         </div>
                     ))}
                 {clickedItem && (
@@ -52,4 +64,4 @@ const DataArtists = () => {
     );
 };
 
-export default DataArtists;
+export default ArtworkGallery;

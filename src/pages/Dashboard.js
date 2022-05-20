@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/config';
 import { buttontw } from '../style/styles';
+import Hero from '../components/account/Hero'
 
 const Dashboard = () => {
 
@@ -16,16 +17,9 @@ const Dashboard = () => {
   };
 
   return (
-    <div className='text-4xl'>
-      {/* {user !== null ? (
-        <div className='p-8'>
-          <h1>{user.displayName}</h1>
-          <h1>{user.email}</h1>
-          <img src={user.photoURL} alt="Profile" className='rounded-xl' />
-        </div>) : 'Go log yourself!'} */}
-      <button className={buttontw} onClick={logoutApp}>Logout</button>
-    </div>
+    <Hero />
   )
 }
 
 export default Dashboard
+{/* <button className={buttontw} onClick={logoutApp}>Logout</button> */ }
