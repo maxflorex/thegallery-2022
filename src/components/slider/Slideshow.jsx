@@ -103,7 +103,7 @@ const Slideshow = ({
         setW(box?.offsetWidth);
         const handleResize = () => {
             let box = document.querySelector('.box');
-            let w = box.offsetWidth;
+            let w = box?.offsetWidth;
             setW(w);
         };
         window.addEventListener('resize', handleResize);

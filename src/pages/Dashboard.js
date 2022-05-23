@@ -1,9 +1,10 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/config';
-import { buttontw } from '../style/styles';
 import Hero from '../components/account/Hero'
+import Users from '../components/users/Users';
+import Admin from '../components/users/Admin';
+import Guests from '../components/users/Guests';
 
 const Dashboard = () => {
 
@@ -17,7 +18,12 @@ const Dashboard = () => {
   };
 
   return (
-    <Hero />
+    <>
+      <Hero />
+      <Users />
+      {/* <Admin />
+      <Guests /> */}
+    </>
   )
 }
 

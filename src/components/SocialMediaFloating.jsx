@@ -2,11 +2,11 @@ import React from 'react';
 
 const SocialMediaFloating = () => {
     return (
-        <div className="flex flex-col bg-off-1/80 justify-center items-center p-4 rounded-xl gap-8 fill-navy-500">
+        <div className="flex flex-col bg-off-1/20 justify-center items-center p-4 rounded-xl gap-8 fill-navy-500">
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 className="hover:fill-pink-500 hover:scale-125 cursor-pointer"
             >
@@ -14,8 +14,8 @@ const SocialMediaFloating = () => {
             </svg>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 className="hover:fill-pink-500 hover:scale-125 cursor-pointer"
             >
@@ -23,8 +23,8 @@ const SocialMediaFloating = () => {
             </svg>
             <svg
                 xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
+                width="16"
+                height="16"
                 viewBox="0 0 24 24"
                 className="hover:fill-pink-500 hover:scale-125 cursor-pointer"
             >
