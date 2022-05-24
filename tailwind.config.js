@@ -31,6 +31,8 @@ module.exports = {
       'off-3': '#d4d4d4',
       'off-4': '#c3c3c3',
       'off-5': '#b2b2b2',
+      'white': '#ffffff',
+      'black': '#000000'
     },
     extend: {},
   },

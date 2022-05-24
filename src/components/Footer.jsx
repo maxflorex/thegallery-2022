@@ -5,7 +5,7 @@ import logo from '../assets/tg-logo-white.svg';
 const Footer = () => {
     return (
         <footer className="w-full bg-[#000000]/80 p-8 sticky top-full overflow-hidden">
-            <div className="flex justify-between min-h-80 items-center text-off-1 container mx-auto py-16 relative ">
+            <div className="flex justify-between min-h-96 items-start text-off-1 container mx-auto py-16 relative ">
                 <Link to="/">
                     <img src={logo} alt="Logo" className="w-40" />
                 </Link>

@@ -1,9 +1,13 @@
-import React from 'react'
-
+import React from 'react';
+import EditProfile from './EditProfile';
+import Options from './Options';
 const Guests = () => {
-  return (
-    <div>Guests</div>
-  )
-}
+    return (
+        <div>
+            <Options />
+            {/* <EditProfile /> */}
+        </div>
+    );
+};
 
-export default Guests
+export default Guests;

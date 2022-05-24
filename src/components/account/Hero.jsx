@@ -5,7 +5,6 @@ import { useSelector } from 'react-redux';
 import { buttontw3 } from '../../style/styles';
 import { auth } from '../../firebase/config';
 import { Link } from 'react-router-dom';
-import bgdot from '../../assets/bg-dots.svg';
 
 // const bg =
 //     'https://www.americanexpress.com/en-us/travel/discover/photos/924/3252/1200/The%20Ritz-CarltonGrand%20Cayman.jpg';
@@ -20,11 +19,6 @@ const Hero = () => {
 
     return (
         <div className="h-[40rem] bg-center bg-cover w-full relative">
-            <img
-                src={bgdot}
-                alt="dots"
-                className="w-full h-full object-cover absolute top-0 z-50"
-            />
             <div className=" w-full h-full flex-wrap relative overflow-hidden">
                 {user != null ? (
                     <div className="h-full w-full bg-navy-500/90 backdrop-blur-sm flex flex-col md:gap-4 gap-2 justify-center items-center">

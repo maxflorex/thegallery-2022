@@ -9,7 +9,7 @@ const ModalMenu = ({ setShowMenu }) => {
 
     const handleClick2 = () => {
         setShowMenu(false);
-        document.body.style.overflow = 'visible';
+        document.body.style.overflow = 'auto';
         document.body.style.height = '100%';
     };
 
@@ -23,6 +23,8 @@ const ModalMenu = ({ setShowMenu }) => {
     const navigateTo = async (link) => {
         await setShowMenu(false);
         navigate(`${link}`);
+        document.body.style.overflow = 'auto';
+        document.body.style.height = '100%';
     };
 
     return (

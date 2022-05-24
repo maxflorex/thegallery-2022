@@ -21,11 +21,10 @@ const Dashboard = () => {
     <>
       <Hero />
       <Users />
-      {/* <Admin />
-      <Guests /> */}
+      {/* <Admin /> */}
+      {/* <Guests /> */}
     </>
   )
 }
 
 export default Dashboard
-{/* <button className={buttontw} onClick={logoutApp}>Logout</button> */ }

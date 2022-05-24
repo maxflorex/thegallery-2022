@@ -1,9 +1,11 @@
-import React from 'react'
-
+import React from 'react';
+import OptionsAdmin from './OptionsAdmin';
 const Admin = () => {
-  return (
-    <div>Admin</div>
-  )
-}
+    return (
+        <div>
+            <OptionsAdmin />
+        </div>
+    );
+};
 
-export default Admin
+export default Admin;

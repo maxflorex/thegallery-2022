@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
+import OptionsArtists from '../users/OptionArtists';
+import EditProfile from './EditProfile';
+import EditArtwork from './EditArtwork'
 
 const Users = () => {
-  return (
-    <div>Users</div>
-  )
-}
+    return (
+        <>
+            <OptionsArtists />
+            {/* <EditProfile /> */}
+            <EditArtwork />
+        </>
+    );
+};
 
-export default Users
+export default Users;

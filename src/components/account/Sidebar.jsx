@@ -1,9 +1,16 @@
-import React from 'react'
+import React from 'react';
 
 const Sidebar = () => {
-  return (
-    <div>Sidebar</div>
-  )
-}
+    return (
+        <div className="h-full p-8 w-[20rem]">
 
-export default Sidebar
+<div className="flex bg-cream-100 px-4 py-36 rounded-lg">
+  <h1>11</h1>
+  <h1>11</h1>
+  <h1>11</h1>
+</div>
+        </div>
+    );
+};
+
+export default Sidebar;
