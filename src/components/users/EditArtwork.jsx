@@ -8,11 +8,11 @@ const EditArtwork = () => {
         <div className="container mx-auto py-16">
             <div className="flex flex-nowrap flex-col py-24 h-full bg-off-1">
                 <h1 className="text-4xl font-semibold text-center pb-8">
-                    Add a new artwork
+                    Edit your artwork
                 </h1>
                 <form className=" flex-col flex justify-between mx-auto gap-8 py-16">
                     <h1 className="text-2xl font-thin text-center pb-4 italic">
-                        Upload your artwork
+                        Change main picture
                     </h1>
                     <div className="flex flex-col gap-4 items-center justify-between pb-4">
                         <label htmlFor="upload-picture" className="">
@@ -26,59 +26,57 @@ const EditArtwork = () => {
                             type="file"
                             id="upload-picture"
                             className="hidden"
-                            placeholder="Update your name..."
                         />
                         <h2>Profile Picture</h2>
                     </div>
                     <input
                         type="text"
                         className={inputtw3}
-                        placeholder="Artwork Title..."
+                        placeholder="Edit Artwork Title..."
                     />
                     <div className="grid grid-cols-2 gap-4">
                         <input
                             type="text"
                             className={inputtw3}
-                            placeholder="Width..."
+                            placeholder="Edit Width..."
                         />
                         <input
                             type="text"
                             className={inputtw3}
-                            placeholder="Height..."
+                            placeholder="Edit Height..."
                         />
                     </div>
                     <div className="grid grid-cols-2 gap-4">
                         <input
                             type="text"
                             className={inputtw3}
-                            placeholder="Enter Medium..."
+                            placeholder="Edit Medium..."
                         />
                         <input
                             type="text"
                             className={inputtw3}
-                            placeholder="Enter Price..."
+                            placeholder="Edit Price..."
                         />
                     </div>
-                    <input type="text" data-role="taginput" data-tag-trigger="Space" className={inputtw3} placeholder='Enter tags' />
+                    <input type="text" data-role="taginput" data-tag-trigger="Space" className={inputtw3} placeholder='Edit Tags' />
                     <div className="flex flex-col gap-2 items-center justify-between pb-4">
                         <label htmlFor="upload-picture" className="">
                             <img
                                 src={upload}
                                 alt="Upload"
-                                className="w-24 p-4 rounded-lg cursor-pointer object-cover hover:scale-105 opacity-50 hover:opacity-100"
+                                className="w-16 p-2 rounded-lg cursor-pointer object-cover hover:scale-105 opacity-50 hover:opacity-100"
                             />
                         </label>
                         <input
                             type="file"
                             id="upload-picture"
                             className="hidden"
-                            placeholder="Update your name..."
                         />
                         <h2>Upload Extra Pictures</h2>
                     </div>
                     <div className="flex gap-4">
-                      <button className={buttontw2}>Add Artwork</button>
-                      <button className={buttontw2}>Clear Form</button>
+                      <button className='w-full py-3 px-4 bg-navy-500 rounded-lg text-white active:scale-95'>Add Artwork</button>
+                      <button className='w-full rounded-lg hover:bg-pink-500 bg-off-3 active:scale-95'>Clear Form</button>
                     </div>
                 </form>
             </div>

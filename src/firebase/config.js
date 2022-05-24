@@ -26,3 +26,5 @@ export const auth = getAuth(app)
 
 // COLLECTIONS REF
 export const colRefCollections = collection(db, 'collections')
+export const colRefArt = collection(db, 'art')
+export const colRefArtist = collection(db, 'artists')

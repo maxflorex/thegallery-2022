@@ -21,8 +21,8 @@ const Dashboard = () => {
     <>
       <Hero />
       <Users />
-      {/* <Admin /> */}
-      {/* <Guests /> */}
+      {/* <Admin />
+      <Guests /> */}
     </>
   )
 }
