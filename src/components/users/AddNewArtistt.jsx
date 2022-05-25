@@ -3,6 +3,7 @@ import FormAddArtist from '../forms/FormAddArtist';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { addDoc, serverTimestamp } from 'firebase/firestore';
 import { colRefArtist, storage } from '../../firebase/config';
+import { buttontw } from '../../style/styles';
 
 const bg =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkfVqmZAwDe1QCMoV1LeBVTiooqw637Hbb59TE0vuMBbnnUC9HJqDaXJIzsb4WEkxeh5M&usqp=CAU';
@@ -11,15 +12,18 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
     const [file, setFile] = useState(null);
     const [myProgress, setMyProgress] = useState(0);
     const [selectedImage, setSelectedImage] = useState(undefined);
+    const [tags, setTags] = useState([]);
+    const [input, setInput] = useState('');
     const [artist, setArtist] = useState({
         name: '',
         nationality: '',
         dob: '',
         bio: '',
         style: '',
+        tag: [],
     });
 
-    const { name, nationality, dob, bio, born, style } = artist;
+    const { name, nationality, dob, bio, style, tag } = artist;
 
     // UPLOAD FILES
     const uploadFiles = () => {
@@ -73,7 +77,10 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
             dob: '',
             bio: '',
             style: '',
+            url: '',
         });
+        setTags([]);
+        setInput('');
         setI(null);
     };
 
@@ -87,6 +94,8 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
             dob: dob,
             bio: bio,
             style: style,
+            url: u,
+            tag: tags,
             createdAt: serverTimestamp(),
         }).then(() => {
             alert('Artwork Submitted!');
@@ -125,6 +134,10 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
                         reset={reset}
                         artist={artist}
                         setArtist={setArtist}
+                        tags={tags}
+                        setTags={setTags}
+                        input={input}
+                        setInput={setInput}
                     />
                 </form>
             </div>

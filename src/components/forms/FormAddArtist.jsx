@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { inputtw3 } from '../../style/styles';
 import uploadIcon from '../../assets/upload.svg';
+import InputTags from './InputTags';
 
-const FormAddArtist = ({ artist, setArtist, handleSubmit, reset }) => {
-    const { name, nationality, dob, bio, style } = artist;
+const FormAddArtist = ({
+    artist,
+    setArtist,
+    handleSubmit,
+    reset,
+    tags,
+    setTags,
+    input,
+    setInput
+}) => {
+    const { name, nationality, dob, bio, style, tag } = artist;
 
     return (
         <div className="flex-col flex justify-between gap-8 py-16">
@@ -34,9 +44,9 @@ const FormAddArtist = ({ artist, setArtist, handleSubmit, reset }) => {
                     placeholder="Nationality..."
                 />
             </div>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid gap-4">
                 <textarea
-                    type="text"
+                    rows="4"
                     className={inputtw3}
                     value={bio}
                     onChange={(e) =>
@@ -44,16 +54,16 @@ const FormAddArtist = ({ artist, setArtist, handleSubmit, reset }) => {
                     }
                     placeholder="Enter Bio..."
                 />
-                <input
-                    type="text"
-                    className={inputtw3}
-                    value={style}
-                    onChange={(e) =>
-                        setArtist({ ...artist, style: e.target.value })
-                    }
-                    placeholder="Enter Style..."
+                <InputTags
+                    setArtist={setArtist}
+                    artist={artist}
+                    tags={tags}
+                    setTags={setTags}
+                    input={input}
+                    setInput={setInput}
                 />
             </div>
+
             <div className="flex flex-col gap-2 items-center justify-between pb-4">
                 <label htmlFor="files" className="">
                     <img
@@ -79,7 +89,7 @@ const FormAddArtist = ({ artist, setArtist, handleSubmit, reset }) => {
                 </button>
                 <button
                     className="w-full rounded-lg hover:bg-pink-500 bg-off-3 active:scale-95"
-                    onClick={reset}
+                    onClick={(e) => reset(e)}
                 >
                     Clear Form
                 </button>
