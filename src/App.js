@@ -9,12 +9,14 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase/config';
+import { auth, colRefArtist } from './firebase/config';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { login, logout } from './redux/userSlice';
 import axios from 'axios';
 import { AppContext } from './context/appContext'
+import { query } from 'firebase/firestore';
+import UseFirestore from './hooks/useFirestore';
 
 
 function App() {
@@ -51,8 +53,12 @@ function App() {
       });
   }, [])
 
+
+  const q = query(colRefArtist);
+  const { artist } = UseFirestore(q);
+
   return (
-    <AppContext.Provider value={{ dataArtists, setW, w }}>
+    <AppContext.Provider value={{ dataArtists, setW, w, artist }}>
       <Router>
         <Navbar />
         <Routes>

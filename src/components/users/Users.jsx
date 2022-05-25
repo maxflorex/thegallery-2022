@@ -11,11 +11,11 @@ const Users = () => {
     
     return (
         <>
-            <OptionsArtists />
+            {/* {/* <OptionsArtists /> */}
             {/* <EditProfile />
             <EditArtwork /> */}
-            {/* <AddArtwork i={imageUrl} setI={setImageUrl} setU={setUrl} u={url}/> */}
-            <AddNewArtist i={imageUrl} setI={setImageUrl} setU={setUrl} u={url} />
+            <AddArtwork i={imageUrl} setI={setImageUrl} setU={setUrl} u={url}/>
+            {/* <AddNewArtist i={imageUrl} setI={setImageUrl} setU={setUrl} u={url} /> */}
         </>
     );
 };

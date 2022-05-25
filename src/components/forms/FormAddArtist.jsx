@@ -20,7 +20,7 @@ const FormAddArtist = ({
     const { name, bio, style } = artist;
     const { month, year } = birth;
 
-    console.log(month, year);
+    console.log(tags);
 
     return (
         <div className="flex-col flex justify-between gap-8 py-16">
@@ -34,8 +34,8 @@ const FormAddArtist = ({
             <div className="grid grid-cols-2 gap-4">
                 <input
                     type="number"
-                    min='1'
-                    max='12'
+                    min="1"
+                    max="12"
                     value={birth.month}
                     className={inputtw3}
                     onChange={(e) =>
@@ -45,11 +45,11 @@ const FormAddArtist = ({
                 />
                 <input
                     type="number"
-                    min='0'
-                    max='2022'
+                    min="0"
+                    max="2022"
                     value={birth.year}
                     className={inputtw3}
-                    onChange={(e) => 
+                    onChange={(e) =>
                         setBirth({ ...birth, year: e.target.value })
                     }
                     placeholder="Enter Year..."
@@ -93,12 +93,21 @@ const FormAddArtist = ({
                 <h2>Upload Extra Pictures</h2>
             </div>
             <div className="flex gap-4">
-                <button
-                    className="w-full py-3 px-4 bg-navy-500 rounded-lg text-white active:scale-95"
-                    onClick={handleSubmit}
-                >
-                    Add Artist
-                </button>
+                {!tags[0] ? (
+                    <button
+                        className="w-full py-3 px-4 bg-off-5 rounded-lg text-white active:scale-95"
+                        disabled
+                    >
+                        Fill out the form
+                    </button>
+                ) : (
+                    <button
+                        className="w-full py-3 px-4 bg-navy-500 rounded-lg text-white active:scale-95"
+                        onClick={handleSubmit}
+                    >
+                        Add Artist
+                    </button>
+                )}
                 <button
                     className="w-full rounded-lg hover:bg-pink-500 bg-off-3 active:scale-95"
                     onClick={(e) => reset(e)}

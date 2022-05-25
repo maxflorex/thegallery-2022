@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
-import { inputtw3 } from '../../style/styles';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { colRefArt, storage } from '../../firebase/config';
 import FormAddArt from '../forms/FormAddArt';
 import { addDoc, serverTimestamp } from 'firebase/firestore';
+import InputSelectArtists from '../forms/InputSelectArtists';
 const bg = 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png';
 
 const AddNewArtwork = ({ i, setI, setU, u }) => {
     const [file, setFile] = useState(null);
     const [myProgress, setMyProgress] = useState(0);
     const [selectedImage, setSelectedImage] = useState(undefined);
+    const [selectedArtist, setSelectedArtist] = useState('');
+
     const [art, setArt] = useState({
         title: '',
         width: '',
@@ -18,7 +20,7 @@ const AddNewArtwork = ({ i, setI, setU, u }) => {
         price: '',
         collection: '',
         tags: '',
-        available: false
+        available: false,
     });
 
     const { title, width, height, medium, price, collection, tags, available } =
@@ -78,9 +80,9 @@ const AddNewArtwork = ({ i, setI, setU, u }) => {
             price: '',
             collection: '',
             tags: '',
-            available: true
+            available: true,
         });
-        setI(null)
+        setI(null);
     };
 
     // ON SUBMIT EVENT
@@ -111,27 +113,40 @@ const AddNewArtwork = ({ i, setI, setU, u }) => {
                     Add a new artwork
                 </h1>
                 <form className="flex-col flex justify-between mx-auto gap-8 py-16">
-                    <h1 className="text-2xl font-thin text-center pb-4 italic">
-                        Upload your artwork
-                    </h1>
-                    <div className="flex flex-col gap-4 items-center justify-between pb-4">
-                        <img
-                            src={i !== null ? i : bg}
-                            alt="Upload"
-                            className="w-full h-96 p-4 rounded-lg cursor-pointer object-contain hover:scale-105"
-                            onClick={uploadFiles}
-                        />
-                        <input
-                            type="file"
-                            id="files"
-                            name="files"
-                            accept="image/png, image/jpeg"
-                            className="hidden"
-                            onChange={upload}
-                        />
-                        <h2>Profile Picture</h2>
-                    </div>
-                    <FormAddArt setArt={setArt} art={art} reset={reset} handleSubmit={handleSubmit} />
+                    <InputSelectArtists
+                        selectedArtist={selectedArtist}
+                        setSelectedArtist={setSelectedArtist}
+                    />
+                    {selectedArtist && (
+                        <>
+                            <h1 className="text-2xl font-thin text-center pb-4 italic">
+                                Upload your artwork
+                            </h1>
+                            <div className="flex flex-col gap-4 items-center justify-between pb-4">
+                                <img
+                                    src={i !== null ? i : bg}
+                                    alt="Upload"
+                                    className="w-full h-96 p-4 rounded-lg cursor-pointer object-contain hover:scale-105"
+                                    onClick={uploadFiles}
+                                />
+                                <input
+                                    type="file"
+                                    id="files"
+                                    name="files"
+                                    accept="image/png, image/jpeg"
+                                    className="hidden"
+                                    onChange={upload}
+                                />
+                                <h2>Main Picture</h2>
+                            </div>
+                            <FormAddArt
+                                setArt={setArt}
+                                art={art}
+                                reset={reset}
+                                handleSubmit={handleSubmit}
+                            />
+                        </>
+                    )}
                 </form>
             </div>
         </div>
