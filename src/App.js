@@ -19,8 +19,9 @@ import { AppContext } from './context/appContext'
 
 function App() {
   const dispatch = useDispatch();
-  const [dataArtists, setDataArtists] = useState({})  
+  const [dataArtists, setDataArtists] = useState({})
   const [w, setW] = useState('');
+  const [country, setCountry] = useState({})
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {

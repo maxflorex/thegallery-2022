@@ -14,16 +14,25 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
     const [selectedImage, setSelectedImage] = useState(undefined);
     const [tags, setTags] = useState([]);
     const [input, setInput] = useState('');
+    const [nation, setNation] = useState({
+        country: '',
+        flag: '',
+    });
+    const [birth, setBirth] = useState({
+        month: '',
+        year: '',
+    });
     const [artist, setArtist] = useState({
         name: '',
         nationality: '',
-        dob: '',
+        dob: [],
         bio: '',
         style: '',
         tag: [],
     });
 
     const { name, nationality, dob, bio, style, tag } = artist;
+    const { country, flag } = nation;
 
     // UPLOAD FILES
     const uploadFiles = () => {
@@ -74,14 +83,21 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
         setArtist({
             name: '',
             nationality: '',
-            dob: '',
             bio: '',
             style: '',
             url: '',
         });
         setTags([]);
         setInput('');
+        setNation({
+            country: '',
+            flag: '',
+        });
         setI(null);
+        setBirth({
+            month: '',
+            year: '',
+        });
     };
 
     // ON SUBMIT EVENT
@@ -90,8 +106,9 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
 
         addDoc(colRefArtist, {
             name: name,
-            nationality: nationality,
-            dob: dob,
+            nationality: country,
+            flag: flag,
+            dob: birth,
             bio: bio,
             style: style,
             url: u,
@@ -138,6 +155,10 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
                         setTags={setTags}
                         input={input}
                         setInput={setInput}
+                        nation={nation}
+                        setNation={setNation}
+                        birth={birth}
+                        setBirth={setBirth}
                     />
                 </form>
             </div>

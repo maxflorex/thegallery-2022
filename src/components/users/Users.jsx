@@ -3,13 +3,12 @@ import OptionsArtists from '../users/OptionArtists';
 import EditProfile from './EditProfile';
 import EditArtwork from './EditArtwork';
 import AddArtwork from './AddNewArtwork';
-import AddNewArtist from './AddNewArtistt';
+import AddNewArtist from './AddNewArtist';
 
 const Users = () => {
     const [imageUrl, setImageUrl] = useState(null);
     const [url, setUrl] = useState(null);
-
-    console.log(url);
+    
     return (
         <>
             <OptionsArtists />

@@ -33,8 +33,6 @@ const SliderArtists = () => {
         }
     }, [w]);
 
-    console.log(data);
-
     return (
         <div className="w-full rounded-xl container mx-auto">
             {/* TITLE */}

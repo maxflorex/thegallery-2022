@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
 import { inputtw3 } from '../../style/styles';
 import uploadIcon from '../../assets/upload.svg';
 import InputTags from './InputTags';
+import CountrySearch from '../users/CountrySearch';
 
 const FormAddArtist = ({
     artist,
@@ -11,9 +11,16 @@ const FormAddArtist = ({
     tags,
     setTags,
     input,
-    setInput
+    setInput,
+    nation,
+    setNation,
+    birth,
+    setBirth,
 }) => {
-    const { name, nationality, dob, bio, style, tag } = artist;
+    const { name, bio, style } = artist;
+    const { month, year } = birth;
+
+    console.log(month, year);
 
     return (
         <div className="flex-col flex justify-between gap-8 py-16">
@@ -27,23 +34,28 @@ const FormAddArtist = ({
             <div className="grid grid-cols-2 gap-4">
                 <input
                     type="number"
+                    min='1'
+                    max='12'
+                    value={birth.month}
                     className={inputtw3}
-                    value={dob}
                     onChange={(e) =>
-                        setArtist({ ...artist, dob: e.target.value })
+                        setBirth({ ...birth, month: e.target.value })
                     }
-                    placeholder="Date of birth..."
+                    placeholder="Enter Month..."
                 />
                 <input
                     type="number"
+                    min='0'
+                    max='2022'
+                    value={birth.year}
                     className={inputtw3}
-                    value={nationality}
-                    onChange={(e) =>
-                        setArtist({ ...artist, nationality: e.target.value })
+                    onChange={(e) => 
+                        setBirth({ ...birth, year: e.target.value })
                     }
-                    placeholder="Nationality..."
+                    placeholder="Enter Year..."
                 />
             </div>
+            <CountrySearch nation={nation} setNation={setNation} />
             <div className="grid gap-4">
                 <textarea
                     rows="4"
@@ -69,7 +81,7 @@ const FormAddArtist = ({
                     <img
                         src={uploadIcon}
                         alt="Upload"
-                        className="w-16 p-2 rounded-lg cursor-pointer object-cover hover:scale-105 opacity-50 hover:opacity-100"
+                        className="w-16 p-2 rounded-lg cursor-pointer object-cover hover:scale-105 opacity-50 hover:opacity-100 z-0"
                     />
                 </label>
                 <input
@@ -85,7 +97,7 @@ const FormAddArtist = ({
                     className="w-full py-3 px-4 bg-navy-500 rounded-lg text-white active:scale-95"
                     onClick={handleSubmit}
                 >
-                    Add Artwork
+                    Add Artist
                 </button>
                 <button
                     className="w-full rounded-lg hover:bg-pink-500 bg-off-3 active:scale-95"
