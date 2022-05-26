@@ -21,21 +21,23 @@ const InputSelectArtists = ({ setSelectedArtist, selectedArtist }) => {
     };
 
     const onClickHandler = () => {
-        setSelected(false);
+        setSelected('');
         setText('');
         setSuggestions([]);
+        setSelectedArtist('');
     };
 
     const onSelectionHanlder = (a) => {
         setSelectedArtist(a.name);
         setSelected(a);
+        setSuggestions([]);
+        setText('');
     };
 
-    console.log(selected);
     return (
-        <div className="relative">
+        <div className="relative w-96 mx-auto">
             {selected ? (
-                <div className="flex flex-col gap-4 p-8justify-center items-center">
+                <div className="flex flex-col gap-4 p-8 justify-center items-center w-full">
                     <h1 className="text-lg font-semibold pl-4">
                         {selected.name}
                     </h1>
@@ -63,14 +65,27 @@ const InputSelectArtists = ({ setSelectedArtist, selectedArtist }) => {
                     onClick={onClickHandler}
                 />
             )}
-            {!selected && (
-                <ul className="flex flex-col gap-4 absolute top-16 w-full">
+            {suggestions[0] === undefined && text !== '' && (
+                <div className="flex items-center justify-center p-4 gap-4">
+                    <h1>Try a new name</h1>
+                    <span
+                        className="py-1 px-3 rounded-full bg-navy-100 cursor-pointer"
+                        onClick={onClickHandler}
+                    >
+                        Clear
+                    </span>
+                </div>
+            )}
+            {suggestions[0] !== undefined && (
+                <ul className="flex flex-col gap-4 absolute top-16 w-full z-40 h-80 overflow-y-scroll py-4 bg-blue-100 rounded-xl px-2 mx-auto">
                     {suggestions &&
                         suggestions.map(({ name, url, id }) => (
                             <li
                                 key={id}
-                                className="cursor-pointer flex items-center justify-center gap-4 bg-white p-2 rounded-full mx-auto hover:bg-off-2"
-                                onClick={() => onSelectionHanlder({ name, url, id })}
+                                className="cursor-pointer flex items-center justify-center gap-4 bg-white p-2 rounded-full mx-auto hover:bg-off-2 flex-wrap"
+                                onClick={() =>
+                                    onSelectionHanlder({ name, url, id })
+                                }
                             >
                                 <h1 className="text-lg font-semibold pl-4">
                                     {name}

@@ -106,6 +106,8 @@ const AddNewArtwork = ({ i, setI, setU, u }) => {
         });
     };
 
+    console.log(selectedArtist);
+
     return (
         <div className="container mx-auto py-16">
             <div className="flex flex-nowrap flex-col py-24 h-full bg-off-1">
@@ -114,8 +116,8 @@ const AddNewArtwork = ({ i, setI, setU, u }) => {
                 </h1>
                 <form className="flex-col flex justify-between mx-auto gap-8 py-16">
                     <InputSelectArtists
-                        selectedArtist={selectedArtist}
                         setSelectedArtist={setSelectedArtist}
+                        selectedArtist={selectedArtist}
                     />
                     {selectedArtist && (
                         <>
