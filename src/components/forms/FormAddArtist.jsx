@@ -17,10 +17,7 @@ const FormAddArtist = ({
     birth,
     setBirth,
 }) => {
-    const { name, bio, style } = artist;
-    const { month, year } = birth;
-
-    console.log(tags);
+    const { name, bio } = artist;
 
     return (
         <div className="flex-col flex justify-between gap-8 py-16">
@@ -30,6 +27,7 @@ const FormAddArtist = ({
                 value={name}
                 onChange={(e) => setArtist({ ...artist, name: e.target.value })}
                 placeholder="Artist's Name..."
+                required
             />
             <div className="grid grid-cols-2 gap-4">
                 <input
@@ -65,6 +63,7 @@ const FormAddArtist = ({
                         setArtist({ ...artist, bio: e.target.value })
                     }
                     placeholder="Enter Bio..."
+                    required
                 />
                 <InputTags
                     setArtist={setArtist}
@@ -93,7 +92,7 @@ const FormAddArtist = ({
                 <h2>Upload Extra Pictures</h2>
             </div>
             <div className="flex gap-4">
-                {!tags[0] ? (
+                {!tags[0] || !name ? (
                     <button
                         className="w-full py-3 px-4 bg-off-5 rounded-lg text-white active:scale-95"
                         disabled

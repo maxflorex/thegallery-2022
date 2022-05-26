@@ -1,12 +1,15 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/appContext';
-import { inputtw3 } from '../../style/styles';
+import { buttontw3, inputtw3 } from '../../style/styles';
+import closeX from '../../assets/x.svg';
 
-const InputSelectArtists = ({ setSelectedArtist, selectedArtist }) => {
+const InputSelectArtists = ({ setSelectedArtist, setArt, art, setCreateArtist }) => {
     const [text, setText] = useState('');
     const { artist } = useContext(AppContext);
     const [suggestions, setSuggestions] = useState([]);
     const [selected, setSelected] = useState(false);
+
+    const { by } = art;
 
     const onChangeHandler = (text) => {
         let matches = [];
@@ -34,12 +37,18 @@ const InputSelectArtists = ({ setSelectedArtist, selectedArtist }) => {
         setText('');
     };
 
+    useEffect(() => {
+        if (selected !== undefined) {
+            setArt({ ...art, by: selected });
+        }
+    }, [selected]);
+
     return (
         <div className="relative w-96 mx-auto">
             {selected ? (
                 <div className="flex flex-col gap-4 p-8 justify-center items-center w-full">
-                    <h1 className="text-lg font-semibold pl-4">
-                        {selected.name}
+                    <h1 className="text-lg font-semibold pl-4 capitalize">
+                        {selected.name.toLowerCase()}
                     </h1>
                     <div className="flex relative">
                         <img
@@ -47,37 +56,51 @@ const InputSelectArtists = ({ setSelectedArtist, selectedArtist }) => {
                             alt="Profile"
                             className="w-32 h-32 object-cover rounded-full relative"
                         />
-                        <span
-                            className="absolute top-0 right-4 bg-pink-500 px-2 rounded-3xl cursor-pointer"
+                        <img
+                            src={closeX}
+                            alt="x"
+                            className="bg-white p-1 absolute top-0 text-white rounded-full cursor-pointer fill-white"
                             onClick={onClickHandler}
-                        >
-                            x
-                        </span>
+                        />
                     </div>
                 </div>
             ) : (
-                <input
-                    type="text"
-                    value={!selected ? text : selected.name}
-                    className={inputtw3}
-                    onChange={(e) => onChangeHandler(e.target.value)}
-                    placeholder="Enter Artist"
-                    onClick={onClickHandler}
-                />
+                <>
+                    <input
+                        type="text"
+                        value={!selected ? text : selected.name}
+                        className={inputtw3}
+                        onChange={(e) => onChangeHandler(e.target.value)}
+                        placeholder="Enter Artist"
+                        onClick={onClickHandler}
+                    />
+                    {text === '' && (
+                        <div className="flex flex-col gap-8 py-8 justify-center items-center">
+                            <p className="italic">- New artist? -</p>
+                            <span className={buttontw3} onClick={() => setCreateArtist(true)}> Create Artist</span>
+                        </div>
+                    )}
+                </>
             )}
             {suggestions[0] === undefined && text !== '' && (
-                <div className="flex items-center justify-center p-4 gap-4">
-                    <h1>Try a new name</h1>
-                    <span
-                        className="py-1 px-3 rounded-full bg-navy-100 cursor-pointer"
-                        onClick={onClickHandler}
-                    >
-                        Clear
-                    </span>
-                </div>
+                <>
+                    <div className="flex items-center justify-center p-4 gap-4">
+                        <h1>Try a new name</h1>
+                        <span
+                            className="py-1 px-3 rounded-full bg-navy-100 cursor-pointer"
+                            onClick={onClickHandler}
+                        >
+                            Clear
+                        </span>
+                    </div>
+                    <div className="flex flex-col gap-8 py-4 justify-center items-center">
+                        <p className="italic">- or -</p>
+                        <span className={buttontw3} onClick={() => setCreateArtist(true)}> Create Artist</span>
+                    </div>
+                </>
             )}
             {suggestions[0] !== undefined && (
-                <ul className="flex flex-col gap-4 absolute top-16 w-full z-40 h-80 overflow-y-scroll py-4 bg-blue-100 rounded-xl px-2 mx-auto">
+                <ul className="flex flex-col gap-4 absolute top-16 w-full z-40 max-h-80 overflow-y-auto py-4 bg-blue-100/90 rounded-xl px-2 mx-auto">
                     {suggestions &&
                         suggestions.map(({ name, url, id }) => (
                             <li
@@ -87,8 +110,8 @@ const InputSelectArtists = ({ setSelectedArtist, selectedArtist }) => {
                                     onSelectionHanlder({ name, url, id })
                                 }
                             >
-                                <h1 className="text-lg font-semibold pl-4">
-                                    {name}
+                                <h1 className="text-lg font-semibold pl-4 capitalize">
+                                    {name.toLowerCase()}
                                 </h1>
                                 <img
                                     src={url}

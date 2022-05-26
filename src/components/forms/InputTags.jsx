@@ -14,7 +14,7 @@ const InputTags = ({ setArtist, artist, tags, setTags, input, setInput }) => {
         const trimmedInput = input.trim();
 
         if (
-            key === "Enter" &&
+            key === "," &&
             trimmedInput.length &&
             !tags.includes(trimmedInput)
         ) {

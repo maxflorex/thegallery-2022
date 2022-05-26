@@ -2,6 +2,7 @@ import { onSnapshot } from "firebase/firestore";
 import { useEffect, useState } from "react";
 
 const UseFirestore = (q) => {
+    
     const [artist, setArtist] = useState([]);
 
     // GET REAL TIME DATA - READ ELEMENTS
