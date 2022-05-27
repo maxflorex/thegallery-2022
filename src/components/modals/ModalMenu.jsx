@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase/config';
-import logo from '../assets/tg-logo-navy.svg';
+import { auth } from '../../firebase/config';
+import logo from '../../assets/tg-logo-navy.svg';
 
 const ModalMenu = ({ setShowMenu }) => {
     const user = useSelector((state) => state.user.user);

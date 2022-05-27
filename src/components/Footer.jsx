@@ -30,6 +30,7 @@ const Footer = () => {
                         <Link to="/">Art for Offices</Link>
                     </div>
                     <div className="flex flex-col gap-2">
+                        <Link to="/dashboard">Dashboard</Link>
                         <Link to="/">Login</Link>
                         <Link to="/">Our Artists</Link>
                         <Link to="/">The Team</Link>

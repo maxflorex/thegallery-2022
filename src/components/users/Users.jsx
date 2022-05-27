@@ -7,6 +7,7 @@ import AddNewArtist from './AddNewArtist';
 import Options from './Options';
 import OptionsAdmin from './OptionsAdmin';
 import SliderShowArtists from '../slider/SliderShowArtists';
+import Inventory from '../Inventory';
 
 const Users = () => {
     const [imageUrl, setImageUrl] = useState(null);
@@ -15,8 +16,9 @@ const Users = () => {
     const [selected, setSelected] = useState(0);
 
     return (
-        <>
+        <div>
             <OptionsAdmin selected={selected} setSelected={setSelected} />
+            {selected === 3 && <Inventory />}
             {selected === 2 && <SliderShowArtists />}
             {selected === 1 && (
                 <AddArtwork
@@ -36,7 +38,7 @@ const Users = () => {
                     u={url}
                 />
             )}
-        </>
+        </div>
     );
 };
 

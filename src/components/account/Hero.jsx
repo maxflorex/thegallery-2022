@@ -18,10 +18,10 @@ const Hero = () => {
     };
 
     return (
-        <div className="h-[40rem] bg-center bg-cover w-full relative">
+        <div className="h-96 bg-center bg-cover w-full relative">
             <div className=" w-full h-full flex-wrap relative overflow-hidden">
                 {user != null ? (
-                    <div className="h-full w-full bg-navy-500/90 backdrop-blur-sm flex flex-col md:gap-4 gap-2 justify-center items-center">
+                    <div className="h-full w-full bg-navy-500/90 backdrop-blur-sm flex flex-col md:gap-4 gap-2 justify-center items-center pb-8">
                         <img
                             src={user.photoUrl}
                             alt="Photo"

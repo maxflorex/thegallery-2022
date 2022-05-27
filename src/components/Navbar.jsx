@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo-typo-line-01.svg';
-import ModalMenu from './ModalMenu';
+import ModalMenu from './modals/ModalMenu';
 
 const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false);

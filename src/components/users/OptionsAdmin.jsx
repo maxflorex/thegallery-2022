@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from 'react';
 import paint from '../../assets/paint.svg';
 import n from '../../assets/notes.svg';
 import p from '../../assets/user.svg';
@@ -17,8 +16,8 @@ const OptionsAdmin = ({ selected, setSelected }) => {
                     }`}
                     onClick={() => handleClick(1)}
                 >
-                    <h1>View Artists</h1>
-                    <img src={p} alt="Artists" className="w-8" />
+                    <h1>View Artwortks</h1>
+                    <img src={paint} alt="Basket" className="w-8" />
                 </div>
                 <div
                     className={`flex justify-between p-4 rounded-lg w-80 active:scale-90 cursor-pointer ${
@@ -26,8 +25,8 @@ const OptionsAdmin = ({ selected, setSelected }) => {
                     }`}
                     onClick={() => handleClick(2)}
                 >
-                    <h1>View Artwortks</h1>
-                    <img src={paint} alt="Basket" className="w-8" />
+                    <h1>View Artists</h1>
+                    <img src={p} alt="Artists" className="w-8" />
                 </div>
                 <div
                     className={`flex justify-between p-4 rounded-lg w-80 active:scale-90 cursor-pointer ${

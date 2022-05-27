@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from '../context/appContext';
-import ModalExpandImage from './ModalExpandImage';
+import ModalExpandImage from './../components/modals/ModalExpandImage';
 
 const ArtworkGallery = () => {
     const { dataArtists } = useContext(AppContext);

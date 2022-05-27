@@ -132,7 +132,10 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
     return (
         <div className={`container mx-auto ${!createArtist && 'py-16'}`}>
             {!createArtist && (
-                <div className="flex flex-nowrap flex-col py-8 h-full" ref={startForm}>
+                <div
+                    className="flex flex-nowrap flex-col py-32 h-full"
+                    ref={startForm}
+                >
                     <h1 className="text-2xl font-semibold text-center">
                         Add a new artwork
                     </h1>

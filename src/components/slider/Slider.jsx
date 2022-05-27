@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/appContext';
 import Slideshow from './Slideshow';
-import ModalExpandImage from '../ModalExpandImage';
+import ModalExpandImage from '../modals/ModalExpandImage';
 
 const Slider = () => {
     const { dataArtists } = useContext(AppContext);
