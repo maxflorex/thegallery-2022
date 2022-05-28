@@ -8,10 +8,10 @@ const OptionsAdmin = ({ selected, setSelected }) => {
     };
 
     return (
-        <div className="text-xl font-bold w-full">
+        <div className="text-xl font-semibold w-72 h-full p-4 flex items-center fixed top-0">
             <div className="flex items-center flex-wrap justify-center gap-4">
                 <div
-                    className={`flex justify-between p-4 rounded-lg w-80 active:scale-90 cursor-pointer ${
+                    className={`flex justify-between w-full p-4 rounded-lg active:scale-90 cursor-pointer ${
                         selected === 1 ? 'bg-cream-500 ' : ' bg-off-1'
                     }`}
                     onClick={() => handleClick(1)}
@@ -20,7 +20,7 @@ const OptionsAdmin = ({ selected, setSelected }) => {
                     <img src={paint} alt="Basket" className="w-8" />
                 </div>
                 <div
-                    className={`flex justify-between p-4 rounded-lg w-80 active:scale-90 cursor-pointer ${
+                    className={`flex justify-between w-full p-4 rounded-lg active:scale-90 cursor-pointer ${
                         selected === 2 ? 'bg-cream-500 ' : ' bg-off-1'
                     }`}
                     onClick={() => handleClick(2)}
@@ -29,7 +29,7 @@ const OptionsAdmin = ({ selected, setSelected }) => {
                     <img src={p} alt="Artists" className="w-8" />
                 </div>
                 <div
-                    className={`flex justify-between p-4 rounded-lg w-80 active:scale-90 cursor-pointer ${
+                    className={`flex justify-between w-full p-4 rounded-lg active:scale-90 cursor-pointer ${
                         selected === 3 ? 'bg-cream-500 ' : ' bg-off-1'
                     }`}
                     onClick={() => handleClick(3)}

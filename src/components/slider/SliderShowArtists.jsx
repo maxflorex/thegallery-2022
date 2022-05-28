@@ -65,7 +65,7 @@ const SliderShowArtists = () => {
     };
 
     return (
-        <div className="w-full rounded-xl container mx-auto py-16">
+        <div className="w-full rounded-xl container mx-auto py-16 px-16">
             {/* SLIDESHOW */}
             <Slideshow autoplay={false} navigation={true}>
                 {artist.length > 1 &&

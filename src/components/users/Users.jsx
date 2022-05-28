@@ -16,28 +16,30 @@ const Users = () => {
     const [selected, setSelected] = useState(0);
 
     return (
-        <div>
+        <div className='relative h-full'>
             <OptionsAdmin selected={selected} setSelected={setSelected} />
-            {selected === 3 && <Inventory />}
-            {selected === 2 && <SliderShowArtists />}
-            {selected === 1 && (
-                <AddArtwork
-                    i={imageUrl}
-                    setI={setImageUrl}
-                    setU={setUrl}
-                    u={url}
-                    createArtist={createArtist}
-                    setCreateArtist={setCreateArtist}
-                />
-            )}
-            {createArtist && (
-                <AddNewArtist
-                    i={imageUrl}
-                    setI={setImageUrl}
-                    setU={setUrl}
-                    u={url}
-                />
-            )}
+            <div className='w-[calc(100%-18rem)] ml-auto h-full'>
+                {selected === 3 && <Inventory />}
+                {selected === 2 && <SliderShowArtists />}
+                {selected === 1 && (
+                    <AddArtwork
+                        i={imageUrl}
+                        setI={setImageUrl}
+                        setU={setUrl}
+                        u={url}
+                        createArtist={createArtist}
+                        setCreateArtist={setCreateArtist}
+                    />
+                )}
+                {createArtist && (
+                    <AddNewArtist
+                        i={imageUrl}
+                        setI={setImageUrl}
+                        setU={setUrl}
+                        u={url}
+                    />
+                )}
+            </div>
         </div>
     );
 };

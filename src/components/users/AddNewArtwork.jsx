@@ -130,7 +130,7 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
     }, [selectedArtist]);
 
     return (
-        <div className={`container mx-auto ${!createArtist && 'py-16'}`}>
+        <div className={`container mx-auto w-full ${!createArtist && 'py-16'}`}>
             {!createArtist && (
                 <div
                     className="flex flex-nowrap flex-col py-32 h-full"

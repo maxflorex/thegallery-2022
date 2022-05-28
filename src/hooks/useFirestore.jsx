@@ -19,4 +19,22 @@ const UseFirestore = (q) => {
     return { artist };
 };
 
+export const UseFirestore2 = (q) => {
+    
+    const [art, setArt] = useState([]);
+
+    // GET REAL TIME DATA - READ ELEMENTS
+    useEffect(() => {
+        onSnapshot(q, (snapshot) => {
+            let a = [];
+            snapshot.docs.forEach((doc) => {
+                a.push({ ...doc.data(), id: doc.id });
+            });
+            setArt(a);
+        });
+    }, []);
+
+    return { art };
+};
+
 export default UseFirestore
