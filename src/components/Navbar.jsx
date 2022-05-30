@@ -21,7 +21,7 @@ const Navbar = () => {
                         width="24"
                         height="24"
                         viewBox="0 0 24 24"
-                        className="bg-cream-100 p-2 rounded-lg fill-navy-500 hover:scale-110 cursor-pointer"
+                        className="bg-cream-100 p-2 rounded-lg fill-navy-500 hover:scale-110 cursor-pointer z-50"
                     >
                         <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
                     </svg>

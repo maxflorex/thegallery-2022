@@ -8,7 +8,7 @@ const OptionsAdmin = ({ selected, setSelected }) => {
     };
 
     return (
-        <div className="text-xl font-semibold w-72 h-full p-4 flex items-center fixed top-0">
+        <div className="text-xl font-semibold w-72 h-screen p-4 flex items-center fixed top-0 bg-off-1/90 z-40">
             <div className="flex items-center flex-wrap justify-center gap-4">
                 <div
                     className={`flex justify-between w-full p-4 rounded-lg active:scale-90 cursor-pointer ${
