@@ -8,34 +8,34 @@ const OptionsAdmin = ({ selected, setSelected }) => {
     };
 
     return (
-        <div className="text-xl font-semibold w-72 h-screen p-4 flex items-center fixed top-0 bg-off-1/90 z-40">
-            <div className="flex items-center flex-wrap justify-center gap-4">
+        <div className="xl:text-xl text-md font-semibold w-full xl:w-72 xl:h-screen p-4 flex items-center xl:fixed top-0 xl:bg-off-1/90 z-40 container mx-auto">
+            <div className="xl:flex items-center xl:flex-wrap justify-center gap-4 w-full grid grid-cols-3">
                 <div
-                    className={`flex justify-between w-full p-4 rounded-lg active:scale-90 cursor-pointer ${
+                    className={`flex justify-between xl:w-80 w-auto items-center  p-4 rounded-lg active:scale-90 cursor-pointer ${
                         selected === 1 ? 'bg-cream-500 ' : ' bg-off-1'
                     }`}
                     onClick={() => handleClick(1)}
                 >
                     <h1>View Artwortks</h1>
-                    <img src={paint} alt="Basket" className="w-8" />
+                    <img src={paint} alt="Basket" className="xl:w-8 md:w-6 w-4" />
                 </div>
                 <div
-                    className={`flex justify-between w-full p-4 rounded-lg active:scale-90 cursor-pointer ${
+                    className={`flex justify-between xl:w-80 w-auto items-center  p-4 rounded-lg active:scale-90 cursor-pointer ${
                         selected === 2 ? 'bg-cream-500 ' : ' bg-off-1'
                     }`}
                     onClick={() => handleClick(2)}
                 >
                     <h1>View Artists</h1>
-                    <img src={p} alt="Artists" className="w-8" />
+                    <img src={p} alt="Artists" className="xl:w-8 md:w-6 w-4" />
                 </div>
                 <div
-                    className={`flex justify-between w-full p-4 rounded-lg active:scale-90 cursor-pointer ${
+                    className={`flex justify-between xl:w-80 w-auto items-center  p-4 rounded-lg active:scale-90 cursor-pointer ${
                         selected === 3 ? 'bg-cream-500 ' : ' bg-off-1'
                     }`}
                     onClick={() => handleClick(3)}
                 >
                     <h1>Inventory</h1>
-                    <img src={n} alt="User" />
+                    <img src={n} alt="User" className="xl:w-8 md:w-6 w-4" />
                 </div>
             </div>
         </div>

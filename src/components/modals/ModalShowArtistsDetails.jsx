@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Arrows from '../Arrows';
-import ModalEditArtist from './ModalEditArtist';
+import ModalDeleteArtist from './ModalDeleteArtist';
 
 const ModalShowArtistsDetails = ({
     data,
@@ -8,7 +8,7 @@ const ModalShowArtistsDetails = ({
     handleRight,
     handleLeft,
 }) => {
-    const [showEdit, setShowEdit] = useState(false);
+    const [showDelete, setShowDelete] = useState(false);
 
     const handleClick = (e) => {
         if (e.target.classList.contains('dismiss')) {
@@ -77,14 +77,17 @@ const ModalShowArtistsDetails = ({
             >
                 Close
             </span>
-            <spanF
-                className="fixed top-8 left-8 px-4 py-2 bg-off-1 rounded-full font-semibold hover:bg-pink-500 cursor-pointer duration-700 transition-all"
-                onClick={() => setShowEdit(true)}
+
+            <span
+                className="fixed top-8 left-8 px-4 py-2 bg-pink-200 rounded-full font-semibold hover:bg-pink-500 cursor-pointer duration-700 transition-all"
+                onClick={() => setShowDelete(true)}
             >
-                Edit Artist
-            </spanF>
+                Delete Artist
+            </span>
             <Arrows right={handleRight} left={handleLeft} />
-            {showEdit && <ModalEditArtist setShowEdit={setShowEdit} data={data} />}
+            {showDelete && (
+                <ModalDeleteArtist id={data.id} setShowDelete={setShowDelete} />
+            )}
         </div>
     );
 };

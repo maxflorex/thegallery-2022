@@ -21,7 +21,7 @@ const Hero = () => {
         <div className="h-80 bg-center bg-cover w-full relative">
             <div className=" w-full h-full flex-wrap relative overflow-hidden">
                 {user != null ? (
-                    <div className="h-full w-full bg-navy-500/90 backdrop-blur-sm flex flex-col md:gap-4 gap-2 justify-center items-end pr-8">
+                    <div className="h-full w-full bg-navy-500/90 backdrop-blur-sm flex flex-col md:gap-4 gap-2 justify-center items-center pr-8">
                         <div className="flex items-center gap-4">
                             <h1 className="text-xl md:text-2xl font-semibold text-cream-100 drop-shadow-sm">
                                 Welcome, {user?.displayName}
@@ -31,7 +31,10 @@ const Hero = () => {
                                 alt="Photo"
                                 className="w-16 h-16 rounded-full object-cover"
                             />
-                            <button className={buttontw4} onClick={logoutApp}>
+                            <button
+                                className="p-2 bg-white/10 rounded-lg hover:scale-105 text-white"
+                                onClick={logoutApp}
+                            >
                                 Logout
                             </button>
                         </div>

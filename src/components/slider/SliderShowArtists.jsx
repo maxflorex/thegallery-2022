@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/appContext';
 import ModalShowArtistsDetails from '../modals/ModalShowArtistsDetails';
-import Slideshow from './Slideshow';
+import Slideshow from './Slideshow2';
 
 const SliderShowArtists = () => {
     const [width, setWidth] = useState('');
@@ -87,7 +87,7 @@ const SliderShowArtists = () => {
                                             'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
                                     }
                                     alt="Artwork"
-                                    className="w-full md:h-64  object-cover rounded-md my-4 overflow-hidden opacity-90 hover:opacity-100"
+                                    className="w-full h-64  object-cover rounded-md my-4 overflow-hidden opacity-90 hover:opacity-100"
                                 />
                                 <h1 className="font-semibold text-lg pb-1 capitalize">
                                     {data.name.toLowerCase()}

@@ -16,9 +16,9 @@ const Users = () => {
     const [selected, setSelected] = useState(0);
 
     return (
-        <div className='h-full'>
+        <div className="h-full">
             <OptionsAdmin selected={selected} setSelected={setSelected} />
-            <div className='w-[calc(100%-18rem)] ml-auto h-full'>
+            <div className="w-full ml-auto h-full">
                 {selected === 3 && <Inventory />}
                 {selected === 2 && <SliderShowArtists />}
                 {selected === 1 && (
