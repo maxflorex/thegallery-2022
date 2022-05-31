@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Arrows from '../Arrows';
+import FormUpdateArtist from '../forms/FormUpdateArtist';
 import ModalDeleteArtist from './ModalDeleteArtist';
 
 const ModalShowArtistsDetails = ({
@@ -9,6 +10,7 @@ const ModalShowArtistsDetails = ({
     handleLeft,
 }) => {
     const [showDelete, setShowDelete] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
 
     const handleClick = (e) => {
         if (e.target.classList.contains('dismiss')) {
@@ -20,7 +22,7 @@ const ModalShowArtistsDetails = ({
     };
 
     // SHOW SPECIFIC NUMBER OF ITEMS FROM ARRAY
-    const tags = data.tag?.slice(0, 4);
+    const tags = data.tag && data.tag.slice(0, 4);
 
     return (
         <div
@@ -60,7 +62,7 @@ const ModalShowArtistsDetails = ({
                         {data.bio}
                     </p>
                     <div className="flex gap-4 flex-wrap items-center justify-center">
-                        {tags?.map((data, index) => (
+                        {data.tag && tags.map((data, index) => (
                             <p
                                 key={index}
                                 className="capitalize py-1 px-2 rounded-3xl bg-blue-300/50 text-xs"
@@ -77,16 +79,26 @@ const ModalShowArtistsDetails = ({
             >
                 Close
             </span>
-
-            <span
-                className="fixed top-8 left-8 px-4 py-2 bg-pink-200 rounded-full font-semibold hover:bg-pink-500 cursor-pointer duration-700 transition-all"
-                onClick={() => setShowDelete(true)}
-            >
-                Delete Artist
-            </span>
+            <div className="flex gap-4 fixed top-8 left-8 ">
+                <span
+                    className="px-4 py-2 bg-pink-200 rounded-full font-semibold hover:bg-pink-500 cursor-pointer duration-700 transition-all"
+                    onClick={() => setShowDelete(true)}
+                >
+                    Delete Artist
+                </span>
+                <span
+                    className="px-4 py-2 bg-blue-200 rounded-full font-semibold hover:bg-blue-500 cursor-pointer duration-700 transition-all"
+                    onClick={() => setShowEdit(true)}
+                >
+                    Edit Artist
+                </span>
+            </div>
             <Arrows right={handleRight} left={handleLeft} />
             {showDelete && (
                 <ModalDeleteArtist id={data.id} setShowDelete={setShowDelete} />
+            )}
+            {showEdit && (
+                <FormUpdateArtist data={data} setShowEdit={setShowEdit} />
             )}
         </div>
     );

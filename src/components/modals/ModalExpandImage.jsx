@@ -38,7 +38,7 @@ const ModalExpandImage = ({ data, setClicked }) => {
                         Medium: {data.medium_display}
                     </p>
                     <div className="flex gap-4 flex-wrap items-center justify-center">
-                        {tags.map((data, index) => (
+                        {data.tag && tags.map((data, index) => (
                             <p
                                 key={index}
                                 className="capitalize py-1 px-2 rounded-3xl bg-off-1 text-xs"
