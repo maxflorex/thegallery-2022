@@ -58,7 +58,7 @@ const ModalShowArtistsDetails = ({
                 </div>
                 <hr className="mb-4 bg-off-2 text-off-3" />
                 <div className="flex justify-between flex-wrap gap-4">
-                    <p className="text-xs text-justify leading-6 max-h-80 overflow-y-auto">
+                    <p className="text-xs text-justify leading-6 max-h-80 overflow-y-auto scroll p-2">
                         {data.bio}
                     </p>
                     <div className="flex gap-4 flex-wrap items-center justify-center">

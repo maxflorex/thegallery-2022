@@ -7,6 +7,7 @@ const SliderShowArtists = () => {
     const [width, setWidth] = useState('');
     const [artistClicked, setArtistClicked] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
+    const [view, setView] = useState(false);
 
     // GET CONTEXT VALUE
     const { w, artist } = useContext(AppContext);
@@ -66,40 +67,79 @@ const SliderShowArtists = () => {
 
     return (
         <div className="w-full rounded-xl container mx-auto py-16 px-16">
+            <div className="flex flex-col gap-4 justify-center items-center mb-8">
+                <h1 className="font-light italic">Select View Mode</h1>
+                <div className="flex gap-8">
+                    <button
+                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        onClick={() => setView(false)}
+                    >
+                        Slider
+                    </button>
+                    <button
+                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        onClick={() => setView(true)}
+                    >
+                        List
+                    </button>
+                </div>
+            </div>
             {/* SLIDESHOW */}
-            <Slideshow autoplay={false} navigation={true}>
-                {artist.length > 1 &&
-                    artist.map((data, index) => (
-                        // SLIDE GOES HERE
-                        <div
-                            key={index}
-                            className="w-full"
-                            onClick={() => handleClick(data, index)}
-                        >
+            {!view && (
+                <Slideshow autoplay={false} navigation={true}>
+                    {artist.length > 1 &&
+                        artist.map((data, index) => (
+                            // SLIDE GOES HERE
                             <div
-                                className="p-4 md:p-8  hover:bg-off-1/0 border-[1px] border-off-1/0 hover:border-[1px] hover:border-off-2 md:hover:bg-off-1 rounded-md"
-                                style={{ width: `${width}px` }}
+                                key={index}
+                                className="w-full"
+                                onClick={() => handleClick(data, index)}
                             >
-                                <img
-                                    src={data.url}
-                                    onError={(event) =>
-                                        (event.target.src =
-                                            'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
-                                    }
-                                    alt="Artwork"
-                                    className="w-full h-64  object-cover rounded-md my-4 overflow-hidden opacity-90 hover:opacity-100"
-                                />
-                                <h1 className="font-semibold text-lg pb-1 capitalize">
-                                    {data.name.toLowerCase()}
-                                </h1>
-                                <div className="flex justify-between flex-wrap">
-                                    <p>{data.nationality}</p>
+                                <div
+                                    className="p-4 md:p-8  hover:bg-off-1/0 border-[1px] border-off-1/0 hover:border-[1px] hover:border-off-2 md:hover:bg-off-1 rounded-md"
+                                    style={{ width: `${width}px` }}
+                                >
+                                    <img
+                                        src={data.url}
+                                        onError={(event) =>
+                                            (event.target.src =
+                                                'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
+                                        }
+                                        alt="Artwork"
+                                        className="w-full h-64  object-cover rounded-md my-4 overflow-hidden opacity-90 hover:opacity-100"
+                                    />
+                                    <h1 className="font-semibold text-lg pb-1 capitalize">
+                                        {data.name.toLowerCase()}
+                                    </h1>
+                                    <div className="flex justify-between flex-wrap">
+                                        <p>{data.nationality}</p>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        // SLIDE ENDS HERE
+                            // SLIDE ENDS HERE
+                        ))}
+                </Slideshow>
+            )}
+            {view && (
+                <ul className="flex flex-col gap-4 mx-auto w-full items-center max-h-96 overflow-y-scroll scroll">
+                    {artist.map((data, index) => (
+                        <li
+                            key={index}
+                            className="flex gap-4 bg-off-1 py-2 px-3 rounded-full cursor-pointer"
+                            onClick={() => handleClick(data, index)}
+                        >
+                            <h2 className="capitalize">
+                                {data.name.toLowerCase()}
+                            </h2>
+                            <img
+                                src={data.url}
+                                alt="Artist"
+                                className="w-8 h-8 object-cover rounded-full"
+                            />
+                        </li>
                     ))}
-            </Slideshow>
+                </ul>
+            )}
             {artistClicked && (
                 <ModalShowArtistsDetails
                     data={artistClicked}

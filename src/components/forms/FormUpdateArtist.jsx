@@ -50,7 +50,10 @@ const FormUpdateArtist = ({ setShowEdit, data }) => {
             })
             .catch((e) => {
                 console.log(e);
-            });
+            })
+            .finally((e) => {
+                handleClick(e)
+            })
     };
 
     // RESET
@@ -182,7 +185,7 @@ const FormUpdateArtist = ({ setShowEdit, data }) => {
                         </button>
                     ) : ( */}
                     <button
-                        className="w-full py-3 px-4 bg-navy-500 rounded-lg text-white active:scale-95"
+                        className="w-full py-3 px-4 bg-navy-500 rounded-lg text-white active:scale-95 dismiss"
                         onClick={() => updateArtist(data.id)}
                     >
                         Update Artist

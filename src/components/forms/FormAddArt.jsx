@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
 import { inputtw3 } from '../../style/styles';
 import uploadIcon from '../../assets/upload.svg';
+import InputTags from './InputTags';
+import InputMedium from './InputMedium';
+import InputCollections from './InputCollections';
 
-const FormAddArt = ({ setArt, art, reset, handleSubmit }) => {
-    
-    const { title, width, height, medium, price, tags, collection } = art;
+const FormAddArt = ({ setArt, art, reset, handleSubmit, setShow, show, tags, setTags }) => {
+    const [input, setInput] = useState('');
+    const { title, width, height, price } = art;
+    const [showAvailable, setShowAvailable] = useState(false);
 
     return (
         <div className="flex-col flex justify-between gap-8 py-16">
@@ -32,12 +36,11 @@ const FormAddArt = ({ setArt, art, reset, handleSubmit }) => {
                 />
             </div>
             <div className="grid grid-cols-2 gap-4">
-                <input
-                    type="text"
-                    className={inputtw3}
-                    value={medium}
-                    onChange={(e) => setArt({ ...art, medium: e.target.value })}
-                    placeholder="Enter Medium..."
+                <InputMedium
+                    show={show}
+                    setShow={setShow}
+                    setArt={setArt}
+                    art={art}
                 />
                 <input
                     type="number"
@@ -49,26 +52,47 @@ const FormAddArt = ({ setArt, art, reset, handleSubmit }) => {
                     placeholder="Enter Price..."
                 />
             </div>
-            <input
-                type="text"
-                className={inputtw3}
-                value={collection}
-                onChange={(e) => setArt({ ...art, collection: e.target.value })}
-                placeholder="Enter Tags"
+            <InputCollections
+                show={show}
+                setShow={setShow}
+                setArt={setArt}
+                art={art}
             />
-            <input
-                type="text"
-                data-role="taginput"
-                data-tag-trigger="Space"
-                className={inputtw3}
-                value={tags}
-                onChange={(e) => setArt({ ...art, tags: e.target.value })}
-                placeholder="Select Collection"
+            <InputTags
+                setArtist={setArt}
+                artist={art}
+                tags={tags}
+                setTags={setTags}
+                input={input}
+                setInput={setInput}
+                show={show}
+                setShow={setShow}
             />
-            <select name="" id="">
-                <option value="">Available</option>
-                <option value="">Sold</option>
-            </select>
+
+            <span
+                className="w-40 bg-off-2 p-2 rounded-lg relative text-center cursor-pointer"
+                onClick={() => setShowAvailable(!showAvailable)}
+            >
+                Available
+                {showAvailable && (
+                    <ul className="flex gap-4 flex-col absolute mt-4 left-0 w-full items-center bg-cream-100 rounded-lg py-4">
+                        <li
+                            onClick={() =>
+                                setArt({ ...art, available: 'Available' })
+                            }
+                        >
+                            Available
+                        </li>
+                        <li
+                            onClick={() =>
+                                setArt({ ...art, available: 'Sold' })
+                            }
+                        >
+                            Sold
+                        </li>
+                    </ul>
+                )}
+            </span>
             <div className="flex flex-col gap-2 items-center justify-between pb-4">
                 <label htmlFor="files" className="">
                     <img

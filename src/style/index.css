@@ -25,16 +25,17 @@
 }
 
 
-    body::-webkit-scrollbar {
+    body::-webkit-scrollbar, .scroll::-webkit-scrollbar {
         width: 1rem;
     }
 
-    body::-webkit-scrollbar-track {
-        box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    body::-webkit-scrollbar-track, .scroll::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+        border-radius: 9999px;
     }
 
-    body::-webkit-scrollbar-thumb {
-        background-color: darkgrey;
-        outline: 1px solid slategrey;
+    body::-webkit-scrollbar-thumb, .scroll::-webkit-scrollbar-thumb {
+        background-color: #00000080;
+        border-radius: 9999px;
     }
 

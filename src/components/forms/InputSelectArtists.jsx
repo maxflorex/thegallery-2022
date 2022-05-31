@@ -9,8 +9,6 @@ const InputSelectArtists = ({ setSelectedArtist, setArt, art, setCreateArtist })
     const [suggestions, setSuggestions] = useState([]);
     const [selected, setSelected] = useState(false);
 
-    const { by } = art;
-
     const onChangeHandler = (text) => {
         let matches = [];
         if (text.length > 0) {
@@ -31,7 +29,7 @@ const InputSelectArtists = ({ setSelectedArtist, setArt, art, setCreateArtist })
     };
 
     const onSelectionHanlder = (a) => {
-        setSelectedArtist(a.name);
+        setSelectedArtist(a);
         setSelected(a);
         setSuggestions([]);
         setText('');

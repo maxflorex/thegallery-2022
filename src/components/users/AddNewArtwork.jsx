@@ -4,6 +4,7 @@ import { colRefArt, storage } from '../../firebase/config';
 import FormAddArt from '../forms/FormAddArt';
 import { addDoc, serverTimestamp } from 'firebase/firestore';
 import InputSelectArtists from '../forms/InputSelectArtists';
+import ArtList from '../ArtList';
 const bg = 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png';
 
 const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
@@ -11,7 +12,10 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
     const [myProgress, setMyProgress] = useState(0);
     const [selectedImage, setSelectedImage] = useState(undefined);
     const [selectedArtist, setSelectedArtist] = useState('');
+    const [view, setView] = useState(false);
+    const [tags, setTags] = useState([]);
     const startForm = useRef(null);
+    const [show, setShow] = useState('');
 
     const [art, setArt] = useState({
         title: '',
@@ -20,22 +24,10 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
         medium: '',
         price: '',
         collection: '',
-        tags: '',
         available: false,
-        by: '',
     });
 
-    const {
-        title,
-        width,
-        height,
-        medium,
-        price,
-        collection,
-        tags,
-        available,
-        by,
-    } = art;
+    const { title, width, height, medium, price, collection, available } = art;
 
     // UPLOAD FILES
     const uploadFiles = () => {
@@ -92,9 +84,13 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
             collection: '',
             tags: '',
             available: true,
-            by: '',
         });
         setI(null);
+        setShow(false);
+        setSelectedArtist('');
+        setSelectedImage(undefined);
+        setU(null);
+        setView(false);
     };
 
     // ON SUBMIT EVENT
@@ -109,9 +105,9 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
             url: u,
             medium: medium,
             price: price,
-            tags: tags,
+            tag: tags,
             available: available,
-            by: by,
+            by: selectedArtist,
             createdAt: serverTimestamp(),
         }).then(() => {
             alert('Artwork Submitted!');
@@ -127,59 +123,99 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
     // USEEFFECT - SCROLL TO BOTTOM
     useEffect(() => {
         scrollToBottom();
-    }, [selectedArtist]);
+    }, [view]);
 
     return (
         <div className={`container mx-auto w-full ${!createArtist && 'py-16'}`}>
-            {!createArtist && (
-                <div
-                    className="flex flex-nowrap flex-col py-32 h-full"
-                    ref={startForm}
-                >
-                    <h1 className="text-2xl font-semibold text-center">
-                        Add a new artwork
-                    </h1>
-                    <form className="flex-col flex justify-between mx-auto gap-8 py-8">
-                        <InputSelectArtists
-                            setSelectedArtist={setSelectedArtist}
-                            setArt={setArt}
-                            art={art}
-                            setCreateArtist={setCreateArtist}
-                            createArtist={createArtist}
-                        />
-                        {selectedArtist && (
-                            <>
-                                <h1 className="text-2xl font-thin text-center pb-4 italic">
-                                    Upload your artwork
-                                </h1>
-                                <div className="flex flex-col gap-4 items-center justify-between pb-4">
-                                    <img
-                                        src={i !== null ? i : bg}
-                                        alt="Upload"
-                                        className="w-full h-96 p-4 rounded-lg cursor-pointer object-contain hover:scale-105"
-                                        onClick={uploadFiles}
-                                    />
-                                    <input
-                                        type="file"
-                                        id="files"
-                                        name="files"
-                                        accept="image/png, image/jpeg"
-                                        className="hidden"
-                                        onChange={upload}
-                                    />
-                                    <h2>Main Picture</h2>
-                                </div>
-                                <FormAddArt
+            <div className="flex flex-col gap-4 justify-center items-center mb-8">
+                <h1 className="font-light italic">Select View Mode</h1>
+                <div className="flex gap-8">
+                    <button
+                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        onClick={() => setView(false)}
+                    >
+                        Artworks
+                    </button>
+                    <button
+                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        onClick={() => setView(true)}
+                    >
+                        Add Art
+                    </button>
+                    <button
+                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        onClick={() => setView(false)}
+                    >
+                        Collections
+                    </button>
+                    <button
+                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        onClick={() => setView(true)}
+                    >
+                        Add Collection
+                    </button>
+                </div>
+            </div>
+            {view && (
+                <>
+                    {!createArtist && (
+                        <div
+                            className="flex flex-nowrap flex-col py-16 h-full"
+                            ref={startForm}
+                        >
+                            <h1 className="text-2xl font-semibold text-center">
+                                Add a new artwork
+                            </h1>
+                            <form className="flex-col flex justify-between mx-auto gap-8 py-8">
+                                <InputSelectArtists
+                                    setSelectedArtist={setSelectedArtist}
                                     setArt={setArt}
                                     art={art}
-                                    reset={reset}
-                                    handleSubmit={handleSubmit}
+                                    setCreateArtist={setCreateArtist}
+                                    createArtist={createArtist}
                                 />
-                            </>
-                        )}
-                    </form>
-                </div>
+                                {selectedArtist
+                                    ? view && (
+                                          <>
+                                              <h1 className="text-2xl font-thin text-center pb-4 italic">
+                                                  Upload your artwork
+                                              </h1>
+                                              <div className="flex flex-col gap-4 items-center justify-between pb-4">
+                                                  <img
+                                                      src={i !== null ? i : bg}
+                                                      alt="Upload"
+                                                      className="w-full h-96 p-4 rounded-lg cursor-pointer object-contain hover:scale-105"
+                                                      onClick={uploadFiles}
+                                                  />
+                                                  <input
+                                                      type="file"
+                                                      id="files"
+                                                      name="files"
+                                                      accept="image/png, image/jpeg"
+                                                      className="hidden"
+                                                      onChange={upload}
+                                                  />
+                                                  <h2>Main Picture</h2>
+                                              </div>
+                                              <FormAddArt
+                                                  setArt={setArt}
+                                                  art={art}
+                                                  reset={reset}
+                                                  handleSubmit={handleSubmit}
+                                                  show={show}
+                                                  setShow={setShow}
+                                                  tags={tags}
+                                                  setTags={setTags}
+                                              />
+                                          </>
+                                      )
+                                    : ''}
+                            </form>
+                        </div>
+                    )}
+                </>
             )}
+            {!view && <ArtList />}
         </div>
     );
 };

@@ -6,11 +6,11 @@ const Arrows = ({ right, left }) => {
     
     return (
         <div className="absolute gap-4 bottom-8 flex w-screen items-center justify-center">
-            <span onClick={right} className={buttonS}>
-                Next
-            </span>
             <span onClick={left} className={buttonS}>
                 Previous
+            </span>
+            <span onClick={right} className={buttonS}>
+                Next
             </span>
         </div>
     );
