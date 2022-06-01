@@ -52,7 +52,7 @@ const InputTags = ({ setArtist, artist, tags, setTags, input, setInput }) => {
     }, [tags])
 
     return (
-        <div>
+        <div className='w-full'>
             <input
                 value={input}
                 placeholder="Enter Tags (Press coma for a new entry)..."
@@ -61,7 +61,7 @@ const InputTags = ({ setArtist, artist, tags, setTags, input, setInput }) => {
                 onChange={onChange}
                 className={inputtw3}
             />
-            <div className="flex gap-4 w-96 mt-4 flex-wrap">
+            <div className="flex gap-4 max-w-96 mt-4 flex-wrap">
                 {tags &&
                     tags.map((tag, index) => (
                         <div key={index} className="flex gap-2 bg-blue-100 py-2 px-3 rounded-2xl items-center">

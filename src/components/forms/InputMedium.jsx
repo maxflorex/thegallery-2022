@@ -2,14 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { inputtw3 } from '../../style/styles';
 
 const data = [
-    'Abstract',
-    'Impressionism',
     'Mixed Media',
-    'Realism',
-    'Photography',
-    'Aerial',
-    'Fauna',
-    'People',
+    'Acrylic',
+    'Giclée',
+    'Sculpture',
+    'Resin',
+    'Oil',
+    'Pigments',
 ];
 
 const InputMedium = ({ show, setShow, setArt, art }) => {

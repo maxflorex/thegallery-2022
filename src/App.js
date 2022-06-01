@@ -9,20 +9,22 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, colRefArtist, colRefArt } from './firebase/config';
+import { auth } from './firebase/config';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { login, logout } from './redux/userSlice';
 import axios from 'axios';
 import { AppContext } from './context/appContext'
-import { query } from 'firebase/firestore';
-import UseFirestore, { UseFirestore2 } from './hooks/useFirestore';
+import UseFirestore from './hooks/useFirestore';
 
 
 function App() {
   const dispatch = useDispatch();
   const [dataArtists, setDataArtists] = useState({})
   const [w, setW] = useState('');
+  const [ ...artist ] = UseFirestore('artists')
+  const [ ...art ] = UseFirestore('art')
+  const [ ...collection ] = UseFirestore('collections')
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -52,12 +54,8 @@ function App() {
       });
   }, [])
 
-
-  const { artist } = UseFirestore(query(colRefArtist));
-  const { art } = UseFirestore2(query(colRefArt));
-
   return (
-    <AppContext.Provider value={{ dataArtists, setW, w, artist, art }}>
+    <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection }}>
       <Router>
         <Navbar />
         <Routes>

@@ -13,7 +13,7 @@ const Users = () => {
     const [imageUrl, setImageUrl] = useState(null);
     const [url, setUrl] = useState(null);
     const [createArtist, setCreateArtist] = useState(false);
-    const [selected, setSelected] = useState(2);
+    const [selected, setSelected] = useState(1);
 
     return (
         <div className="h-full">

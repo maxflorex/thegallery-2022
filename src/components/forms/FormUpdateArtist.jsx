@@ -52,8 +52,8 @@ const FormUpdateArtist = ({ setShowEdit, data }) => {
                 console.log(e);
             })
             .finally((e) => {
-                handleClick(e)
-            })
+                handleClick(e);
+            });
     };
 
     // RESET
@@ -176,14 +176,6 @@ const FormUpdateArtist = ({ setShowEdit, data }) => {
                     />
                 )}
                 <div className="flex flex-col gap-4 mt-8">
-                    {/* {!name ? (
-                        <button
-                            className="w-full py-3 px-4 bg-off-5 rounded-lg text-white active:scale-95"
-                            disabled
-                        >
-                            Fill out the form
-                        </button>
-                    ) : ( */}
                     <button
                         className="w-full py-3 px-4 bg-navy-500 rounded-lg text-white active:scale-95 dismiss"
                         onClick={() => updateArtist(data.id)}

@@ -1,13 +1,22 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { inputtw3 } from '../../style/styles';
 import uploadIcon from '../../assets/upload.svg';
 import InputTags from './InputTags';
 import InputMedium from './InputMedium';
 import InputCollections from './InputCollections';
 
-const FormAddArt = ({ setArt, art, reset, handleSubmit, setShow, show, tags, setTags }) => {
+const FormAddArt = ({
+    setArt,
+    art,
+    reset,
+    handleSubmit,
+    setShow,
+    show,
+    tags,
+    setTags,
+}) => {
     const [input, setInput] = useState('');
-    const { title, width, height, price } = art;
+    const { title, width, height, price, available } = art;
     const [showAvailable, setShowAvailable] = useState(false);
 
     return (
@@ -73,7 +82,7 @@ const FormAddArt = ({ setArt, art, reset, handleSubmit, setShow, show, tags, set
                 className="w-40 bg-off-2 p-2 rounded-lg relative text-center cursor-pointer"
                 onClick={() => setShowAvailable(!showAvailable)}
             >
-                Available
+                {available === '' ? 'Select Availability' : available}
                 {showAvailable && (
                     <ul className="flex gap-4 flex-col absolute mt-4 left-0 w-full items-center bg-cream-100 rounded-lg py-4">
                         <li

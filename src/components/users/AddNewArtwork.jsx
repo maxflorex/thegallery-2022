@@ -5,6 +5,8 @@ import FormAddArt from '../forms/FormAddArt';
 import { addDoc, serverTimestamp } from 'firebase/firestore';
 import InputSelectArtists from '../forms/InputSelectArtists';
 import ArtList from '../ArtList';
+import CollectionList from '../CollectionList';
+import FormAddCollections from '../forms/FormAddCollections';
 const bg = 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png';
 
 const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
@@ -12,7 +14,7 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
     const [myProgress, setMyProgress] = useState(0);
     const [selectedImage, setSelectedImage] = useState(undefined);
     const [selectedArtist, setSelectedArtist] = useState('');
-    const [view, setView] = useState(false);
+    const [view, setView] = useState('art');
     const [tags, setTags] = useState([]);
     const startForm = useRef(null);
     const [show, setShow] = useState('');
@@ -24,7 +26,7 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
         medium: '',
         price: '',
         collection: '',
-        available: false,
+        available: '',
     });
 
     const { title, width, height, medium, price, collection, available } = art;
@@ -91,6 +93,7 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
         setSelectedImage(undefined);
         setU(null);
         setView(false);
+        setFile(null);
     };
 
     // ON SUBMIT EVENT
@@ -123,7 +126,7 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
     // USEEFFECT - SCROLL TO BOTTOM
     useEffect(() => {
         scrollToBottom();
-    }, [view]);
+    }, [view, selectedArtist, file]);
 
     return (
         <div className={`container mx-auto w-full ${!createArtist && 'py-16'}`}>
@@ -132,31 +135,31 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
                 <div className="flex gap-8">
                     <button
                         className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
-                        onClick={() => setView(false)}
+                        onClick={() => setView('art')}
                     >
                         Artworks
                     </button>
                     <button
                         className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
-                        onClick={() => setView(true)}
+                        onClick={() => setView('addArt')}
                     >
                         Add Art
                     </button>
                     <button
                         className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
-                        onClick={() => setView(false)}
+                        onClick={() => setView('collections')}
                     >
                         Collections
                     </button>
                     <button
                         className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
-                        onClick={() => setView(true)}
+                        onClick={() => setView('addCollections')}
                     >
                         Add Collection
                     </button>
                 </div>
             </div>
-            {view && (
+            {view === 'addArt' && (
                 <>
                     {!createArtist && (
                         <div
@@ -177,7 +180,10 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
                                 {selectedArtist
                                     ? view && (
                                           <>
-                                              <h1 className="text-2xl font-thin text-center pb-4 italic">
+                                              <h1
+                                                  className="text-2xl font-thin text-center pb-4 italic"
+                                                  ref={startForm}
+                                              >
                                                   Upload your artwork
                                               </h1>
                                               <div className="flex flex-col gap-4 items-center justify-between pb-4">
@@ -197,16 +203,23 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
                                                   />
                                                   <h2>Main Picture</h2>
                                               </div>
-                                              <FormAddArt
-                                                  setArt={setArt}
-                                                  art={art}
-                                                  reset={reset}
-                                                  handleSubmit={handleSubmit}
-                                                  show={show}
-                                                  setShow={setShow}
-                                                  tags={tags}
-                                                  setTags={setTags}
-                                              />
+                                              {file && (
+                                                  <div ref={startForm}>
+                                                      <FormAddArt
+                                                          setArt={setArt}
+                                                          art={art}
+                                                          reset={reset}
+                                                          handleSubmit={
+                                                              handleSubmit
+                                                          }
+                                                          show={show}
+                                                          setShow={setShow}
+                                                          tags={tags}
+                                                          setTags={setTags}
+                                                          file={file}
+                                                      />
+                                                  </div>
+                                              )}
                                           </>
                                       )
                                     : ''}
@@ -215,7 +228,9 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
                     )}
                 </>
             )}
-            {!view && <ArtList />}
+            {view === 'art' && <ArtList />}
+            {view === 'collections' && <CollectionList />}
+            {view === 'addCollections' && <FormAddCollections />}
         </div>
     );
 };

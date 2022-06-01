@@ -15,6 +15,39 @@ const ArtList = () => {
         document.body.style.height = '100%';
     };
 
+    const dataLength = art.length;
+
+    // ROTATION - R
+    const handleRight = () => {
+        if (currentIndex + 1 >= dataLength) {
+            setCurrentIndex(0);
+            setArtClicked(art[0]);
+        }
+        const indexedData = art.filter((item) => {
+            return art.indexOf(item) === currentIndex + 1;
+        });
+        if (currentIndex + 1 < dataLength) {
+            setCurrentIndex(currentIndex + 1);
+            setArtClicked(indexedData[0]);
+        }
+    };
+
+    // ROTATION - L
+    const handleLeft = () => {
+        const dataLength = art.length;
+        if (currentIndex === 0) {
+            setCurrentIndex(dataLength - 1);
+            setArtClicked(art[dataLength - 1]);
+        }
+        const indexedData = art.filter((item) => {
+            return art.indexOf(item) === currentIndex - 1;
+        });
+        if (currentIndex > 0) {
+            setCurrentIndex(currentIndex - 1);
+            setArtClicked(indexedData[0]);
+        }
+    };
+
     return (
         <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
             {art &&
@@ -39,6 +72,8 @@ const ArtList = () => {
                 <ModalShowArtDetail
                     setArtClicked={setArtClicked}
                     artClicked={artClicked}
+                    handleLeft={handleLeft}
+                    handleRight={handleRight}
                 />
             )}
         </div>
