@@ -70,10 +70,10 @@ const FormUpdateArtist = ({ setShowEdit, data }) => {
 
     return (
         <div
-            className="fixed w-full h-full overflow-hidden bg-white/90 z-50 dismiss top-0 left-0 no-scrollbar backdrop-blur-sm dismiss"
+        className="fixed w-full h-full overflow-hidden bg-blue-100/90 z-50 dismiss top-0 left-0 scroll backdrop-blur-sm dismiss"
             onClick={(e) => handleClick(e)}
         >
-            <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-[40rem] bg-white p-16 rounded-lg drop-shadow-md">
+            <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[40rem] bg-white p-16 rounded-lg drop-shadow-md max-h-[90vh] overflow-y-auto scroll">
                 <h1 className="text-3xl font-medium pb-8 text-center">
                     Update Artist
                 </h1>

@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import { AppContext } from '../../context/appContext';
 import { inputtw3 } from '../../style/styles';
-
-const data = [
-    'Abstract',
-    'Impressionism',
-    'Mixed Media',
-    'Realism',
-    'Photography',
-    'Aerial',
-    'Fauna',
-    'People',
-];
 
 const InputCollections = ({ show, setShow, art, setArt }) => {
     const [selected, setSelected] = useState('');
+
+    const { collection } = useContext(AppContext);
 
     const handleClick = (data) => {
         setSelected(data);
@@ -42,15 +34,16 @@ const InputCollections = ({ show, setShow, art, setArt }) => {
             />
             {show === 'collection' && (
                 <div className="absolute mt-4 bg-cream-100 p-4 rounded-lg z-[999]">
-                    {data.map((data, index) => (
-                        <h3
-                            key={index}
-                            className="p-2 hover:bg-cream-300 rounded-xl cursor-pointer font-collection"
-                            onClick={() => handleClick(data)}
-                        >
-                            {data}
-                        </h3>
-                    ))}
+                    {collection &&
+                        collection.map((data, index) => (
+                            <h3
+                                key={index}
+                                className="p-2 hover:bg-cream-300 rounded-xl cursor-pointer font-collection"
+                                onClick={() => handleClick(data.title)}
+                            >
+                                {data.title}
+                            </h3>
+                        ))}
                 </div>
             )}
         </div>

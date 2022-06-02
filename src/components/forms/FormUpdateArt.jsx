@@ -32,8 +32,10 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
         medium: '',
         height: '',
         collection: '',
-        available: '',
+        available: true,
     });
+
+  
 
     const {
         urlClick,
@@ -48,15 +50,15 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
     } = clicked;
 
     const {
-        url = '',
-        wide = '',
-        title = '',
-        tag = '',
-        price = '',
-        medium = '',
-        height = '',
-        collection = '',
-        available = '',
+        url,
+        wide,
+        title,
+        tag,
+        price,
+        medium,
+        height,
+        collection,
+        available
     } = art;
 
     // CLOSE MODAL
@@ -79,11 +81,11 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
             price: `${price ? price : data.price}`,
             tag: `${tag ? tag : data.tag}`,
             wide: `${wide ? wide : data.wide}`,
-            available: `${available ? available : data.available}`,
+            available: available
         })
             .then((e) => {
                 alert('Updated!');
-                reset(e)
+                reset(e);
                 setShowEdit(false);
             })
             .catch((e) => {
@@ -94,15 +96,15 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
     // RESET
     const reset = () => {
         setArt({
-            urlClick: false,
-            wideClick: false,
-            titleClick: false,
-            tagClick: false,
-            priceClick: false,
-            mediumClick: false,
-            heightClick: false,
-            collectionClick: false,
-            availableClick: false,
+            url: '',
+            wide: '',
+            title: '',
+            tag: '',
+            price: '',
+            medium: '',
+            height: '',
+            collection: '',
+            available: true,
         });
         setClicked({
             urlClick: false,
@@ -119,10 +121,10 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
 
     return (
         <div
-            className="fixed w-full h-full overflow-hidden bg-white/90 z-50 dismiss top-0 left-0 no-scrollbar backdrop-blur-sm dismiss"
+            className="fixed w-full h-full overflow-hidden bg-blue-100/90 z-50 dismiss top-0 left-0 scroll backdrop-blur-sm dismiss"
             onClick={(e) => handleClick(e)}
         >
-            <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-96 bg-white p-16 rounded-lg drop-shadow-md max-h-[80vh] overflow-y-auto scrollMini min-w-96">
+            <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[40rem] bg-white p-16 rounded-lg drop-shadow-md max-h-[90vh] overflow-y-auto scroll">
                 <h1 className="text-3xl font-medium pb-8 text-center">
                     Update Artist
                 </h1>
@@ -277,7 +279,7 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
                     </label>
                     <h1 className="flex items-center gap-2 capitalize">
                         <span className="text-xs italic">Current Values: </span>{' '}
-                        {data.available}
+                        {data.available ? 'Available' : 'Sold'}
                     </h1>
                 </div>
                 {availableClick && (
@@ -285,14 +287,18 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
                         className="w-40 bg-off-2 p-2 rounded-lg relative text-center cursor-pointer"
                         onClick={() => setShowAvailable(!showAvailable)}
                     >
-                        {available === '' ? 'Select Availability' : available}
+                        {available || available === 'true'
+                            ? 'Available'
+                            : !available
+                            ? 'Sold'
+                            : 'Select option'}
                         {showAvailable && (
                             <ul className="flex gap-4 flex-col absolute mt-4 left-0 w-full items-center bg-cream-100 rounded-lg py-4">
                                 <li
                                     onClick={() =>
                                         setArt({
                                             ...art,
-                                            available: 'Available',
+                                            available: true,
                                         })
                                     }
                                 >
@@ -300,7 +306,7 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
                                 </li>
                                 <li
                                     onClick={() =>
-                                        setArt({ ...art, available: 'Sold' })
+                                        setArt({ ...art, available:false })
                                     }
                                 >
                                     Sold

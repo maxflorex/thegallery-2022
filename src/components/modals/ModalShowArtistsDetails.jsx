@@ -8,6 +8,7 @@ const ModalShowArtistsDetails = ({
     setArtistClicked,
     handleRight,
     handleLeft,
+    setView
 }) => {
     const [showDelete, setShowDelete] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
@@ -95,7 +96,7 @@ const ModalShowArtistsDetails = ({
             </div>
             <Arrows right={handleRight} left={handleLeft} />
             {showDelete && (
-                <ModalDeleteArtist id={data.id} setShowDelete={setShowDelete} />
+                <ModalDeleteArtist id={data.id} setShowDelete={setShowDelete} setArtistClicked={setArtistClicked} setView={setView}/>
             )}
             {showEdit && (
                 <FormUpdateArtist data={data} setShowEdit={setShowEdit} />

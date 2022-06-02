@@ -9,6 +9,7 @@ const data = [
     'Resin',
     'Oil',
     'Pigments',
+    'Aluminum'
 ];
 
 const InputMedium = ({ show, setShow, setArt, art }) => {

@@ -14,10 +14,11 @@ const FormAddArt = ({
     show,
     tags,
     setTags,
+    showAvailable, setShowAvailable
 }) => {
     const [input, setInput] = useState('');
     const { title, width, height, price, available } = art;
-    const [showAvailable, setShowAvailable] = useState(false);
+
 
     return (
         <div className="flex-col flex justify-between gap-8 py-16">
@@ -87,14 +88,14 @@ const FormAddArt = ({
                     <ul className="flex gap-4 flex-col absolute mt-4 left-0 w-full items-center bg-cream-100 rounded-lg py-4">
                         <li
                             onClick={() =>
-                                setArt({ ...art, available: 'Available' })
+                                setArt({ ...art, available: true })
                             }
                         >
                             Available
                         </li>
                         <li
                             onClick={() =>
-                                setArt({ ...art, available: 'Sold' })
+                                setArt({ ...art, available: false })
                             }
                         >
                             Sold

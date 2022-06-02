@@ -3,7 +3,6 @@ import FormAddArtist from '../forms/FormAddArtist';
 import { getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { addDoc, serverTimestamp } from 'firebase/firestore';
 import { colRefArtist, storage } from '../../firebase/config';
-import { buttontw } from '../../style/styles';
 
 const bg =
     'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkfVqmZAwDe1QCMoV1LeBVTiooqw637Hbb59TE0vuMBbnnUC9HJqDaXJIzsb4WEkxeh5M&usqp=CAU';
@@ -31,7 +30,7 @@ const AddNewArtistt = ({ i, setI, u, setU }) => {
         tag: [],
     });
 
-    const { name, nationality, dob, bio, style, tag } = artist;
+    const { name, bio, style} = artist;
     const { country, flag } = nation;
 
     // UPLOAD FILES

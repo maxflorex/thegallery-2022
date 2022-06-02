@@ -2,10 +2,12 @@ import React from 'react';
 import { deleteDoc, doc } from 'firebase/firestore';
 import { colRefArt } from '../../firebase/config';
 
-const ModalDeleteArtist = ({ id, setShowDelete, setArtClicked }) => {
+const ModalDeleteArtist = ({ id, setShowDelete, setArtClicked, setView }) => {
     const handleClick = (e) => {
         if (e.target.classList.contains('closeM')) {
             setShowDelete(false);
+            setArtClicked('');
+            setView('art')
             // SHOW SCROLLBAR
             document.body.style.overflow = 'auto';
             document.body.style.height = 'auto';
@@ -13,10 +15,12 @@ const ModalDeleteArtist = ({ id, setShowDelete, setArtClicked }) => {
     };
 
     // DELETE DOCUMENTS
-    const deleteArtwork = async (id, e) => {
+    const deleteArtwork = async (id) => {
         await deleteDoc(doc(colRefArt, id));
+        setShowDelete(false);
+        setArtClicked('');
+        setView('art')
         alert('The artwork has been deleted!');
-        setArtClicked(false)
     };
 
     return (

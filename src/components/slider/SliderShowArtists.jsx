@@ -2,12 +2,16 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/appContext';
 import ModalShowArtistsDetails from '../modals/ModalShowArtistsDetails';
 import Slideshow from './Slideshow2';
+import AddNewArtist from '../users/AddNewArtist';
 
 const SliderShowArtists = () => {
     const [width, setWidth] = useState('');
     const [artistClicked, setArtistClicked] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [view, setView] = useState(false);
+    const [view, setView] = useState('slider');
+    const [imageUrl, setImageUrl] = useState(null);
+    const [url, setUrl] = useState(null);
+    const [createArtist, setCreateArtist] = useState(false);
 
     // GET CONTEXT VALUE
     const { w, artist } = useContext(AppContext);
@@ -71,21 +75,27 @@ const SliderShowArtists = () => {
                 <h1 className="font-light italic">Select View Mode</h1>
                 <div className="flex gap-8">
                     <button
-                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
-                        onClick={() => setView(false)}
+                        className={`py-2 px-3 rounded-xl ${view === 'slider' ?' bg-off-3' : 'bg-off-1'} text-md font-semibold`}
+                        onClick={() => setView('slider')}
                     >
                         Slider
                     </button>
                     <button
-                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
-                        onClick={() => setView(true)}
+                        className={`py-2 px-3 rounded-xl ${view === 'list' ?' bg-off-3' : 'bg-off-1'} text-md font-semibold`}
+                        onClick={() => setView('list')}
                     >
-                        List
+                        list
+                    </button>
+                    <button
+                        className={`py-2 px-3 rounded-xl ${view === 'add' ?' bg-off-3' : 'bg-off-1'} text-md font-semibold`}
+                        onClick={() => setView('add')}
+                    >
+                        Add Artist
                     </button>
                 </div>
             </div>
             {/* SLIDESHOW */}
-            {!view && (
+            {view === 'slider' && (
                 <Slideshow autoplay={false} navigation={true}>
                     {artist.length > 1 &&
                         artist.map((data, index) => (
@@ -120,7 +130,7 @@ const SliderShowArtists = () => {
                         ))}
                 </Slideshow>
             )}
-            {view && (
+            {view === 'list' && (
                 <ul className="flex flex-col gap-4 mx-auto w-full items-center max-h-96 overflow-y-scroll scroll">
                     {artist.map((data, index) => (
                         <li
@@ -140,12 +150,23 @@ const SliderShowArtists = () => {
                     ))}
                 </ul>
             )}
+            {view === 'add' && (
+                <AddNewArtist
+                    i={imageUrl}
+                    setI={setImageUrl}
+                    setU={setUrl}
+                    u={url}
+                    createArtist={createArtist}
+                    setCreateArtist={setCreateArtist}
+                />
+            )}
             {artistClicked && (
                 <ModalShowArtistsDetails
                     data={artistClicked}
                     setArtistClicked={setArtistClicked}
                     handleRight={handleRight}
                     handleLeft={handleLeft}
+                    setView={setView}
                 />
             )}
         </div>

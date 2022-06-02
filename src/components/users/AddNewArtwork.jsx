@@ -18,6 +18,7 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
     const [tags, setTags] = useState([]);
     const startForm = useRef(null);
     const [show, setShow] = useState('');
+    const [showAvailable, setShowAvailable] = useState('');
 
     const [art, setArt] = useState({
         title: '',
@@ -92,8 +93,10 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
         setSelectedArtist('');
         setSelectedImage(undefined);
         setU(null);
-        setView(false);
+        setView('art');
         setFile(null);
+        setTags([]);
+        setShowAvailable('');
     };
 
     // ON SUBMIT EVENT
@@ -131,28 +134,36 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
     return (
         <div className={`container mx-auto w-full ${!createArtist && 'py-16'}`}>
             <div className="flex flex-col gap-4 justify-center items-center mb-8">
-                <h1 className="font-light italic">Select View Mode</h1>
+                <h1 className="font-light italic">Select Option</h1>
                 <div className="flex gap-8">
                     <button
-                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        className={`py-2 px-3 rounded-xl ${
+                            view === 'art' ? ' bg-off-3' : 'bg-off-1'
+                        } text-md font-semibold`}
                         onClick={() => setView('art')}
                     >
                         Artworks
                     </button>
                     <button
-                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        className={`py-2 px-3 rounded-xl ${
+                            view === 'addArt' ? ' bg-off-3' : 'bg-off-1'
+                        } text-md font-semibold`}
                         onClick={() => setView('addArt')}
                     >
                         Add Art
                     </button>
                     <button
-                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        className={`py-2 px-3 rounded-xl ${
+                            view === 'collections' ? ' bg-off-3' : 'bg-off-1'
+                        } text-md font-semibold`}
                         onClick={() => setView('collections')}
                     >
                         Collections
                     </button>
                     <button
-                        className="py-2 px-3 rounded-xl bg-off-1 text-md font-semibold"
+                        className={`py-2 px-3 rounded-xl ${
+                            view === 'addCollections' ? ' bg-off-3' : 'bg-off-1'
+                        } text-md font-semibold`}
                         onClick={() => setView('addCollections')}
                     >
                         Add Collection
@@ -217,6 +228,12 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
                                                           tags={tags}
                                                           setTags={setTags}
                                                           file={file}
+                                                          showAvailable={
+                                                              showAvailable
+                                                          }
+                                                          setShowAvailable={
+                                                              setShowAvailable
+                                                          }
                                                       />
                                                   </div>
                                               )}
@@ -228,7 +245,7 @@ const AddNewArtwork = ({ i, setI, setU, u, createArtist, setCreateArtist }) => {
                     )}
                 </>
             )}
-            {view === 'art' && <ArtList />}
+            {view === 'art' && <ArtList setView={setView} />}
             {view === 'collections' && <CollectionList />}
             {view === 'addCollections' && <FormAddCollections />}
         </div>

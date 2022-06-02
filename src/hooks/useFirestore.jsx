@@ -21,4 +21,5 @@ const UseFirestore = (myCollection) => {
     return state;
 };
 
+
 export default UseFirestore;

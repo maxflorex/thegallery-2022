@@ -32,46 +32,46 @@ const ModalMenu = ({ setShowMenu }) => {
                 className="absolute bg-[#0000]/80 w-full h-[100vh] -top-4 backdrop-blur-sm"
                 onClick={handleClick2}
             />
-            <div className="absolute w-[40rem] h-[100vh] -top-4 left-0 bg-off-1/90 backdrop-blur-sm">
-                <div className="flex flex-col justify-start items-center h-full pt-40 ">
-                    <div className="flex flex-col gap-2 text-[#000000]/70 md:text-2xl text-lg text-center">
+            <div className="absolute w-96 min-h-[100vh] -top-4 left-0 bg-off-1/90 backdrop-blur-sm ">
+                <div className="flex flex-col justify-start items-center h-full pt-[10vh] ">
+                    <div className="flex flex-col gap-2 text-[#000000]/70 md:text-xl text-lg text-center">
                         <button
                             onClick={() => navigateTo('/')}
-                            className="hover:bg-white hover:shadow-sm p-4 rounded-lg"
+                            className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
                         >
                             Home
                         </button>
                         <hr className="text-off-2 font-extralight" />
                         <button
-                            className="hover:bg-white hover:shadow-sm p-4 rounded-lg"
+                            className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
                             onClick={() => navigateTo('/contact')}
                         >
                             Contact
                         </button>
                         <hr className="text-off-2 font-extralight" />
                         <button
-                            className="hover:bg-white hover:shadow-sm p-4 rounded-lg"
+                            className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
                             onClick={() => navigateTo('/art')}
                         >
                             Artworks
                         </button>
                         <hr className="text-off-2 font-extralight" />
                         <button
-                            className="hover:bg-white hover:shadow-sm p-4 rounded-lg"
+                            className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
                             onClick={() => navigateTo('/artists')}
                         >
                             Artists
                         </button>
                         <hr className="text-off-2 font-extralight" />
                         <button
-                            className="hover:bg-white hover:shadow-sm p-4 rounded-lg"
+                            className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
                             onClick={() => navigateTo('/artists')}
                         >
                             Exhibitions
                         </button>
                         <hr className="text-off-2 font-extralight" />
                         <button
-                            className="hover:bg-white hover:shadow-sm p-4 rounded-lg"
+                            className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
                             onClick={() => navigateTo('/exhibitions')}
                         >
                             About

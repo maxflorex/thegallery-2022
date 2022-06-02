@@ -17,7 +17,7 @@ const OptionsAdmin = ({ selected, setSelected }) => {
                     onClick={() => handleClick(1)}
                 >
                     <h1>View Artwortks</h1>
-                    <img src={paint} alt="Basket" className="xl:w-8 md:w-6 w-4" />
+                    <img src={paint} alt="Basket" className="xl:w-6 w-4" />
                 </div>
                 <div
                     className={`flex justify-between xl:w-80 w-auto items-center  p-4 rounded-lg active:scale-90 cursor-pointer ${
@@ -26,7 +26,7 @@ const OptionsAdmin = ({ selected, setSelected }) => {
                     onClick={() => handleClick(2)}
                 >
                     <h1>View Artists</h1>
-                    <img src={p} alt="Artists" className="xl:w-8 md:w-6 w-4" />
+                    <img src={p} alt="Artists" className="xl:w-6 w-4" />
                 </div>
                 <div
                     className={`flex justify-between xl:w-80 w-auto items-center  p-4 rounded-lg active:scale-90 cursor-pointer ${
@@ -35,7 +35,7 @@ const OptionsAdmin = ({ selected, setSelected }) => {
                     onClick={() => handleClick(3)}
                 >
                     <h1>Inventory</h1>
-                    <img src={n} alt="User" className="xl:w-8 md:w-6 w-4" />
+                    <img src={n} alt="User" className="xl:w-6 w-4" />
                 </div>
             </div>
         </div>
