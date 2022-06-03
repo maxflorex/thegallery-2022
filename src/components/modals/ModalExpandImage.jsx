@@ -11,7 +11,7 @@ const ModalExpandImage = ({ data, setClicked }) => {
     };
 
     // SHOW SPECIFIC NUMBER OF ITEMS FROM ARRAY
-    const tags = data.term_titles.slice(0, 4);
+    const tags = data.tag.slice(0, 4);
 
     return (
         <div
@@ -20,7 +20,7 @@ const ModalExpandImage = ({ data, setClicked }) => {
         >
             <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <img
-                    src={`https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`}
+                    src={data.url}
                     onError={(event) =>
                         (event.target.src =
                             'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
@@ -29,13 +29,13 @@ const ModalExpandImage = ({ data, setClicked }) => {
                     className="max-h-[70vh] rounded-md max-w-[90vw] drop-shadow-sm"
                 />
                 <div className="flex flex-col justify-between items-start py-4 flex-wrap gap-1">
-                    <p className="text-md">{data.artist_title}</p>
+                    <p className="text-md">{data.title}</p>
                     <h1 className="text-xl font-semibold">{data.title}</h1>
                 </div>
                 <hr className="mb-4 bg-off-2 text-off-3" />
                 <div className="flex justify-between flex-wrap gap-4">
                     <p className="text-xs italic">
-                        Medium: {data.medium_display}
+                        Medium: {data.medium}
                     </p>
                     <div className="flex gap-4 flex-wrap items-center justify-center">
                         {data.tag && tags.map((data, index) => (
@@ -48,7 +48,6 @@ const ModalExpandImage = ({ data, setClicked }) => {
                         ))}
                     </div>
                 </div>
-                <p className="pt-2 md:pt-1">{data.date_end}</p>
             </div>
             <span
                 className="fixed top-8 right-8 px-4 py-2 bg-off-1 rounded-full font-semibold hover:bg-pink-500 cursor-pointer dismiss duration-700 transition-all"

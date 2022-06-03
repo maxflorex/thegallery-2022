@@ -85,7 +85,7 @@ const ModalShowArtDetail = ({
                     <h1 className="text-2xl font-semibold mt-4 capitalize">
                         {title.toLowerCase()}
                     </h1>
-                    <p className="text-xs italic">By: {by.name}</p>
+                    <p className="text-xs italic capitalize">By: {by.name.toLowerCase()}</p>
                 </div>
                 <div className="flex gap-4 justify-between text-xs items-center">
                     <p className="flex items-center gap-2 text-sm">{medium}</p>

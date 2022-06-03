@@ -3,6 +3,7 @@ import { AppContext } from '../context/appContext';
 import ModalShowArtDetail from './modals/ModalShowArtDetail';
 import Pagination from './Pagination';
 
+// ITEMS PER PAGINATION
 let PageSize = 12;
 
 const ArtList = ({ setView }) => {
@@ -20,7 +21,7 @@ const ArtList = ({ setView }) => {
     };
 
     const dataLength = art.length;
-    
+
     // USE MEMO
     const paginatedData = useMemo(() => {
         const firstPageIndex = (currentPage - 1) * PageSize;
@@ -35,8 +36,8 @@ const ArtList = ({ setView }) => {
                 {art &&
                     paginatedData.map((data, index) => (
                         <div
-                            className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-off-1 rounded-lg hover:scale-110 cursor-pointer"
                             key={index}
+                            className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-off-1 rounded-lg hover:scale-110 cursor-pointer"
                             onClick={() => handleClick(data, index)}
                         >
                             <div className="flex md:flex-col gap-1 items-start md:justify-center justify-between">
