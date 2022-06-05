@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import Arrows from '../Arrows';
 import FormUpdateArt from '../forms/FormUpdateArt';
 import ModalDeleteArt from './ModalDeleteArt';
@@ -9,7 +10,7 @@ const ModalShowArtDetail = ({
     setView,
     setCurrentIndex,
     currentIndex,
-    art
+    art,
 }) => {
     const [showDelete, setShowDelete] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
@@ -70,6 +71,15 @@ const ModalShowArtDetail = ({
         }
     };
 
+    const navigate = useNavigate();
+
+    const HandleNavigation = () => {
+        navigate(`/art/${id}`);
+        // SHOW SCROLLBAR
+        document.body.style.overflow = 'auto';
+        document.body.style.height = 'auto';
+    };
+
     return (
         <div
             className="fixed w-full h-full overflow-hidden bg-off-2/90 z-50 dismiss top-0 left-0 no-scrollbar backdrop-blur-sm"
@@ -81,12 +91,17 @@ const ModalShowArtDetail = ({
                     alt=""
                     className="max-h-[60vh] max-w-[80vw] object-contain rounded-md bg-white"
                 />
-                <div className="flex justify-between items-center">
+                <span
+                    className="flex justify-between items-center cursor-pointer"
+                    onClick={HandleNavigation}
+                >
                     <h1 className="text-2xl font-semibold mt-4 capitalize">
                         {title.toLowerCase()}
                     </h1>
-                    <p className="text-xs italic capitalize">By: {by.name.toLowerCase()}</p>
-                </div>
+                    <p className="text-xs italic capitalize">
+                        By: {by.name.toLowerCase()}
+                    </p>
+                </span>
                 <div className="flex gap-4 justify-between text-xs items-center">
                     <p className="flex items-center gap-2 text-sm">{medium}</p>
                     <p

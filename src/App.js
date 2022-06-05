@@ -13,6 +13,7 @@ import { auth } from './firebase/config';
 import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { login, logout } from './redux/userSlice';
+import Art from './pages/artwork/[art]';
 import axios from 'axios';
 import { AppContext } from './context/appContext'
 import UseFirestore from './hooks/useFirestore';
@@ -22,9 +23,9 @@ function App() {
   const dispatch = useDispatch();
   const [dataArtists, setDataArtists] = useState({})
   const [w, setW] = useState('');
-  const [ ...artist ] = UseFirestore('artists')
-  const [ ...art ] = UseFirestore('art')
-  const [ ...collection ] = UseFirestore('collections')
+  const [...artist] = UseFirestore('artists')
+  const [...art] = UseFirestore('art')
+  const [...collection] = UseFirestore('collections')
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -65,6 +66,8 @@ function App() {
           <Route path={'/about'} element={<About />} />
           <Route path={'/login'} element={<Account />} />
           <Route path={'/dashboard'} element={<Dashboard />} />
+          <Route path={'/art/:id'} element={<Art />} />
+
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
