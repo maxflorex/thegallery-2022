@@ -14,12 +14,13 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { login, logout } from './redux/userSlice';
 import Art from './pages/artwork/[art]';
+import Artist from './pages/artist/[artist]'
 import axios from 'axios';
 import { AppContext } from './context/appContext'
 import UseFirestore from './hooks/useFirestore';
 
 
-function App() {
+function App() { 
   const dispatch = useDispatch();
   const [dataArtists, setDataArtists] = useState({})
   const [w, setW] = useState('');
@@ -67,7 +68,7 @@ function App() {
           <Route path={'/login'} element={<Account />} />
           <Route path={'/dashboard'} element={<Dashboard />} />
           <Route path={'/art/:id'} element={<Art />} />
-
+          <Route path={'/artist/:id'} element={<Artist />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />

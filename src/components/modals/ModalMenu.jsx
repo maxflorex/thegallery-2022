@@ -34,7 +34,7 @@ const ModalMenu = ({ setShowMenu }) => {
             />
             <div className="absolute w-96 min-h-[100vh] -top-4 left-0 bg-off-1/90 backdrop-blur-sm ">
                 <div className="flex flex-col justify-start items-center h-full pt-[10vh] ">
-                    <div className="flex flex-col gap-2 text-[#000000]/70 md:text-xl text-lg text-center">
+                    <div className="flex flex-col gap-2 text-black md:text-xl text-lg text-center">
                         <button
                             onClick={() => navigateTo('/')}
                             className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
@@ -78,7 +78,7 @@ const ModalMenu = ({ setShowMenu }) => {
                         </button>
                     </div>
                     {/* BASED ON USER */}
-                    <div className="flex flex-col items-center gap-4 relative  md:text-2xl text-xl mt-32 bg-cream-500/20 p-8 text-[#000000]/70 rounded-lg">
+                    <div className="flex flex-col items-center gap-8 relative  md:text-xl text-lg mt-32 bg-cream-500/20 p-8 text-black rounded-lg">
                         {user !== null ? (
                             <div>
                                 <div
@@ -92,13 +92,14 @@ const ModalMenu = ({ setShowMenu }) => {
                                         className="w-12 h-12 rounded-full object-cover"
                                     />
                                 </div>
-                                <div className="flex flex-col gap-4 ">
+                                <div className="flex flex-col gap-4 p-2">
                                     <button
+                                    className='hover:bg-white hover:shadow-sm p-2 rounded-lg'
                                         onClick={() => navigateTo('/dashboard')}
                                     >
                                         Dashboard
                                     </button>
-                                    <button onClick={logoutApp}>Logout</button>
+                                    <button onClick={logoutApp} className='hover:bg-white hover:shadow-sm p-2 rounded-lg'>Logout</button>
                                 </div>
                             </div>
                         ) : (
