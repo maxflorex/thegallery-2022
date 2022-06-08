@@ -1,5 +1,5 @@
 import { doc, updateDoc } from 'firebase/firestore';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { colRefArt } from '../../firebase/config';
 import { inputtw3 } from '../../style/styles';
 import InputCollection from './InputCollections';
@@ -35,8 +35,6 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
         available: true,
     });
 
-  
-
     const {
         urlClick,
         wideClick,
@@ -58,8 +56,16 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
         medium,
         height,
         collection,
-        available
+        available,
     } = art;
+
+    useEffect(() => {
+        if (data) {
+            setTags(data?.tag);
+        }
+    }, [data]);
+
+    console.log(tags);
 
     // CLOSE MODAL
     const handleClick = (e) => {
@@ -79,14 +85,15 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
             height: `${height ? height : data.height}`,
             medium: `${medium ? medium : data.medium}`,
             price: `${price ? price : data.price}`,
-            tag: `${tag ? tag : data.tag}`,
+            tag: tags,
             wide: `${wide ? wide : data.wide}`,
-            available: available
+            available: available,
         })
             .then((e) => {
                 alert('Updated!');
                 reset(e);
                 setShowEdit(false);
+                setTags([]);
             })
             .catch((e) => {
                 console.log(e);
@@ -117,7 +124,16 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
             collectionClick: false,
             availableClick: false,
         });
+        setTags([]);
     };
+
+    useEffect(() => {
+        if (data?.tag > 0) {
+            setTags([data.tag]);
+        } else {
+            setTags([])
+        }
+    }, [data]);
 
     return (
         <div
@@ -306,7 +322,7 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
                                 </li>
                                 <li
                                     onClick={() =>
-                                        setArt({ ...art, available:false })
+                                        setArt({ ...art, available: false })
                                     }
                                 >
                                     Sold
@@ -359,7 +375,7 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
                     </label>
                     <h1 className="flex items-center gap-2 capitalize">
                         <span className="text-xs italic">Current Values: </span>{' '}
-                        {data.tag.length}
+                        {data?.tag?.length}
                     </h1>
                 </div>
                 {tagClick && (
@@ -372,6 +388,7 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
                         setInput={setInput}
                         show={show}
                         setShow={setShow}
+                        data={data}
                     />
                 )}
                 <div className="flex flex-col gap-4 mt-8">

@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 import { AppContext } from '../context/appContext';
 import ModalShowArtDetail from './modals/ModalShowArtDetail';
 import Pagination from './Pagination';
@@ -11,6 +11,7 @@ const ArtList = ({ setView }) => {
     const [artClicked, setArtClicked] = useState('');
     const [currentIndex, setCurrentIndex] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
+    const [getPagination, setGetPagination] = useState([]);
 
     const handleClick = (data, index) => {
         setArtClicked(data);
@@ -23,18 +24,21 @@ const ArtList = ({ setView }) => {
     const dataLength = art.length;
 
     // USE MEMO
-    const paginatedData = useMemo(() => {
-        const firstPageIndex = (currentPage - 1) * PageSize;
-        const lastPageIndex = firstPageIndex + PageSize;
-        return art.slice(firstPageIndex, lastPageIndex);
-    }, [currentPage]);
+    useEffect(() => {
+        const paginatedData = () => {
+            const firstPageIndex = (currentPage - 1) * PageSize;
+            const lastPageIndex = firstPageIndex + PageSize;
+            return art.slice(firstPageIndex, lastPageIndex);
+        };
+        setGetPagination(paginatedData());
+    }, [currentPage, art]);
 
     return (
         <div className="py-16 px-8">
             <h1 className="text-2xl text-center font-semibold">Artworks</h1>
             <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4 py-16">
                 {art &&
-                    paginatedData.map((data, index) => (
+                    getPagination?.map((data, index) => (
                         <div
                             key={index}
                             className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-off-1 rounded-lg hover:scale-110 cursor-pointer"
@@ -43,7 +47,7 @@ const ArtList = ({ setView }) => {
                             <div className="flex md:flex-col gap-1 items-start md:justify-center justify-between">
                                 <div className="">
                                     <h1 className="text-sm capitalize break-words">
-                                        {data.title.toLowerCase()}
+                                        {data.title?.toLowerCase()}
                                     </h1>
                                     <p className="text-xs italic">
                                         {data.medium}

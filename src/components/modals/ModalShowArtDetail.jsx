@@ -80,26 +80,37 @@ const ModalShowArtDetail = ({
         document.body.style.height = 'auto';
     };
 
+console.log(tag?.length > 0);
+
     return (
         <div
             className="fixed w-full h-full overflow-hidden bg-off-2/90 z-50 dismiss top-0 left-0 no-scrollbar backdrop-blur-sm"
             onClick={handleClick}
         >
-            <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-full bg-white p-8 rounded-xl">
-                <img
-                    src={url}
-                    alt=""
-                    className="max-h-[60vh] max-w-[80vw] object-contain rounded-md bg-white"
-                />
+            <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-full bg-white p-4 rounded-xl">
+                <div className="relative">
+                    <img
+                        src={url}
+                        alt=""
+                        className="max-h-[60vh] max-w-[80vw] object-contain rounded-md bg-white"
+                    />
+                    {tag && (
+                        <div className="flex gap-4 bottom-4 right-4 absolute">
+                            {tag?.map((data, i) => (
+                                <p key={i} className='pb-1 px-2 bg-white/80 rounded-lg text-xs italic'>{data}</p>
+                            ))}
+                        </div>
+                    )}
+                </div>
                 <span
                     className="flex justify-between items-center cursor-pointer"
                     onClick={HandleNavigation}
                 >
                     <h1 className="text-2xl font-semibold mt-4 capitalize">
-                        {title.toLowerCase()}
+                        {title?.toLowerCase()}
                     </h1>
                     <p className="text-xs italic capitalize">
-                        By: {by.name.toLowerCase()}
+                        By: {by?.name?.toLowerCase()}
                     </p>
                 </span>
                 <div className="flex gap-4 justify-between text-xs items-center">
@@ -124,17 +135,6 @@ const ModalShowArtDetail = ({
                     </p>
                     <p className="text-lg font-semibold">${price}</p>
                 </div>
-                <ul className="flex gap-4">
-                    {tag > 0 &&
-                        tag.map((data, i) => (
-                            <li
-                                key={i}
-                                className="p-1 bg-off-1 rounded-full text-xs"
-                            >
-                                {data}
-                            </li>
-                        ))}
-                </ul>
             </div>
             <span
                 className="fixed top-8 right-8 px-2 py-1 text-sm bg-off-1 rounded-full font-semibold hover:bg-pink-500 cursor-pointer dismiss duration-700 transition-all"
