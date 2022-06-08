@@ -31,11 +31,11 @@ const ArtFullDetails = ({ art }) => {
     };
 
     return (
-        <>
+        <div className='snap-y snap-mandatory'>
             {title && (
-                <div ref={topPage}>
+                <div ref={topPage} className='snap-center'>
                     <div className="flex flex-col md:flex-row w-full">
-                        <div className="w-full md:w-[50vw] py-16 md:py-40 flex items-center justify-evenly bg-blue-100 lg:h-screen h-auto">
+                        <div className="w-full md:w-[50vw] py-16 md:py-40 flex items-center justify-evenly bg-off-1 lg:h-screen h-auto">
                             <div className="py-24 md:py-4 px-8">
                                 <img
                                     src={url}
@@ -106,10 +106,10 @@ const ArtFullDetails = ({ art }) => {
                     </div>
                 </div>
             )}
-            <ArtistCta by={by} />
-            <OtherArtworkByArtist moreByArtist={moreByArtist} />
+            <ArtistCta by={by} moreByArtist={moreByArtist} />
+            <OtherArtworkByArtist moreByArtist={moreByArtist}  />
             {showForm && <ArtInquery setShowForm={setShowForm} art={art} />}
-        </>
+        </div>
     );
 };
 

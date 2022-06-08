@@ -1,62 +1,57 @@
 import { addDoc, serverTimestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { colRefInqueries } from '../../firebase/config';
-import { buttontw, buttontw2, buttontw3, inputtw } from '../../style/styles';
+import { colRefCommissions } from '../../firebase/config';
+import { buttontw2, buttontw3 } from '../../style/styles';
 
-const ArtInquery = ({ setShowForm, art }) => {
-    const [inquery, setInquery] = useState({
-        name: '',
-        email: '',
-        message: '',
-        notes: '',
-    });
-
-    const { by, title, price } = art;
-    const { name, email, message, notes } = inquery;
-
+const ModalComissions = ({ setShowC, by }) => {
     const handleClick = (e) => {
         if (e.target.classList.contains('dismiss')) {
-            setShowForm(false);
+            setShowC(false);
         }
         document.body.style.overflow = 'auto';
         document.body.style.height = '100%';
     };
 
-    const myInput =
-        'w-full p-3 bg-blue-100 rounded-lg my-4 focus:outline-0 focus:bg-white border-[1px] border-blue-100';
+    const [commision, setComission] = useState({
+        name: '',
+        email: '',
+        message: '',
+    });
+
+    const { name, email, message } = commision;
 
     const reset = (e) => {
         e.preventDefault();
-        setInquery({
+        setComission({
             name: '',
             email: '',
             message: '',
-            notes: '',
         });
     };
 
     // ON SUBMIT EVENT
     const handleSubmit = (e) => {
         e.preventDefault();
-        addDoc(colRefInqueries, {
+        addDoc(colRefCommissions, {
             name: name,
             email: email,
             message: `${
                 message === ''
-                    ? `I'd like to get this artwork by ${by.name}`
+                    ? `I'd like to get a comission by ${by.name}`
                     : message
             }`,
-            notes: notes,
-            artwork_title: title,
-            price: price,
             createdAt: serverTimestamp(),
         }).then(() => {
             reset(e);
         });
-        setShowForm(false);
+        setShowC(false);
         document.body.style.overflow = 'auto';
         document.body.style.height = '100%';
+        alert('Commission request sent!');
     };
+
+    const myInput =
+        'w-full p-3 bg-blue-100 rounded-lg my-4 focus:outline-0 focus:bg-white border-[1px] border-blue-100';
 
     return (
         <div
@@ -75,10 +70,10 @@ const ArtInquery = ({ setShowForm, art }) => {
                         className={myInput}
                         value={name}
                         onChange={(e) =>
-                            setInquery({ ...inquery, name: e.target.value })
+                            setComission({ ...commision, name: e.target.value })
                         }
                     />
-                    {/* NAME */}
+                    {/* EMAIL */}
                     <label>Email</label>
                     <input
                         type="email"
@@ -87,7 +82,10 @@ const ArtInquery = ({ setShowForm, art }) => {
                         className={myInput}
                         value={email}
                         onChange={(e) =>
-                            setInquery({ ...inquery, email: e.target.value })
+                            setComission({
+                                ...commision,
+                                email: e.target.value,
+                            })
                         }
                     />
                     {/* MESSAGE */}
@@ -99,30 +97,27 @@ const ArtInquery = ({ setShowForm, art }) => {
                         className={myInput}
                         value={
                             message === ''
-                                ? `I'd like to get this artwork by ${by.name}`
+                                ? `I'd like to get a comission by ${by.name}`
                                 : message
                         }
                         onChange={(e) =>
-                            setInquery({ ...inquery, message: e.target.value })
-                        }
-                    />
-                    {/* NOTES */}
-                    <label>
-                        Notes <span className="italic">(Optional)</span>
-                    </label>
-                    <textarea
-                        type="email"
-                        placeholder="Enter your notes..."
-                        className={myInput}
-                        value={notes}
-                        onChange={(e) =>
-                            setInquery({ ...inquery, notes: e.target.value })
+                            setComission({
+                                ...commision,
+                                message: e.target.value,
+                            })
                         }
                     />
                     <div className="flex flex-wrap mt-4">
-                        <button className={buttontw2} onClick={handleSubmit}>
-                            Send Inquery
-                        </button>
+                        {name && email ? (
+                            <button
+                                className={buttontw2}
+                                onClick={handleSubmit}
+                            >
+                                Send Inquery
+                            </button>
+                        ) : (
+                            <button disabled className='py-2 px-4 bg-off-1 rounded-lg'>Complete Form</button>
+                        )}
                         <button className={buttontw3} onClick={(e) => reset(e)}>
                             Clear Form
                         </button>
@@ -133,4 +128,4 @@ const ArtInquery = ({ setShowForm, art }) => {
     );
 };
 
-export default ArtInquery;
+export default ModalComissions;

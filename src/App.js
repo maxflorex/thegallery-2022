@@ -18,9 +18,11 @@ import Artist from './pages/artist/[artist]'
 import axios from 'axios';
 import { AppContext } from './context/appContext'
 import UseFirestore from './hooks/useFirestore';
+import Cart from './pages/Cart';
+import Favorites from './pages/Favorites'
 
 
-function App() { 
+function App() {
   const dispatch = useDispatch();
   const [dataArtists, setDataArtists] = useState({})
   const [w, setW] = useState('');
@@ -69,6 +71,8 @@ function App() {
           <Route path={'/dashboard'} element={<Dashboard />} />
           <Route path={'/art/:id'} element={<Art />} />
           <Route path={'/artist/:id'} element={<Artist />} />
+          <Route path={'/favorites'} element={<Favorites />} />
+          <Route path={'/artist/:id'} element={<Cart />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />

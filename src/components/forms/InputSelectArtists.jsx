@@ -98,7 +98,7 @@ const InputSelectArtists = ({ setSelectedArtist, setArt, art, setCreateArtist })
                 </>
             )}
             {suggestions[0] !== undefined && (
-                <ul className="flex flex-col gap-4 absolute top-16 w-full z-40 max-h-80 overflow-y-auto py-4 bg-blue-100/90 rounded-xl px-2 mx-auto">
+                <ul className="scroll flex flex-col gap-4 absolute top-16 w-full z-40 max-h-80 overflow-y-auto py-4 bg-blue-100/90 rounded-xl px-2 mx-auto">
                     {suggestions &&
                         suggestions.map(({ name, url, id }) => (
                             <li

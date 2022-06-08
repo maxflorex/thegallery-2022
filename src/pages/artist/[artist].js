@@ -6,6 +6,7 @@ import { UseFirestoreArtByArtist, UseFirestoreArtist } from '../../hooks/useFire
 import { buttontw4, inputtw } from '../../style/styles';
 
 const Artist = () => {
+	const [random, setRandom] = useState({})
 	const [email, setEmail] = useState('')
 	const [data, setData] = useState({})
 	const { id } = useParams();
@@ -42,16 +43,34 @@ const Artist = () => {
 		}
 	};
 
+	function getRandomItem(arr) {
+		// GET RANDOM INDEX VALUE
+		const randomIndex = Math.floor(Math.random() * arr.length);
+		// GET RANDOM VALUE
+		const item = arr[randomIndex];
+		// RETURN
+		return item
+	}
+
+	useEffect(() => {
+			setRandom(getRandomItem(moreByArtist))
+		
+	}, [moreByArtist.length > 0])
+
+	// console.log(random);
+	console.log(random);
+
 	return (<>
-		<div className="bg-navy-100 h-80 flex justify-center items-center bg-cover overflow-hidden bg-center" style={{ backgroundImage: `url(${moreByArtist[0]?.url})` }}>
+		<div className="bg-navy-100 h-80 flex justify-center items-center bg-cover overflow-hidden bg-center relative" style={{ backgroundImage: `url(${random?.url})` }}>
 			<div className="bg-white/60 p-8 h-full w-full backdrop-blur-md flex flex-col justify-center items-center gap-4">
 				{data && (<>
+					<p className='italic'>- Local Artist -</p>
 					<h1 className='text-center capitalize text-4xl font-light'>{data?.name?.toLowerCase()}</h1>
 					<div className="flex gap-2 items-center">
 						<img src={`https://flagcdn.com/${data?.flag?.toLowerCase()}.svg`} alt="Flag" className='h-4' />
 						<p>{data?.nationality}</p>
 					</div>
-					<p className='mb-6'>Artworks on display: <span className='font-bold px-2 py-1 rounded-2xl bg-white ml-2'>{moreByArtist && moreByArtist?.length}</span> </p>
+					<p className='mb-6 absolute right-8 bottom-4'>Artworks on display: <span className='font-bold px-2 py-1 rounded-2xl bg-white ml-2'>{moreByArtist && moreByArtist?.length}</span> </p>
 				</>)}
 
 			</div>
