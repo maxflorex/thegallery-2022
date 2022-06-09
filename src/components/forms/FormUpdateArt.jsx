@@ -128,12 +128,12 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
     };
 
     useEffect(() => {
-        if (data?.tag > 0) {
-            setTags([data.tag]);
+        if (data?.tag) {
+            setTags(data.tag);
         } else {
             setTags([])
         }
-    }, [data]);
+    }, [data?.tag]);
 
     return (
         <div
@@ -157,7 +157,7 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
                     </label>
                     <h1 className="flex items-center gap-2 capitalize">
                         <span className="text-xs italic">Current Values: </span>{' '}
-                        {data.title.toLowerCase()}
+                        {data.title?.toLowerCase()}
                     </h1>
                 </div>
                 {titleClick && (

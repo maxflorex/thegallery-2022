@@ -59,8 +59,6 @@ const InputTags = ({
         setArtist({ ...artist, tag: tags });
     }, [tags]);
 
-    console.log(tags);
-
     return (
         <div className="w-full">
             <input

@@ -57,9 +57,6 @@ const Artist = () => {
 		
 	}, [moreByArtist.length > 0])
 
-	// console.log(random);
-	console.log(random);
-
 	return (<>
 		<div className="bg-navy-100 h-80 flex justify-center items-center bg-cover overflow-hidden bg-center relative" style={{ backgroundImage: `url(${random?.url})` }}>
 			<div className="bg-white/60 p-8 h-full w-full backdrop-blur-md flex flex-col justify-center items-center gap-4">
@@ -96,7 +93,7 @@ const Artist = () => {
 							<div className="overflow-hidden rounded-lg">
 								<img src={data.url} alt="Artwork" className='rounded-lg max-h-64 object-cover group-hover:scale-110 w-full opacity-40 group-hover:opacity-100' />
 							</div>
-							<h2 className='capitalize'>{data.title.toLowerCase()}</h2>
+							<h2 className='capitalize'>{data?.title?.toLowerCase()}</h2>
 						</div>
 					</Link>
 				))}

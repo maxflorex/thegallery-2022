@@ -1,6 +1,12 @@
 import { collection, doc, onSnapshot, query, where } from 'firebase/firestore';
 import { useEffect, useState } from 'react';
-import { colRefArt, colRefArtist, db } from '../firebase/config';
+import { useSelector } from 'react-redux';
+import {
+    colRefArt,
+    colRefArtist,
+    colRefFavorites,
+    db,
+} from '../firebase/config';
 
 const UseFirestore = (myCollection) => {
     const [state, setState] = useState([]);
@@ -35,6 +41,41 @@ export const UseFirestoreMoreArt = (by) => {
             setState(a);
         });
     }, [by]);
+
+    return state;
+};
+export const UseFirestoreWhere = (user) => {
+    const [state, setState] = useState([]);
+    const q = query(colRefFavorites, where('user', '==', user || ''));
+
+    // GET REAL TIME DATA - READ ELEMENTS
+    useEffect(() => {
+        let a = [];
+        onSnapshot(q, (snapshot) => {
+            snapshot.docs.forEach((doc) => {
+                a.push({ ...doc.data(), id: doc.id });
+            });
+            setState(a);
+        });
+    }, [user]);
+
+    return state;
+};
+
+export const UseFirestoreWhereAB = (b) => {
+    const [state, setState] = useState([]);
+    const q = query(colRefFavorites, where('user', '==', b || ''));
+
+    // GET REAL TIME DATA - READ ELEMENTS
+    useEffect(() => {
+        let a = [];
+        onSnapshot(q, (snapshot) => {
+            snapshot.docs.forEach((doc) => {
+                a.push({ ...doc.data(), id: doc.id });
+            });
+            setState(a);
+        });
+    }, [b]);
 
     return state;
 };

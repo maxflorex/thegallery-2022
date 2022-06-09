@@ -9,26 +9,34 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth } from './firebase/config';
-import { useDispatch } from 'react-redux';
-import { useEffect, useState } from 'react';
+import { auth, colRefFavorites } from './firebase/config';
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useMemo, useState } from 'react';
 import { login, logout } from './redux/userSlice';
 import Art from './pages/artwork/[art]';
 import Artist from './pages/artist/[artist]'
 import axios from 'axios';
 import { AppContext } from './context/appContext'
-import UseFirestore from './hooks/useFirestore';
+import UseFirestore, { UseFirestoreWhereAB } from './hooks/useFirestore';
 import Cart from './pages/Cart';
 import Favorites from './pages/Favorites'
+import { addDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
 
 
 function App() {
   const dispatch = useDispatch();
   const [dataArtists, setDataArtists] = useState({})
+  const [love, setLove] = useState([])
+  const [favItems, setFavItems] = useState([])
+  // IF TRUE MEANS THAT USER EXISTS IN THE FAVORITES COLLECTION
+  const [result, setResult] = useState(false)
   const [w, setW] = useState('');
   const [...artist] = UseFirestore('artists')
   const [...art] = UseFirestore('art')
   const [...collection] = UseFirestore('collections')
+  const user = useSelector((state) => state.user.user);
+  const [...favCol] = UseFirestore('favorites')
+  const [...favUser] = UseFirestoreWhereAB(user?.uid)
 
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
@@ -47,7 +55,6 @@ function App() {
     });
   }, []);
 
-
   useEffect(() => {
     axios.get(`https://api.artic.edu/api/v1/artworks`)
       .then(res => {
@@ -58,8 +65,79 @@ function App() {
       });
   }, [])
 
+  // ON SUBMIT EVENT
+  const handleFavorite = (art, e) => {
+    e.preventDefault()
+
+    // IF USER EXISTS - HAS FAVORITES
+    if (favUser[0]) {
+      try {
+        if (love.length === 0) {
+          try {
+            setLove(favItems)
+            try {
+              setLove((prevState) => [...prevState, art])
+            } catch (e) {
+              console.log(e);
+            }
+          } catch (e) {
+            console.log(e);
+          }
+        } else {
+          setLove((prevState) => [...prevState, art])
+        }
+        try {
+          updateDoc(doc(colRefFavorites, favUser[0]?.id), {
+            user: user.uid,
+            favorites: love,
+            createdAt: serverTimestamp(),
+          }).then(() => {
+            alert('New ❤️ added!');
+            setFavItems([])
+          }).catch((e) => {
+            console.log(e);
+          })
+        } catch (e) {
+          console.log(e);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    } else {
+      try {
+        setLove([art])
+        try {
+          addDoc(colRefFavorites, {
+            user: user.uid,
+            favorites: art,
+            createdAt: serverTimestamp(),
+          }).then(() => {
+            alert('A 💟 was added');
+            setFavItems([])
+          });
+        } catch (e) {
+          console.log(e);
+        }
+      } catch (e) {
+        console.log(e);
+      }
+    }
+  }
+
+  useEffect(() => {
+    if (favCol.length === undefined) {
+      // CHECK IF USER EXISTS IN COLLECTION
+      const values = value => favCol.some(collection => collection.user.includes(value))
+      setResult(values(user?.uid))
+      // result ? console.log('This user have some ❤️') : console.log('Emotionless 😡');
+    }
+    setFavItems(favUser[0]?.favorites)
+  }, [favCol[0], favItems, favUser])
+
+  console.log(love);
+
   return (
-    <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection }}>
+    <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, handleFavorite, user }}>
       <Router>
         <Navbar />
         <Routes>

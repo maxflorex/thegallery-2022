@@ -1,15 +1,17 @@
 import { OtherArtworkByArtist } from './OtherArtworkByArtist';
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { FiHeart, FiShoppingCart } from 'react-icons/fi';
 import { UseFirestoreMoreArt } from '../hooks/useFirestore';
 import ArtistCta from './ArtistCta';
 import ArtInquery from './forms/ArtInquery';
 import { Link } from 'react-router-dom';
+import { AppContext } from '../context/appContext';
 
 const ArtFullDetails = ({ art }) => {
     const [showForm, setShowForm] = useState(false);
     const { by, title, medium, height, wide, price, url } = art;
     const topPage = useRef(null);
+    const { handleFavorite } = useContext(AppContext);
 
     const [...moreByArtist] = UseFirestoreMoreArt(by);
 
@@ -50,7 +52,7 @@ const ArtFullDetails = ({ art }) => {
                                 {medium}
                             </p>
                             <h1 className="text-4xl capitalize">
-                                {title.toLowerCase()}
+                                {title?.toLowerCase()}
                             </h1>
                             <Link
                                 to={`/artist/${by.name
@@ -59,7 +61,7 @@ const ArtFullDetails = ({ art }) => {
                             >
                                 <div className="flex items-center justify-center gap-4 my-auto">
                                     <h1 className="italic text-sm capitalize">
-                                        by : {by.name.toLowerCase()}
+                                        by : {by?.name?.toLowerCase()}
                                     </h1>
                                     <img
                                         src={by.url}
@@ -99,7 +101,7 @@ const ArtFullDetails = ({ art }) => {
                                 Acquire this artwork
                             </button>
                             <div className="flex gap-4 items-center p-2 mt-4">
-                                <FiHeart className="hover:scale-125 cursor-pointer hover:fill-pink-500" />
+                                <FiHeart className="hover:scale-125 cursor-pointer hover:fill-pink-500" onClick={(e) => handleFavorite(art, e)} />
                                 <FiShoppingCart className="hover:scale-125 cursor-pointer hover:fill-pink-500" />
                             </div>
                         </div>
