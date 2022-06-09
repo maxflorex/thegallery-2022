@@ -28,8 +28,6 @@ function App() {
   const [dataArtists, setDataArtists] = useState({})
   const [love, setLove] = useState([])
   const [favItems, setFavItems] = useState([])
-  // IF TRUE MEANS THAT USER EXISTS IN THE FAVORITES COLLECTION
-  const [result, setResult] = useState(false)
   const [w, setW] = useState('');
   const [...artist] = UseFirestore('artists')
   const [...art] = UseFirestore('art')
@@ -71,39 +69,32 @@ function App() {
 
     // IF USER EXISTS - HAS FAVORITES
     if (favUser[0]) {
-      try {
-        if (love.length === 0) {
+      if (love.length === 0) {
+        try {
+          setLove(favItems)
           try {
-            setLove(favItems)
-            try {
-              setLove((prevState) => [...prevState, art])
-            } catch (e) {
-              console.log(e);
-            }
+            setLove((prevState) => [...prevState, art])
           } catch (e) {
             console.log(e);
           }
-        } else {
-          setLove((prevState) => [...prevState, art])
-        }
-        try {
-          updateDoc(doc(colRefFavorites, favUser[0]?.id), {
-            user: user.uid,
-            favorites: love,
-            createdAt: serverTimestamp(),
-          }).then(() => {
-            alert('New ❤️ added!');
-            setFavItems([])
-          }).catch((e) => {
-            console.log(e);
-          })
         } catch (e) {
           console.log(e);
         }
-      } catch (e) {
-        console.log(e);
+      } else {
+        setLove((prevState) => [...prevState, art])
       }
+      updateDoc(doc(colRefFavorites, favUser[0]?.id), {
+        user: user.uid,
+        favorites: love,
+        createdAt: serverTimestamp(),
+      }).then(() => {
+        alert('New ❤️ added!');
+        setFavItems([])
+      }).catch((e) => {
+        console.log(e);
+      })
     } else {
+      // IF USER EXISTS - HAS FAVORITES
       try {
         setLove([art])
         try {
@@ -128,13 +119,11 @@ function App() {
     if (favCol.length === undefined) {
       // CHECK IF USER EXISTS IN COLLECTION
       const values = value => favCol.some(collection => collection.user.includes(value))
-      setResult(values(user?.uid))
-      // result ? console.log('This user have some ❤️') : console.log('Emotionless 😡');
     }
     setFavItems(favUser[0]?.favorites)
-  }, [favCol[0], favItems, favUser])
+  }, [favCol[0], favItems, favUser, love])
 
-  console.log(love);
+  console.log(favItems);
 
   return (
     <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, handleFavorite, user }}>
