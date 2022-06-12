@@ -56,7 +56,7 @@ const Pagination = (props) => {
             {paginationRange.map((pageNumber, i) => {
                 // IF PAGE IS DOT, THEN RENDER CODE ICON
                 if (pageNumber === DOTS) {
-                    return <li className="pagination-item dots">&#8230;</li>;
+                    return <li className="pagination-item dots" key={i}>&#8230;</li>;
                 }
 
                 // RENDER PAGE PILS

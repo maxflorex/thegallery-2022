@@ -5,3 +5,4 @@ export const buttontw = 'bg-cream-500 mr-auto py-4 px-6 rounded-lg hover:scale-1
 export const buttontw3 = 'bg-cream-500 mx-auto py-4 px-6 rounded-lg hover:scale-110 active:scale-100 text-white font-semibold hover:bg-blue-500 cursor-pointer text-black'
 export const buttontw4 = 'bg-cream-500 ml-auto py-4 px-6 rounded-lg hover:scale-110 active:scale-100 text-white font-semibold hover:bg-blue-500 cursor-pointer text-black'
 export const buttontw2 = 'bg-navy-500 mr-auto py-4 px-6 rounded-lg hover:scale-110 active:scale-100 text-off-1 font-semibold hover:bg-blue-500'
+

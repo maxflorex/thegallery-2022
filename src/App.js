@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, colRefFavorites } from './firebase/config';
+import { auth, colRefFavorites, db } from './firebase/config';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useMemo, useState } from 'react';
 import { login, logout } from './redux/userSlice';
@@ -20,22 +20,24 @@ import { AppContext } from './context/appContext'
 import UseFirestore, { UseFirestoreWhereAB } from './hooks/useFirestore';
 import Cart from './pages/Cart';
 import Favorites from './pages/Favorites'
-import { addDoc, doc, serverTimestamp, updateDoc } from 'firebase/firestore';
+import { addDoc, arrayUnion, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
 
 
 function App() {
   const dispatch = useDispatch();
   const [dataArtists, setDataArtists] = useState({})
-  const [love, setLove] = useState([])
-  const [favItems, setFavItems] = useState([])
   const [w, setW] = useState('');
   const [...artist] = UseFirestore('artists')
   const [...art] = UseFirestore('art')
   const [...collection] = UseFirestore('collections')
   const user = useSelector((state) => state.user.user);
+  const userName = user?.displayName?.toLowerCase().replace(/ /g, '')
+  const favDocRef = doc(db, 'favorites', `${userName}`)
   const [...favCol] = UseFirestore('favorites')
-  const [...favUser] = UseFirestoreWhereAB(user?.uid)
+  const [result, setResult] = useState('')
+  const [userExists, setUserExists] = useState(false)
 
+  // USE REDUX TO HANDLE USER
   useEffect(() => {
     onAuthStateChanged(auth, (userAuth) => {
       if (userAuth) {
@@ -52,7 +54,7 @@ function App() {
       }
     });
   }, []);
-
+  // GET ART API WITH AXIOS
   useEffect(() => {
     axios.get(`https://api.artic.edu/api/v1/artworks`)
       .then(res => {
@@ -63,70 +65,41 @@ function App() {
       });
   }, [])
 
-  // ON SUBMIT EVENT
-  const handleFavorite = (art, e) => {
-    e.preventDefault()
-
-    // IF USER EXISTS - HAS FAVORITES
-    if (favUser[0]) {
-      if (love.length === 0) {
-        try {
-          setLove(favItems)
-          try {
-            setLove((prevState) => [...prevState, art])
-          } catch (e) {
-            console.log(e);
-          }
-        } catch (e) {
-          console.log(e);
-        }
-      } else {
-        setLove((prevState) => [...prevState, art])
-      }
-      updateDoc(doc(colRefFavorites, favUser[0]?.id), {
-        user: user.uid,
-        favorites: love,
-        createdAt: serverTimestamp(),
+  // FAVORITE FUNCTION
+  const handleFavorite = async (art, id) => {
+    if (userExists) {
+      await updateDoc(favDocRef, {
+        favorites: arrayUnion(art),
+        artwork_id: arrayUnion(id)
       }).then(() => {
-        alert('New ❤️ added!');
-        setFavItems([])
-      }).catch((e) => {
-        console.log(e);
+        alert('Updated! ❤️');
       })
     } else {
-      // IF USER EXISTS - HAS FAVORITES
-      try {
-        setLove([art])
-        try {
-          addDoc(colRefFavorites, {
-            user: user.uid,
-            favorites: art,
-            createdAt: serverTimestamp(),
-          }).then(() => {
-            alert('A 💟 was added');
-            setFavItems([])
-          });
-        } catch (e) {
-          console.log(e);
-        }
-      } catch (e) {
-        console.log(e);
-      }
+      await setDoc(favDocRef, {
+        favorites: art,
+        artwork_id: id
+      }).then(() => {
+        alert('New 💟');
+      })
     }
   }
 
+  // CHECK IF USER EXISTS IN FAVORITES COLLECTION
   useEffect(() => {
-    if (favCol.length === undefined) {
-      // CHECK IF USER EXISTS IN COLLECTION
-      const values = value => favCol.some(collection => collection.user.includes(value))
+    if (favCol?.length === 0) {
+      setResult(false)
+    } else if (favCol?.length > 0) {
+      setResult(true)
+      if (favCol[0].id === userName) {
+        setUserExists(true)
+      } else {
+        setUserExists(false)
+      }
     }
-    setFavItems(favUser[0]?.favorites)
-  }, [favCol[0], favItems, favUser, love])
-
-  console.log(favItems);
+  }, [favCol])
 
   return (
-    <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, handleFavorite, user }}>
+    <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, handleFavorite, user, userExists }}>
       <Router>
         <Navbar />
         <Routes>
@@ -139,7 +112,7 @@ function App() {
           <Route path={'/art/:id'} element={<Art />} />
           <Route path={'/artist/:id'} element={<Artist />} />
           <Route path={'/favorites'} element={<Favorites />} />
-          <Route path={'/artist/:id'} element={<Cart />} />
+          <Route path={'/cart'} element={<Cart />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />

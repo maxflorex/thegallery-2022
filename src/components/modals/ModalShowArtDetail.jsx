@@ -94,13 +94,13 @@ console.log(tag?.length > 0);
                         alt=""
                         className="max-h-[60vh] max-w-[80vw] object-contain rounded-md bg-white"
                     />
-                    {tag && (
+                    {/* {tag?.length > 0 && (
                         <div className="flex gap-4 bottom-4 right-4 absolute">
                             {tag?.map((data, i) => (
                                 <p key={i} className='pb-1 px-2 bg-white/80 rounded-lg text-xs italic'>{data}</p>
                             ))}
                         </div>
-                    )}
+                    )} */}
                 </div>
                 <span
                     className="flex justify-between items-center cursor-pointer"
