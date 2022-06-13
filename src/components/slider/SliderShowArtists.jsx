@@ -45,7 +45,7 @@ const SliderShowArtists = () => {
             setArtistClicked(artist[0]);
         }
         const indexedData = artist.filter((item) => {
-            return artist.indexOf(item) === currentIndex + 1;
+            return artist?.indexOf(item) === currentIndex + 1;
         });
         if (currentIndex + 1 < dataLength) {
             setCurrentIndex(currentIndex + 1);
@@ -55,13 +55,13 @@ const SliderShowArtists = () => {
 
     // ROTATION - L
     const handleLeft = () => {
-        const dataLength = artist.length;
+        const dataLength = artist?.length;
         if (currentIndex === 0) {
             setCurrentIndex(dataLength - 1);
             setArtistClicked(artist[dataLength - 1]);
         }
-        const indexedData = artist.filter((item) => {
-            return artist.indexOf(item) === currentIndex - 1;
+        const indexedData = artist?.filter((item) => {
+            return artist?.indexOf(item) === currentIndex - 1;
         });
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);

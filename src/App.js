@@ -9,19 +9,17 @@ import Home from './pages/Home';
 import Dashboard from './pages/Dashboard';
 import Account from './pages/Account';
 import { onAuthStateChanged } from 'firebase/auth';
-import { auth, colRefFavorites, db } from './firebase/config';
+import { auth } from './firebase/config';
 import { useDispatch, useSelector } from 'react-redux';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { login, logout } from './redux/userSlice';
 import Art from './pages/artwork/[art]';
 import Artist from './pages/artist/[artist]'
 import axios from 'axios';
 import { AppContext } from './context/appContext'
-import UseFirestore, { UseFirestoreWhereAB } from './hooks/useFirestore';
+import UseFirestore from './hooks/useFirestore';
 import Cart from './pages/Cart';
 import Favorites from './pages/Favorites'
-import { addDoc, arrayUnion, doc, serverTimestamp, setDoc, updateDoc } from 'firebase/firestore';
-
 
 function App() {
   const dispatch = useDispatch();
@@ -32,10 +30,11 @@ function App() {
   const [...collection] = UseFirestore('collections')
   const user = useSelector((state) => state.user.user);
   const userName = user?.displayName?.toLowerCase().replace(/ /g, '')
-  const favDocRef = doc(db, 'favorites', `${userName}`)
   const [...favCol] = UseFirestore('favorites')
+  const [...cartCol] = UseFirestore('cart')
   const [result, setResult] = useState('')
   const [userExists, setUserExists] = useState(false)
+  const [cartExists, setCartExists] = useState(false)
 
   // USE REDUX TO HANDLE USER
   useEffect(() => {
@@ -65,30 +64,9 @@ function App() {
       });
   }, [])
 
-  // FAVORITE FUNCTION
-  const handleFavorite = async (art, id) => {
-    if (userExists) {
-      await updateDoc(favDocRef, {
-        favorites: arrayUnion(art),
-        artwork_id: arrayUnion(id)
-      }).then(() => {
-        alert('Updated! ❤️');
-      })
-    } else {
-      await setDoc(favDocRef, {
-        favorites: art,
-        artwork_id: id
-      }).then(() => {
-        alert('New 💟');
-      })
-    }
-  }
-
   // CHECK IF USER EXISTS IN FAVORITES COLLECTION
   useEffect(() => {
-    if (favCol?.length === 0) {
-      setResult(false)
-    } else if (favCol?.length > 0) {
+    if (favCol?.length > 0) {
       setResult(true)
       if (favCol[0].id === userName) {
         setUserExists(true)
@@ -98,8 +76,20 @@ function App() {
     }
   }, [favCol])
 
+  // CHECK IF USER EXISTS IN CART COLLECTION
+  useEffect(() => {
+    if (cartCol?.length > 0) {
+      setResult(true)
+      if (cartCol[0].id === userName) {
+        setCartExists(true)
+      } else {
+        setCartExists(false)
+      }
+    }
+  }, [cartCol])
+
   return (
-    <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, handleFavorite, user, userExists }}>
+    <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, user, userExists, userName, cartExists }}>
       <Router>
         <Navbar />
         <Routes>

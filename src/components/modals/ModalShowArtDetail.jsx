@@ -47,7 +47,7 @@ const ModalShowArtDetail = ({
             setArtClicked(art[0]);
         }
         const indexedData = art.filter((item) => {
-            return art.indexOf(item) === currentIndex + 1;
+            return art?.indexOf(item) === currentIndex + 1;
         });
         if (currentIndex + 1 < dataLength) {
             setCurrentIndex(currentIndex + 1);
@@ -57,13 +57,13 @@ const ModalShowArtDetail = ({
 
     // ROTATION - L
     const handleLeft = () => {
-        const dataLength = art.length;
+        const dataLength = art?.length;
         if (currentIndex === 0) {
             setCurrentIndex(dataLength - 1);
             setArtClicked(art[dataLength - 1]);
         }
-        const indexedData = art.filter((item) => {
-            return art.indexOf(item) === currentIndex - 1;
+        const indexedData = art?.filter((item) => {
+            return art?.indexOf(item) === currentIndex - 1;
         });
         if (currentIndex > 0) {
             setCurrentIndex(currentIndex - 1);

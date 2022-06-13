@@ -6,14 +6,16 @@ import ArtistCta from './ArtistCta';
 import ArtInquery from './forms/ArtInquery';
 import { Link } from 'react-router-dom';
 import { AppContext } from '../context/appContext';
+import useFavorite from '../hooks/useFavorite';
+import useCart from '../hooks/useCart';
 
-const ArtFullDetails = ({ art }) => {
+const ArtFullDetails = ({ art, id }) => {
     const [showForm, setShowForm] = useState(false);
     const { by, title, medium, height, wide, price, url } = art;
     const topPage = useRef(null);
-    const { handleFavorite } = useContext(AppContext);
-
     const [...moreByArtist] = UseFirestoreMoreArt(by);
+    const [HandleFavorite] = useFavorite();
+    const [HandleCart] = useCart();
 
     // FUNCTION - SCROLL TO TOP
     const scrollToBottom = () => {
@@ -23,7 +25,7 @@ const ArtFullDetails = ({ art }) => {
     // USEEFFECT - SCROLL TO TOP
     useEffect(() => {
         scrollToBottom();
-    }, [url]);
+    }, [url, id]);
 
     const handleClick = () => {
         setShowForm(true);
@@ -101,8 +103,8 @@ const ArtFullDetails = ({ art }) => {
                                 Acquire this artwork
                             </button>
                             <div className="flex gap-4 items-center p-2 mt-4">
-                                <FiHeart className="hover:scale-125 cursor-pointer hover:fill-pink-500" onClick={(e) => handleFavorite(art, e)} />
-                                <FiShoppingCart className="hover:scale-125 cursor-pointer hover:fill-pink-500" />
+                                <FiHeart className="hover:scale-125 cursor-pointer hover:fill-pink-500" onClick={() => HandleFavorite(art, id)} />
+                                <FiShoppingCart className="hover:scale-125 cursor-pointer hover:fill-blue-500" onClick={() => HandleCart(art, id)} />
                             </div>
                         </div>
                     </div>
