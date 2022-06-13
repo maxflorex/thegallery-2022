@@ -19,11 +19,11 @@ const Favorites = () => {
   console.log(fav);
 
   return (
-    <div>
+    <>
       {l > 0 ? (
         <FavoriteExists art={fav} />
       ) : (<FavoriteDoesNotExist />)}
-    </div>
+    </>
   )
 }
 

@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { FiX } from 'react-icons/fi';
-import {buttontw} from '../style/styles'
+import { Link, useNavigate } from 'react-router-dom';
+import { buttontw } from '../style/styles';
 
 const FavoriteExists = ({ art }) => {
     const [show, setShow] = useState('');
+    const navigate = useNavigate();
 
     return (
-        <div className="flex justify-center items-center w-full h-full">
-            <div className="w-full flex flex-col justify-center items-center gap-4 bg-blue-200 p-8">
-                <h1 className="text-left text-4xl font-semibold w-full container pt-40 pb-16 underline underline-offset-8 italic">
+        <div className="flex justify-center items-center w-full h-full flex-1">
+            <div className="w-full flex flex-col justify-center items-center gap-4 p-8">
+                <h1 className="text-left text-4xl font-thin w-full container pt-40 pb-12 px-8">
                     Your Favorite Artworks
                 </h1>
-                <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4 pb-40">
+                <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
                     {art?.favorites?.map((data, i) => (
                         <div
                             key={i}
@@ -47,7 +49,20 @@ const FavoriteExists = ({ art }) => {
                         </div>
                     ))}
                 </div>
-                <button className={buttontw}>Go to cart</button>
+                <div className="flex gap-4 items-center justify-center">
+                    <Link
+                        to="/cart"
+                        className="py-2 px-4 rounded-xl bg-off-1 text-xs hover:scale-110 hover:bg-pink-200 my-8"
+                    >
+                        Go to cart
+                    </Link>
+                    <Link
+                        to="/"
+                        className="py-2 px-4 rounded-xl bg-blue-200 text-xs hover:scale-110 hover:bg-pink-200 my-8"
+                    >
+                        Go home
+                    </Link>
+                </div>
             </div>
         </div>
     );

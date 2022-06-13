@@ -40,3 +40,8 @@ body::-webkit-scrollbar-thumb,
     background-color: #00000080;
     border-radius: 9999px;
 }
+
+td, th {
+padding: 2rem 0
+}
+
