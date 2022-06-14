@@ -20,7 +20,7 @@ const CartExists = ({ art }) => {
                             <h1 className="text-4xl ">{result}</h1>
                             <p className="absolute top-0 -right-6">00</p>
                         </div>
-                        <CartForm />
+                        <CartForm art={art} total={result} />
                     </div>
                 </div>
                 <TableCart art={art} />

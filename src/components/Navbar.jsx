@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo-typo-line-01.svg';
 import ModalMenu from './modals/ModalMenu';
+import { HiMenuAlt4 } from 'react-icons/hi';
+import { FiHeart, FiShoppingCart } from 'react-icons/fi';
 
 const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false);
@@ -17,21 +19,19 @@ const Navbar = () => {
             <nav className="px-8 py-4 fixed top-4 w-full text-blue-500 z-[50] font-semibold flex justify-between">
                 <div className="flex gap-4 items-center">
                     <div className="burger" onClick={handleShowMenu}>
-                        <svg
-                            xmlns="http://www.w3.org/2000/svg"
-                            width="24"
-                            height="24"
-                            viewBox="0 0 24 24"
-                            className="bg-cream-100 p-2 rounded-lg fill-navy-500 hover:scale-110 cursor-pointer z-50"
-                        >
-                            <path d="M24 6h-24v-4h24v4zm0 4h-24v4h24v-4zm0 8h-24v4h24v-4z" />
-                        </svg>
+                        <HiMenuAlt4 className=" bg-off-1 py-1 px-2 rounded-lg w-8 h-8 fill-navy-500 duration-200 hover:scale-110 cursor-pointer" />
                     </div>
-                    <Link to='/favorites'>❤️</Link>
-                    <Link to='/cart'>🛒</Link>
+                    <div className="flex gap-4 bg-off-1 py-2 px-3 rounded-lg">
+                        <Link to="/favorites">
+                            <FiHeart className='text-navy-500 hover:text-pink-500 transition-all duration-200 hover:scale-110' />
+                        </Link>
+                        <Link to="/cart" className='text-navy-500 hover:text-blue-500 transition-all duration-200 hover:scale-110'>
+                            <FiShoppingCart />
+                        </Link>
+                    </div>
                 </div>
-                <Link className="hover:scale-125" to="/">
-                    <img src={logo} alt="" className="w-32" />
+                <Link className="hover:scale-110" to="/">
+                    <img src={logo} alt="" className="w-32 bg-navy-500 py-3 px-4 rounded-md" />
                 </Link>
                 {showMenu && (
                     <ModalMenu setShowMenu={setShowMenu} showMenu={showMenu} />

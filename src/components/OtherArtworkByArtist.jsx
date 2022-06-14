@@ -37,13 +37,13 @@ export const OtherArtworkByArtist = ({ moreByArtist }) => {
                                         <FiHeart
                                             className="hover:scale-125 cursor-pointer hover:fill-pink-500"
                                             onClick={() =>
-                                                HandleFavorite(data, data.id)
+                                                HandleFavorite(data)
                                             }
                                         />
                                         <FiShoppingCart
                                             className="hover:scale-125 cursor-pointer hover:fill-pink-500"
                                             onClick={() =>
-                                                HandleCart(data, data.id)
+                                                HandleCart(data)
                                             }
                                         />
                                     </div>

@@ -8,26 +8,23 @@ const useFavorite = () => {
     const favDocRef = doc(db, 'favorites', `${userName}`);
 
     // FAVORITE FUNCTION
-    const HandleFavorite = async (art, id) => {
-
+    const HandleFavorite = async (art) => {
         if (userExists) {
             await updateDoc(favDocRef, {
                 favorites: arrayUnion(art),
-                artwork_id: arrayUnion(id),
             }).then(() => {
-                alert('Updated! ❤️');
+                alert('❤️');
             });
         } else {
             await setDoc(favDocRef, {
                 favorites: art,
-                artwork_id: id,
             }).then(() => {
                 alert('New 💟');
             });
         }
     };
 
-    return [HandleFavorite]
+    return [HandleFavorite];
 };
 
 export default useFavorite;

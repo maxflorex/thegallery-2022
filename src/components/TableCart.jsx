@@ -1,5 +1,9 @@
 import React from 'react';
+import useRemoveCart from '../hooks/useRemoveCart';
 export function TableCart({ art }) {
+
+    const [HandleRemoveCart] = useRemoveCart();
+
     return (
         <div className="col-span-2 flex flex-col gap-8 items-start justify-start flex-1 p-8">
             <table className="w-full">
@@ -15,8 +19,8 @@ export function TableCart({ art }) {
                 </thead>
                 {art &&
                     art.cart.map((data, i) => (
-                        <tbody key={i}>
-                            <tr className="hover:bg-off-1 rounded-xl">
+                        <tbody key={i} className="hover:bg-off-1 rounded-full">
+                            <tr>
                                 <td className="py-4 hidden md:block">
                                     <img
                                         src={data?.url}
@@ -39,9 +43,9 @@ export function TableCart({ art }) {
                                     <p className="font-bold">${data.price}</p>
                                 </td>
                                 <td>
-                                    <button className="py-2 px-4 rounded-xl bg-off-1 text-xs hover:scale-110 hover:bg-pink-200">
-                                        Delete
-                                    </button>
+                                    <span className="py-2 px-4 rounded-xl bg-off-1 text-xs hover:scale-110 hover:bg-pink-200 cursor-pointer" onClick={() => HandleRemoveCart(data)}>
+                                        Remove
+                                    </span>
                                 </td>
                             </tr>
                         </tbody>

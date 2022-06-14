@@ -10,11 +10,13 @@ const Cart = () => {
   const cart = useFirestoreId('cart', `${userName}`)
   const [l, setL] = useState(0)
 
+  console.log(l);
+
   useEffect(() => {
     if (cart?.cart?.length > 0) {
       setL(cart?.cart?.length)
     }
-  }, [cart])
+  }, [cart?.length])
 
   return (<>
     {l > 0 ? (

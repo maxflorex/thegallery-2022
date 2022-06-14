@@ -16,7 +16,7 @@ const Favorites = () => {
     }
   }, [fav])
 
-  console.log(fav);
+  console.log(l);
 
   return (
     <>

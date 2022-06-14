@@ -1,12 +1,14 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from 'react'
+import { Link } from 'react-router-dom'
+import pic from '../assets/undraw_winners_re_wr1l.svg'
 
-const FavoriteDoesNotExist = () => {
+const Success = () => {
     return (
         <div className="w-full flex flex-1">
-            <div className="flex flex-col justify-center items-center w-full my-40">
-                <h1 className="text-lg">No ❤️ found</h1>
-                <p className="text-sm italic">Add more items</p>
+            <div className="flex flex-col justify-center items-center w-full my-40 gap-4">
+                <img src={pic} alt="" className='w-96' />
+                <h1 className='text-4xl font-thin mt-16'>Congratrulations!</h1>
+                <p1 className="italic">Your inquery has been submitted!</p1>
                 <div className="flex gap-4 items-center justify-center">
                     <Link
                         to="/"
@@ -23,7 +25,7 @@ const FavoriteDoesNotExist = () => {
                 </div>
             </div>
         </div>
-    );
-};
+    )
+}
 
-export default FavoriteDoesNotExist;
+export default Success

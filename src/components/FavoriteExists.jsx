@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
-import { FiX } from 'react-icons/fi';
-import { Link, useNavigate } from 'react-router-dom';
-import { buttontw } from '../style/styles';
+import { FiX, FiShoppingCart } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
+import useCart from '../hooks/useCart';
+import useRemoveFavorite from '../hooks/useRemoveFavorite';
 
 const FavoriteExists = ({ art }) => {
     const [show, setShow] = useState('');
-    const navigate = useNavigate();
+    const [HandleCart] = useCart();
+    const [handleRemoveFavorite] = useRemoveFavorite();
 
     return (
         <div className="flex justify-center items-center w-full h-full flex-1">
@@ -42,8 +44,17 @@ const FavoriteExists = ({ art }) => {
                                 className="w-full h-32 rounded-lg object-cover col-span-2"
                             />
                             {show === i && (
-                                <div className="flex items-center absolute top-0 right-0 h-full">
-                                    <FiX className="p-2 bg-blue-500 rounded-full w-8 h-8" />
+                                <div className="flex items-end absolute bottom-6 right-6 h-full gap-2">
+                                    <FiX
+                                        className="p-2 bg-navy-500 hover:bg-pink-500 rounded-full w-6 h-6 stroke-white"
+                                        onClick={() =>
+                                            handleRemoveFavorite(data)
+                                        }
+                                    />
+                                    <FiShoppingCart
+                                        className="p-2 bg-navy-500 hover:bg-blue-500 rounded-full w-6 h-6 stroke-white"
+                                        onClick={() => HandleCart([data])}
+                                    />
                                 </div>
                             )}
                         </div>
@@ -51,16 +62,16 @@ const FavoriteExists = ({ art }) => {
                 </div>
                 <div className="flex gap-4 items-center justify-center">
                     <Link
-                        to="/cart"
-                        className="py-2 px-4 rounded-xl bg-off-1 text-xs hover:scale-110 hover:bg-pink-200 my-8"
-                    >
-                        Go to cart
-                    </Link>
-                    <Link
                         to="/"
-                        className="py-2 px-4 rounded-xl bg-blue-200 text-xs hover:scale-110 hover:bg-pink-200 my-8"
+                        className="py-2 px-4 rounded-xl bg-off-1 text-xs hover:scale-110 hover:bg-off-2 my-8"
                     >
                         Go home
+                    </Link>
+                    <Link
+                        to="/cart"
+                        className="py-2 px-4 rounded-xl bg-blue-200 text-xs hover:scale-110 hover:bg-blue-500 my-8"
+                    >
+                        Go to cart
                     </Link>
                 </div>
             </div>

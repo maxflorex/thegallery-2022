@@ -20,6 +20,7 @@ import { AppContext } from './context/appContext'
 import UseFirestore from './hooks/useFirestore';
 import Cart from './pages/Cart';
 import Favorites from './pages/Favorites'
+import Success from './pages/Success';
 
 function App() {
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ function App() {
         setCartExists(false)
       }
     }
-  }, [cartCol])
+  }, [cartCol?.cart?.length])
 
   return (
     <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, user, userExists, userName, cartExists }}>
@@ -95,7 +96,7 @@ function App() {
         <Routes>
           <Route exact path={'/'} element={<Home />} />
           <Route path={'/contact'} element={<Contact />} />
-          <Route path={'/artworks'} element={<Artworks />} />
+          <Route path={'/art'} element={<Artworks />} />
           <Route path={'/about'} element={<About />} />
           <Route path={'/login'} element={<Account />} />
           <Route path={'/dashboard'} element={<Dashboard />} />
@@ -103,6 +104,7 @@ function App() {
           <Route path={'/artist/:id'} element={<Artist />} />
           <Route path={'/favorites'} element={<Favorites />} />
           <Route path={'/cart'} element={<Cart />} />
+          <Route path={'/success'} element={<Success />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
