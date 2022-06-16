@@ -4,30 +4,29 @@ import rough from '../assets/rough-line.svg';
 import rough2 from '../assets/rough-line-01.svg';
 import { buttontw2 } from '../style/styles';
 import SocialMediaFloating from './SocialMediaFloating';
-import pic from '../assets/undraw_3d_modeling_re_6vi2 (1).svg';
+import pic from '../assets/trcg.jpg';
 
 const CTA = () => {
     return (
-        <div className="relative pt-16">
-            <div
-                style={{ backgroundImage: `url(${bg})` }}
-                className="bg-cover h-[32rem] bg-fixed "
-            >
-                <div className="flex gap-4 items-center h-full justify-center container mx-auto">
-                    <img src={pic} alt="Illustration" className="h-56" />
-                    <div className="container mx-auto flex flex-col p-8 h-full justify-center">
-                        <p className="xl:w-1/3 md:w-1/2 w-2/3 text-4xl italic leading-relaxed pb-4">
-                            Get free personalized advice from our expert art
-                            advisors, 24/7
-                        </p>
-                        <button className={`${buttontw2} + 'bg-navy-500'`}>
-                            Get in touch
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div className="flex flex-col h-full justify-center items-center absolute top-8 right-8">
-                <SocialMediaFloating />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 container mx-auto mb-24 px-8">
+            <img src={pic} alt="The Gallery" className='w-full h-96 object-cover rounded-lg' />
+            <div className="flex gap-8 flex-col  h-full my-auto items-start justify-center">
+                <h1 className="text-3xl font-light capitalize">
+                    Showcasing local art
+                </h1>
+                <p className="font-normal leading-loose">
+                    The lush landscape, vibrant coast, rich seafaring culture
+                    and sheer luminescence of colour and light found within the
+                    Cayman Islands landscape has inspired many an artist to put
+                    pen, pencil and paintbrush to paper or canvas, creating a
+                    fantastic multi-dimensional artistic offering. Luckily,
+                    there are some great venues dotted around the island that
+                    give artists the opportunity to show off their work to the
+                    public.
+                </p>
+                <button className="py-2 px-4 bg-off-1 rounded-lg mr-auto lg:px-8 hover:bg-blue-500">
+                    Know More
+                </button>
             </div>
         </div>
     );

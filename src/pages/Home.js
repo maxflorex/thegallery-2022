@@ -11,9 +11,9 @@ const Home = () => {
     <div className='mb-32'>
       <Hero />
       <Slider />
-      <Collections />
       <CTA />
-      {/* <ArtworkGallery /> */}
+      <Collections />
+      <ArtworkGallery />
     </div>
   )
 }

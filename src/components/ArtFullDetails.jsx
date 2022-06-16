@@ -5,7 +5,6 @@ import { UseFirestoreMoreArt } from '../hooks/useFirestore';
 import ArtistCta from './ArtistCta';
 import ArtInquery from './forms/ArtInquery';
 import { Link } from 'react-router-dom';
-import { AppContext } from '../context/appContext';
 import useFavorite from '../hooks/useFavorite';
 import useCart from '../hooks/useCart';
 
@@ -35,9 +34,9 @@ const ArtFullDetails = ({ art, id }) => {
     };
 
     return (
-        <div className='snap-y snap-mandatory'>
+        <div className="snap-y snap-mandatory">
             {title && (
-                <div ref={topPage} className='snap-center'>
+                <div ref={topPage} className="snap-center">
                     <div className="flex flex-col md:flex-row w-full">
                         <div className="w-full md:w-[50vw] py-16 md:py-40 flex items-center justify-evenly bg-off-1 lg:h-screen h-auto">
                             <div className="py-24 md:py-4 px-8">
@@ -103,15 +102,21 @@ const ArtFullDetails = ({ art, id }) => {
                                 Acquire this artwork
                             </button>
                             <div className="flex gap-4 items-center p-2 mt-4">
-                                <FiHeart className="hover:scale-125 cursor-pointer hover:fill-pink-500" onClick={() => HandleFavorite(art, id)} />
-                                <FiShoppingCart className="hover:scale-125 cursor-pointer hover:fill-blue-500" onClick={() => HandleCart(art, id)} />
+                                <FiHeart
+                                    className="hover:scale-125 cursor-pointer hover:fill-pink-500"
+                                    onClick={() => HandleFavorite(art)}
+                                />
+                                <FiShoppingCart
+                                    className="hover:scale-125 cursor-pointer hover:fill-blue-500"
+                                    onClick={() => HandleCart([art])}
+                                />
                             </div>
                         </div>
                     </div>
                 </div>
             )}
             <ArtistCta by={by} moreByArtist={moreByArtist} />
-            <OtherArtworkByArtist moreByArtist={moreByArtist}  />
+            <OtherArtworkByArtist moreByArtist={moreByArtist} />
             {showForm && <ArtInquery setShowForm={setShowForm} art={art} />}
         </div>
     );
