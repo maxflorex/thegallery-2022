@@ -8,7 +8,6 @@ const InputTags = ({
     setTags,
     input,
     setInput,
-    data,
 }) => {
     const [isKeyReleased, setIsKeyReleased] = useState(false);
 

@@ -2,9 +2,11 @@ import { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../../context/appContext';
 import Slideshow from './Slideshow';
 import ModalExpandImage from '../modals/ModalExpandImage';
+import { Link } from 'react-router-dom';
+import { FiPlay } from 'react-icons/fi';
 
 const Slider = () => {
-    const { dataArtists } = useContext(AppContext);
+    const { art } = useContext(AppContext);
     const [data, setData] = useState({});
     const [width, setWidth] = useState('');
     const [clickedItem, setClickedItem] = useState('');
@@ -13,67 +15,62 @@ const Slider = () => {
     const { w } = useContext(AppContext);
 
     useEffect(() => {
-        dataArtists && setData(dataArtists);
-    }, [dataArtists]);
+        art && setData(art);
+    }, [art]);
 
     // CHANGE SLIDE WIDTH WITH SCREEN CHANGE
     useEffect(() => {
         if (w >= 1280) {
-            setWidth(w / 5);
+            setWidth(w / 6);
         } else if (w > 650) {
-            setWidth(w / 3);
+            setWidth(w / 4);
         } else if (w < 650) {
-            setWidth(w / 1);
+            setWidth(w / 2);
         }
     }, [w]);
 
-    // HANDLE CLICK
-    const handleClick = (data) => {
-        setClickedItem(data);
-        // HIDE SCROLLBAR
-        document.body.style.overflow = 'hidden';
-        document.body.style.height = '100%';
-    };
-
     return (
         <>
-            <div className="w-full rounded-xl container mx-auto">
-                {/* TITLE */}
-                <h1 className="font-semibold text-2xl py-2 pl-8">Featured Artworks</h1>
-                {/* SLIDESHOW */}
+            <div className="w-full rounded-md py-24 container mx-auto">
+                <div className="flex w-full justify-between items-center px-8 group">
+                    <h1 className="text-3xl font-light">Featured Artworks</h1>
+                    <Link to="/art" className='flex gap-2 items-center px-4 py-2 bg-off-1 rounded-md hover:bg-cream-500'>
+                        <h1 className='text-sm text-navy-500'>See All</h1>
+                        <FiPlay className='text-off-3 group-hover:text-white' />
+                    </Link>
+                </div>
                 <Slideshow autoplay={false} navigation={true}>
                     {data.length > 1 &&
                         data.map((data, index) => (
                             // SLIDE GOES HERE
-                            <div
+                            <Link
                                 key={index}
-                                className="w-full"
-                                onClick={() => handleClick(data)}
+                                className="w-full group"
+                                to={`/art/${data.id}`}
                             >
                                 <div
-                                    className="p-8  hover:bg-off-1/0 border-[1px] border-off-1/0 hover:border-[1px] hover:border-off-2 md:hover:bg-off-1 rounded-md"
+                                    className="p-8 border-[1px] border-off-1/0 hover:border-[1px] hover:border-off-2 md:hover:bg-off-1 rounded-md"
                                     style={{ width: `${width}px` }}
                                 >
-                                    <img
-                                        src={`https://www.artic.edu/iiif/2/${data.image_id}/full/843,/0/default.jpg`}
-                                        onError={(event) =>
-                                            (event.target.src =
-                                                'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
-                                        }
-                                        alt="Artwork"
-                                        className="w-full h-80 md:h-64 object-cover rounded-md my-4 overflow-hidden opacity-90 hover:opacity-100"
-                                    />
-                                    <h1 className="font-semibold text-lg pb-1">
-                                        {data.title}
+                                    <div className="flex h-64 md:h-40 my-4 overflow-hidden rounded-md">
+                                        <img
+                                            src={data.url}
+                                            onError={(event) =>
+                                                (event.target.src =
+                                                    'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
+                                            }
+                                            alt="Artwork"
+                                            className="object-cover group-hover:scale-105 self-end opacity-80 group-hover:opacity-100 h-full w-full bg-off-3"
+                                        />
+                                    </div>
+                                    <h1 className="font-semibold text-sm pb-1 capitalize">
+                                        {data.title.toLowerCase()}
                                     </h1>
-                                    <div className="flex justify-between flex-wrap">
-                                        <p>{data.artist_title}</p>
-                                        <p className="italic">
-                                            {data.date_end}
-                                        </p>
+                                    <div className="flex justify-between flex-wrap capitalize text-xs">
+                                        <p>{data.medium}</p>
                                     </div>
                                 </div>
-                            </div>
+                            </Link>
                             // SLIDE ENDS HERE
                         ))}
                 </Slideshow>

@@ -16,7 +16,7 @@ const ArtworkGallery = () => {
 
     return (
         <div className="relative overflow-hidden">
-                       <div className="container mx-auto z-10">
+            <div className="container mx-auto z-10">
                 <div className="grid grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6 gap-8 m-8 py-16">
                     {art.length > 0 &&
                         art.slice(0, 6).map((data, index) => (
@@ -34,7 +34,6 @@ const ArtworkGallery = () => {
                                     alt="Artwork"
                                     className="w-full h-80 object-cover rounded-md overflow-hidden opacity-50 hover:opacity-100"
                                 />
-
                             </div>
                         ))}
                     {clickedItem && (

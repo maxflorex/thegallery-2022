@@ -1,5 +1,5 @@
 import { OtherArtworkByArtist } from './OtherArtworkByArtist';
-import { useContext, useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FiHeart, FiShoppingCart } from 'react-icons/fi';
 import { UseFirestoreMoreArt } from '../hooks/useFirestore';
 import ArtistCta from './ArtistCta';

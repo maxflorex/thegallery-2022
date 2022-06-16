@@ -26,11 +26,11 @@ const ModalExpandImage = ({ data, setClicked }) => {
                             'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
                     }
                     alt="Artwork enlarged"
-                    className="max-h-[70vh] rounded-md max-w-[90vw] drop-shadow-sm"
+                    className="max-h-[70vh] rounded-md max-w-[80vw] drop-shadow-sm"
                 />
-                <div className="flex flex-col justify-between items-start py-4 flex-wrap gap-1">
-                    <p className="text-md">{data.title}</p>
-                    <h1 className="text-xl font-semibold">{data.title}</h1>
+                <div className="flex flex-col justify-between items-start py-4 flex-wrap gap-1 capitalize">
+                    <p className="text-md">{data.by.name.toLowerCase()}</p>
+                    <h1 className="text-xl font-semibold">{data.title.toLowerCase()}</h1>
                 </div>
                 <hr className="mb-4 bg-off-2 text-off-3" />
                 <div className="flex justify-between flex-wrap gap-4">
@@ -38,7 +38,7 @@ const ModalExpandImage = ({ data, setClicked }) => {
                         Medium: {data.medium}
                     </p>
                     <div className="flex gap-4 flex-wrap items-center justify-center">
-                        {data.tag && tags.map((data, index) => (
+                        {data?.tag?.length > 0 && tags.map((data, index) => (
                             <p
                                 key={index}
                                 className="capitalize py-1 px-2 rounded-3xl bg-off-1 text-xs"

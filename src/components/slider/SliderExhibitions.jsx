@@ -10,18 +10,6 @@ const SliderExhibitions = () => {
     // GET CONTEXT VALUE
     const { w } = useContext(AppContext);
 
-    useEffect(() => {
-        axios
-            .get(`https://api.artic.edu/api/v1/exhibitions?limit=24`)
-            .then((res) => {
-                const galleries = res.data.data;
-                setData(galleries);
-            })
-            .catch((error) => {
-                console.log(error);
-            });
-    }, []);
-
     // CHANGE SLIDE WIDTH WITH SCREEN CHANGE
     useEffect(() => {
         if (w >= 1280) {

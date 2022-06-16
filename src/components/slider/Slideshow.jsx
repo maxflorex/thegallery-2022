@@ -1,5 +1,7 @@
 import React, { useRef, useEffect, useCallback, useContext } from 'react';
 import { AppContext } from '../../context/appContext';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import ArrowContainer from '../../style/ArrowContainer';
 
 const Slideshow = ({
     children,
@@ -88,14 +90,7 @@ const Slideshow = ({
     }, [autoplay, interval, next]);
 
     // STYLES
-    const arrows =
-        'absolute w-10 self-center z-30 text-navy-500 top-0 2xl:-left-16 left-2 h-full fill-cream-500 hover:fill-navy-500 hover:scale-125';
-    const arrowsL =
-        'absolute w-10 self-center z-30 text-navy-500 top-0 2xl:-right-16 right-2 h-full fill-cream-500 hover:fill-navy-500 hover:scale-125';
-    const arrowsContainer =
-        'h-full flex items-center justify-center gap-8 overflow-visible hover:bg-off-3/80';
     const sliderContainer = 'flex flex-nowrap w-full cursor-pointer';
-    const mainContainer = 'relative overflow-hidden md:rounded-xl box';
 
     // GET WINDOW SIZE
     useEffect(() => {
@@ -110,52 +105,22 @@ const Slideshow = ({
     }, []);
 
     return (
-        <div className='relative'>
-            <div className="bg-slate-200 pb-12 relative">
-                <div className={mainContainer}>
+        <div className="relative">
+            <div className="relative">
+                <div className='relative overflow-visiblei md:rounded-xl box'>
                     <div ref={slideshow} className={sliderContainer}>
                         {children}
                     </div>
                 </div>
             </div>
             {navigation && (
-                <div className="z-20 w-full h-full pointer-events-none flex my-auto box-border">
-                    <div
-                        onClick={previous}
-                        className="pointer-events-auto cursor-pointer w-8 h-full text-center transition-all hover:bg-slate-900 hover:bg-opacity-40 over"
-                    >
-                        <div className={arrowsContainer}>
-                            <svg
-                                clipRule="evenodd"
-                                fillRule="evenodd"
-                                strokeLinejoin="round"
-                                strokeMiterlimit="2"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                                className={arrows}
-                            >
-                                <path d="M20 .755l-14.374 11.245 14.374 11.219-.619.781-15.381-12 15.391-12 .609.755z" />
-                            </svg>
-                        </div>
-                    </div>
-                    <div
-                        onClick={next}
-                        className="pointer-events-auto cursor-pointer w-8 h-full text-center transition-all hover:bg-slate-900 hover:bg-opacity-40 right-0"
-                    >
-                        <div className={arrowsContainer}>
-                            <svg
-                                clipRule="evenodd"
-                                fillRule="evenodd"
-                                strokeLinejoin="round"
-                                strokeMiterlimit="2"
-                                viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg"
-                                className={arrowsL}
-                            >
-                                <path d="M4 .755l14.374 11.245-14.374 11.219.619.781 15.381-12-15.391-12-.609.755z" />
-                            </svg>
-                        </div>
-                    </div>
+                <div className="z-20 w-full h-full flex my-auto box-border items-center">
+                    <ArrowContainer direction="left" click={previous}>
+                        <FiArrowLeft className="text-navy-500" />
+                    </ArrowContainer>
+                    <ArrowContainer click={next}>
+                        <FiArrowRight />
+                    </ArrowContainer>
                 </div>
             )}
         </div>

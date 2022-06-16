@@ -21,6 +21,7 @@ import UseFirestore from './hooks/useFirestore';
 import Cart from './pages/Cart';
 import Favorites from './pages/Favorites'
 import Success from './pages/Success';
+import CollectionsAll from './pages/collections/[collections]';
 
 function App() {
   const dispatch = useDispatch();
@@ -105,6 +106,7 @@ function App() {
           <Route path={'/favorites'} element={<Favorites />} />
           <Route path={'/cart'} element={<Cart />} />
           <Route path={'/success'} element={<Success />} />
+          <Route path={'/collections/:id'} element={<CollectionsAll />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />
