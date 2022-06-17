@@ -3,7 +3,7 @@ import { AppContext } from '../context/appContext';
 import ModalExpandImage from './../components/modals/ModalExpandImage';
 import { FiPlay } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
-import { TbClick } from "react-icons/tb";
+import { TbClick } from 'react-icons/tb';
 
 const ArtworkGallery = () => {
     const { art } = useContext(AppContext);
@@ -38,8 +38,12 @@ const ArtworkGallery = () => {
                     <h1 className="text-3xl font-light capitalize">
                         Artworks On Display
                     </h1>
-                    <TbClick className='text-off-5 -mr-2' />
-                    <p className='text-sm italic text-off-5'>Click to expand the image</p>
+                    <div className="flex gap-4 items-center">
+                        <TbClick className="text-off-5 -mr-2" />
+                        <p className="text-sm italic text-off-5">
+                            Click to expand the image
+                        </p>
+                    </div>
                 </div>
                 <Link
                     to="/art"

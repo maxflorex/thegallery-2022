@@ -29,7 +29,7 @@ const CollecionCard = (props) => {
             <div className="relative">
                 <img
                     src={random.url}
-                    alt="Collection picture"
+                    alt="Collection"
                     className="w-full object-cover h-64 rounded-md relative overflow-hidden opacity-70 hover:opacity-100"
                 />
                 <div className="flex w-full h-full justify-center items-end gap-2 bg-gradient-to-t from-black/40 rounded-md absolute bottom-0 left-0 p-4">

@@ -7,14 +7,14 @@ const ModalExpandImage = ({ data, setClicked }) => {
     const handleClick = (e) => {
         if (e.target.classList.contains('dismiss')) {
             setClicked('');
+            // SHOW SCROLLBAR
+            document.body.style.overflow = 'auto';
+            document.body.style.height = 'auto';
         }
-        // SHOW SCROLLBAR
-        document.body.style.overflow = 'auto';
-        document.body.style.height = 'auto';
     };
 
     // SHOW SPECIFIC NUMBER OF ITEMS FROM ARRAY
-    const tags = data.tag.slice(0, 4);
+    const tags = data?.tag?.slice(0, 4);
 
     const [HandleFavorite] = useFavorite();
     const [HandleCart] = useCart();

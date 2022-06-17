@@ -22,6 +22,9 @@ import Cart from './pages/Cart';
 import Favorites from './pages/Favorites'
 import Success from './pages/Success';
 import CollectionsAll from './pages/collections/[collections]';
+import TermsConditions from './pages/TermsConditions';
+import Cookies from './pages/Cookies';
+import LegalNotices from './pages/LegalNotices';
 
 function App() {
   const dispatch = useDispatch();
@@ -107,6 +110,9 @@ function App() {
           <Route path={'/cart'} element={<Cart />} />
           <Route path={'/success'} element={<Success />} />
           <Route path={'/collections/:id'} element={<CollectionsAll />} />
+          <Route path={'/Terms-and-conditions'} element={<TermsConditions />} />
+          <Route path={'/cookies-policy'} element={<Cookies />} />
+          <Route path={'/legal-notices'} element={<LegalNotices />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />

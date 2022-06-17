@@ -1,10 +1,6 @@
 import React from 'react';
-import bg from '../assets/bg-2-01.svg';
-import rough from '../assets/rough-line.svg';
-import rough2 from '../assets/rough-line-01.svg';
-import { buttontw2 } from '../style/styles';
-import SocialMediaFloating from './SocialMediaFloating';
 import pic from '../assets/trcg.jpg';
+import { Link } from 'react-router-dom';
 
 const CTA = () => {
     return (
@@ -24,9 +20,9 @@ const CTA = () => {
                     give artists the opportunity to show off their work to the
                     public.
                 </p>
-                <button className="py-2 px-4 bg-off-1 rounded-lg mr-auto lg:px-8 hover:bg-blue-500">
+                <Link to='/about' className="py-2 px-4 bg-off-1 rounded-lg mr-auto lg:px-8 hover:bg-blue-500">
                     Know More
-                </button>
+                </Link>
             </div>
         </div>
     );

@@ -106,8 +106,8 @@ const Slideshow = ({
 
     return (
         <div className="relative">
-            <div className="relative">
-                <div className='relative overflow-visiblei md:rounded-xl box'>
+            <div className="relative w-full">
+                <div className='relative overflow-visible md:rounded-xl box'>
                     <div ref={slideshow} className={sliderContainer}>
                         {children}
                     </div>
