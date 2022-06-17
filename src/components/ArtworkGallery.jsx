@@ -50,7 +50,7 @@ const ArtworkGallery = () => {
                     className="flex gap-2 items-center px-4 py-2 bg-off-1 rounded-md hover:bg-cream-500"
                 >
                     <h1 className="text-sm text-navy-500">
-                        See All Collections
+                        See All Artworks
                     </h1>
                     <FiPlay className="text-off-3 group-hover:text-white" />
                 </Link>

@@ -93,7 +93,7 @@ const Slider = () => {
                                         />
                                         <FiShoppingCart
                                             className="hover:scale-125 cursor-pointer hover:fill-pink-500"
-                                            onClick={() => HandleCart([data])}
+                                            onClick={() => HandleCart(data)}
                                         />
                                     </div>
                                 )}

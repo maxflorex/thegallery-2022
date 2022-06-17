@@ -15,7 +15,7 @@ const Collections = () => {
                         Browse by collections
                     </h1>
                     <Link
-                        to="/art"
+                        to="/collections"
                         className="flex gap-2 items-center px-4 py-2 bg-white rounded-md hover:bg-cream-500"
                     >
                         <h1 className="text-sm text-navy-500">

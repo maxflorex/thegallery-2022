@@ -53,7 +53,7 @@ const FavoriteExists = ({ art }) => {
                                     />
                                     <FiShoppingCart
                                         className="p-2 bg-navy-500 hover:bg-blue-500 rounded-full w-6 h-6 stroke-white"
-                                        onClick={() => HandleCart([data])}
+                                        onClick={() => HandleCart(data)}
                                     />
                                 </div>
                             )}

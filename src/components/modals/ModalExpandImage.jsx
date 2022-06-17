@@ -25,45 +25,51 @@ const ModalExpandImage = ({ data, setClicked }) => {
             onClick={handleClick}
         >
             <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                <img
-                    src={data.url}
-                    onError={(event) =>
-                        (event.target.src =
-                            'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
-                    }
-                    alt="Artwork enlarged"
-                    className="max-h-[70vh] rounded-md max-w-[80vw] drop-shadow-sm"
-                />
-                <div className="flex flex-col justify-between items-start py-4 flex-wrap gap-1 capitalize">
-                    <p className="text-md">{data.by.name.toLowerCase()}</p>
-                    <h1 className="text-xl font-semibold">
-                        {data.title.toLowerCase()}
-                    </h1>
+                <div className="relative">
+                    <img
+                        src={data.url}
+                        onError={(event) =>
+                            (event.target.src =
+                                'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
+                        }
+                        alt="Artwork enlarged"
+                        className="max-h-[70vh] rounded-md max-w-[80vw] drop-shadow-sm"
+                    />
                 </div>
-                <hr className="mb-4 bg-off-2 text-off-3" />
-                <div className="flex justify-between flex-wrap gap-4">
-                    <p className="text-xs italic">Medium: {data.medium}</p>
-                    <div className="flex gap-4 flex-wrap items-center justify-center">
-                        {data?.tag?.length > 0 &&
-                            tags.map((data, index) => (
-                                <p
-                                    key={index}
-                                    className="capitalize py-1 px-2 rounded-3xl bg-off-1 text-xs"
-                                >
-                                    {data}
-                                </p>
-                            ))}
+                <div className="grid grid-cols-2">
+                    <div className="flex flex-col justify-between items-start py-4 flex-wrap gap-1 capitalize">
+                        <p className="text-md">{data.by.name.toLowerCase()}</p>
+                        <h1 className="text-xl font-semibold">
+                            {data.title.toLowerCase()}
+                        </h1>
+                        <p className="text-xs italic">Medium: {data.medium}</p>
+                        <p className="text-xs uppercase">
+                            {data.wide + 'w' + ' x ' + data.height + 'h'}
+                        </p>
                     </div>
-                </div>
-                <div className="flex gap-4 items-center p-2 mt-4">
-                    <FiHeart
-                        className="hover:scale-125 cursor-pointer hover:fill-pink-500"
-                        onClick={() => HandleFavorite(data)}
-                    />
-                    <FiShoppingCart
-                        className="hover:scale-125 cursor-pointer hover:fill-blue-500"
-                        onClick={() => HandleCart([data])}
-                    />
+                    <div className="flex flex-col flex-wrap gap-4 w-full justify-start py-4">
+                        <div className="flex gap-4 flex-wrap items-center justify-end">
+                            {data?.tag?.length > 0 &&
+                                tags.map((data, index) => (
+                                    <p
+                                        key={index}
+                                        className="capitalize py-1 px-2 rounded-3xl bg-off-1 text-xs italic"
+                                    >
+                                        {data}
+                                    </p>
+                                ))}
+                        </div>
+                        <div className="flex ml-auto gap-4 items-center mt-4 bg-off-1 rounded-2xl py-2 px-4 shadow">
+                            <FiHeart
+                                className="hover:scale-125 cursor-pointer hover:fill-pink-500"
+                                onClick={() => HandleFavorite(data)}
+                            />
+                            <FiShoppingCart
+                                className="hover:scale-125 cursor-pointer hover:fill-blue-500"
+                                onClick={() => HandleCart(data)}
+                            />
+                        </div>
+                    </div>
                 </div>
             </div>
             <span

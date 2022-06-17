@@ -108,7 +108,7 @@ const ArtFullDetails = ({ art, id }) => {
                                 />
                                 <FiShoppingCart
                                     className="hover:scale-125 cursor-pointer hover:fill-blue-500"
-                                    onClick={() => HandleCart([art])}
+                                    onClick={() => HandleCart(art)}
                                 />
                             </div>
                         </div>

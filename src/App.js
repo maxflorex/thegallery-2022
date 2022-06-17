@@ -25,6 +25,7 @@ import CollectionsAll from './pages/collections/[collections]';
 import TermsConditions from './pages/TermsConditions';
 import Cookies from './pages/Cookies';
 import LegalNotices from './pages/LegalNotices';
+import Collections from './pages/Collections';
 
 function App() {
   const dispatch = useDispatch();
@@ -113,6 +114,8 @@ function App() {
           <Route path={'/Terms-and-conditions'} element={<TermsConditions />} />
           <Route path={'/cookies-policy'} element={<Cookies />} />
           <Route path={'/legal-notices'} element={<LegalNotices />} />
+          <Route path={'/collections'} element={<Collections />} />
+          <Route path={'/collections/:name'} element={<CollectionsAll />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
         <Footer />

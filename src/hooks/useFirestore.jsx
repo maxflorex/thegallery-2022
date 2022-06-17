@@ -44,9 +44,9 @@ export const UseFirestoreMoreArt = (by) => {
 
     return state;
 };
-export const UseFirestoreWhere = (user) => {
+export const UseFirestoreWhere = (artist) => {
     const [state, setState] = useState([]);
-    const q = query(colRefFavorites, where('user', '==', user || ''));
+    const q = query(colRefArt, where('by.name', 'array-contains', artist || ''));
 
     // GET REAL TIME DATA - READ ELEMENTS
     useEffect(() => {
@@ -57,25 +57,7 @@ export const UseFirestoreWhere = (user) => {
             });
             setState(a);
         });
-    }, [user]);
-
-    return state;
-};
-
-export const UseFirestoreWhereAB = (b) => {
-    const [state, setState] = useState([]);
-    const q = query(colRefFavorites, where('user', '==', b || ''));
-
-    // GET REAL TIME DATA - READ ELEMENTS
-    useEffect(() => {
-        let a = [];
-        onSnapshot(q, (snapshot) => {
-            snapshot.docs.forEach((doc) => {
-                a.push({ ...doc.data(), id: doc.id });
-            });
-            setState(a);
-        });
-    }, [b]);
+    }, [artist]);
 
     return state;
 };
