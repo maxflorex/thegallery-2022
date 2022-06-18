@@ -1,7 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import useRemoveCart from '../hooks/useRemoveCart';
 export function TableCart({ art }) {
-
     const [HandleRemoveCart] = useRemoveCart();
 
     return (
@@ -9,7 +9,7 @@ export function TableCart({ art }) {
             <table className="w-full">
                 <thead className="">
                     <tr className="text-xs italic mb-16">
-                        <th className='hidden md:block'>Artwork</th>
+                        <th className="hidden md:block">Artwork</th>
                         <th>Title</th>
                         <th>Medium</th>
                         <th>Artists</th>
@@ -22,11 +22,13 @@ export function TableCart({ art }) {
                         <tbody key={i} className="hover:bg-off-1 rounded-full">
                             <tr>
                                 <td className="py-4 hidden md:block">
-                                    <img
-                                        src={data?.url}
-                                        alt="Artwork"
-                                        className="object-contain rounded-sm px-8 w-40 h-24 mx-auto"
-                                    />
+                                    <Link to={`/art/${data.id}`}>
+                                        <img
+                                            src={data?.url}
+                                            alt="Artwork"
+                                            className="object-contain rounded-sm px-8 w-40 h-24 mx-auto"
+                                        />
+                                    </Link>
                                 </td>
                                 <td className="capitalize text-xs lg:text-sm">
                                     {data.title?.toLowerCase()}
@@ -43,7 +45,10 @@ export function TableCart({ art }) {
                                     <p className="font-bold">${data.price}</p>
                                 </td>
                                 <td>
-                                    <span className="py-2 px-4 rounded-xl bg-off-1 text-xs hover:scale-110 hover:bg-pink-200 cursor-pointer" onClick={() => HandleRemoveCart(data)}>
+                                    <span
+                                        className="py-2 px-4 rounded-xl bg-off-1 text-xs hover:scale-110 hover:bg-pink-200 cursor-pointer"
+                                        onClick={() => HandleRemoveCart(data)}
+                                    >
                                         Remove
                                     </span>
                                 </td>

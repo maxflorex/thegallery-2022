@@ -51,7 +51,7 @@ const Hero = () => {
                     />
                     {/* MODAL */}
                     {text && suggestions[0] && (
-                        <ul className="flex flex-col scroll  gap-4 absolute top-12 w-full z-40 max-h-80 overflow-y-auto py-4 bg-blue-100/90 rounded-xl mx-auto">
+                        <ul className="flex flex-col scroll  gap-4 absolute top-16 w-full z-40 max-h-80 overflow-y-auto py-4 bg-blue-100/90 rounded-xl mx-auto">
                             {suggestions &&
                                 suggestions.map(({ title, id, url }) => (
                                     <li

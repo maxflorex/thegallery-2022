@@ -8,7 +8,7 @@ const Collections = () => {
     const [...collection] = UseFirestore('collections');
 
     return (
-        <div className="bg-off-1 my-32">
+        <div className="bg-off-1 mt-32">
             <div className="container mx-auto p-8">
                 <div className="flex w-full justify-between items-center group pt-24 pb-14">
                     <h1 className="text-3xl font-light capitalize">

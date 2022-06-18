@@ -32,7 +32,7 @@ const ArtworkGallery = () => {
     }, [art?.length]);
 
     return (
-        <div className="relative overflow-hidden p-8 my-32">
+        <div className="relative overflow-hidden p-8 mt-32 mb-24">
             <div className="flex w-full justify-between items-center group container mx-auto">
                 <div className="flex items-end gap-4">
                     <h1 className="text-3xl font-light capitalize">

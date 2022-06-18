@@ -1,11 +1,15 @@
 import { addDoc, serverTimestamp } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react'
-import { Link, useParams } from 'react-router-dom';
+import { FiHeart, FiShoppingCart } from 'react-icons/fi';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { colRefSubscription } from '../../firebase/config';
+import useCart from '../../hooks/useCart';
+import useFavorite from '../../hooks/useFavorite';
 import { UseFirestoreArtByArtist, UseFirestoreArtist } from '../../hooks/useFirestore'
 import { buttontw4, inputtw } from '../../style/styles';
 
 const Artist = () => {
+	const [show, setShow] = useState('')
 	const [random, setRandom] = useState({})
 	const [email, setEmail] = useState('')
 	const [data, setData] = useState({})
@@ -53,9 +57,20 @@ const Artist = () => {
 	}
 
 	useEffect(() => {
-			setRandom(getRandomItem(moreByArtist))
-		
+		setRandom(getRandomItem(moreByArtist))
+
 	}, [moreByArtist.length > 0])
+
+	const [HandleFavorite] = useFavorite();
+	const [HandleCart] = useCart();
+
+	const navigate = useNavigate();
+
+	const handleNavigate = (id, e) => {
+		if (e.target.classList.contains('dismiss')) {
+			navigate(`/art/${id}`);
+		}
+	};
 
 	return (<>
 		<div className="bg-navy-100 h-80 flex justify-center items-center bg-cover overflow-hidden bg-center relative" style={{ backgroundImage: `url(${random?.url})` }}>
@@ -86,16 +101,28 @@ const Artist = () => {
 			</>}
 
 
-			<div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:m-16 m-8 lg:col-span-3 gap-8 col-span-4">
+			<div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:m-16 m-8 lg:col-span-3 gap-8 col-span-4 dismiss">
 				{moreByArtist && moreByArtist.map((data, i) => (
-					<Link key={i} to={`/art/${data.id}`} className='first:col-span-2 group last:row-span-4'>
-						<div className='flex w-full flex-col gap-4 p-4 border-[1px] border-black/10 group-hover:bg-off-1 rounded-lg'>
-							<div className="overflow-hidden rounded-lg">
-								<img src={data.url} alt="Artwork" className='rounded-lg max-h-64 object-cover group-hover:scale-110 w-full opacity-40 group-hover:opacity-100' />
+					<section key={i} className='cursor-pointer first:col-span-2 group last:row-span-4 dismiss' onMouseEnter={() => setShow(i)} onMouseLeave={() => setShow('')}>
+						<div className='flex w-full flex-col gap-4 p-4 border-[1px] border-black/10 group-hover:bg-off-1 rounded-lg dismiss' >
+							<div className="overflow-hidden rounded-lg relative dismiss">
+								<img src={data.url} alt="Artwork" className='rounded-lg max-h-64 object-cover group-hover:scale-110 w-full opacity-80 group-hover:opacity-100 dismiss' onClick={(e) => handleNavigate(data.id, e)} />
+								{show === i &&
+									<div className="flex ml-auto gap-4 items-center mt-4 bg-off-1 rounded-2xl py-2 px-4 shadow absolute top-1 right-4 z-40">
+										<FiHeart
+											className="hover:scale-125 cursor-pointer hover:fill-pink-500"
+											onClick={() => HandleFavorite(data)}
+										/>
+										<FiShoppingCart
+											className="hover:scale-125 cursor-pointer hover:fill-blue-500"
+											onClick={() => HandleCart(data)}
+										/>
+									</div>
+								}
 							</div>
 							<h2 className='capitalize'>{data?.title?.toLowerCase()}</h2>
 						</div>
-					</Link>
+					</section>
 				))}
 			</div>
 		</div>

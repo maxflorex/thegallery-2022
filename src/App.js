@@ -26,6 +26,8 @@ import TermsConditions from './pages/TermsConditions';
 import Cookies from './pages/Cookies';
 import LegalNotices from './pages/LegalNotices';
 import Collections from './pages/Collections';
+import ScrollToTop from './components/ScrollToTop';
+import ArtistAll from './pages/Artist';
 
 function App() {
   const dispatch = useDispatch();
@@ -97,28 +99,31 @@ function App() {
   return (
     <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, user, userExists, userName, cartExists }}>
       <Router>
-        <Navbar />
-        <Routes>
-          <Route exact path={'/'} element={<Home />} />
-          <Route path={'/contact'} element={<Contact />} />
-          <Route path={'/art'} element={<Artworks />} />
-          <Route path={'/about'} element={<About />} />
-          <Route path={'/login'} element={<Account />} />
-          <Route path={'/dashboard'} element={<Dashboard />} />
-          <Route path={'/art/:id'} element={<Art />} />
-          <Route path={'/artist/:id'} element={<Artist />} />
-          <Route path={'/favorites'} element={<Favorites />} />
-          <Route path={'/cart'} element={<Cart />} />
-          <Route path={'/success'} element={<Success />} />
-          <Route path={'/collections/:id'} element={<CollectionsAll />} />
-          <Route path={'/Terms-and-conditions'} element={<TermsConditions />} />
-          <Route path={'/cookies-policy'} element={<Cookies />} />
-          <Route path={'/legal-notices'} element={<LegalNotices />} />
-          <Route path={'/collections'} element={<Collections />} />
-          <Route path={'/collections/:name'} element={<CollectionsAll />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-        <Footer />
+        <ScrollToTop>
+          <Navbar />
+          <Routes>
+            <Route exact path={'/'} element={<Home />} />
+            <Route path={'/contact'} element={<Contact />} />
+            <Route path={'/art'} element={<Artworks />} />
+            <Route path={'/artist'} element={<ArtistAll />} />
+            <Route path={'/about'} element={<About />} />
+            <Route path={'/login'} element={<Account />} />
+            <Route path={'/dashboard'} element={<Dashboard />} />
+            <Route path={'/art/:id'} element={<Art />} />
+            <Route path={'/artist/:id'} element={<Artist />} />
+            <Route path={'/favorites'} element={<Favorites />} />
+            <Route path={'/cart'} element={<Cart />} />
+            <Route path={'/success'} element={<Success />} />
+            <Route path={'/collections/:id'} element={<CollectionsAll />} />
+            <Route path={'/Terms-and-conditions'} element={<TermsConditions />} />
+            <Route path={'/cookies-policy'} element={<Cookies />} />
+            <Route path={'/legal-notices'} element={<LegalNotices />} />
+            <Route path={'/collections'} element={<Collections />} />
+            <Route path={'/collections/:name'} element={<CollectionsAll />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+          <Footer />
+        </ScrollToTop>
       </Router>
     </AppContext.Provider>
   );

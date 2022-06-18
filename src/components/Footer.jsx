@@ -22,7 +22,7 @@ const Footer = () => {
         <footer className="w-full bg-[#000000]/80 p-8 sticky top-full overflow-hidden">
             <section className="flex justify-between min-h-96 items-center text-off-1 container mx-auto py-16 relative">
                 <Link to="/">
-                    <img src={logo} alt="Logo" className="w-36 z-50" />
+                    <img src={logo} alt="Logo" className="w-24 z-50" />
                 </Link>
                 <div className="xl:gap-32 lg:flex gap-16 flex-wrap p-4 hidden">
                     <div className="flex flex-col gap-2">
@@ -48,7 +48,7 @@ const Footer = () => {
                         <Link to="/login">Login</Link>
                     </div>
                 </div>
-                <img src={ritzlogo} alt="Logo" className="h-44" />
+                <img src={ritzlogo} alt="Logo" className="h-32" />
             </section>
             {showContact && <ModalContact setShow={setShowContact} />}
         </footer>
