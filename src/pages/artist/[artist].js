@@ -72,6 +72,8 @@ const Artist = () => {
 		}
 	};
 
+	console.log(artist1);
+
 	return (<>
 		<div className="bg-navy-100 h-80 flex justify-center items-center bg-cover overflow-hidden bg-center relative" style={{ backgroundImage: `url(${random?.url})` }}>
 			<div className="bg-white/60 p-8 h-full w-full backdrop-blur-md flex flex-col justify-center items-center gap-4">
@@ -128,8 +130,8 @@ const Artist = () => {
 		</div>
 
 		{/* SUBSCRIBE */}
-		<div className="bg-cream-100 py-40 min-h-80 flex flex-col justify-center items-center">
-			<h1 className='italic lg:text-2xl text-lg w-3/4 text-center'>Subscribe to know about new releases from <span className='capitalize underline'>{data?.name?.toLowerCase()}</span></h1>
+		<div className="bg-navy-100 py-40 min-h-80 flex flex-col justify-center items-center">
+			<h1 className='italic lg:text-xl text-md w-3/4 text-center'>Subscribe to know about new releases from <span className='capitalize underline'>{data?.name?.toLowerCase()}</span></h1>
 			<div className="flex gap-4 mt-8">
 				<input type="email" placeholder='Enter your email...' required value={email} className={inputtw} onChange={(e) => setEmail(e.target.value)} />
 

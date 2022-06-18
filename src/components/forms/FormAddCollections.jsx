@@ -28,7 +28,7 @@ const FormAddCollections = () => {
             description: desc,
             createdAt: serverTimestamp(),
         }).then(() => {
-            alert('Artwork Submitted!');
+            alert('A new collection has been added 🥳');
             reset(e);
         });
     };

@@ -52,6 +52,7 @@ const ArtInquery = ({ setShowForm, art }) => {
             createdAt: serverTimestamp(),
         }).then(() => {
             reset(e);
+            alert('Your inquery has been sent! 📤')
         });
         setShowForm(false);
         document.body.style.overflow = 'auto';

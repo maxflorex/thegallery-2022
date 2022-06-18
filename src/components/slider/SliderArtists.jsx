@@ -30,7 +30,7 @@ const SliderArtists = () => {
                 <div className="flex justify-between items-center w-full">
                     <div className="flex items-end gap-4">
                         <h1 className="text-3xl font-light capitalize">
-                            Artworks On Display
+                            Local Artists
                         </h1>
                         <div className="flex gap-4 items-center">
                             {/* <TbClick className="text-off-5 -mr-2" /> */}

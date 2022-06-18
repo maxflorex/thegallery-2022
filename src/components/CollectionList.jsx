@@ -20,7 +20,7 @@ const CollectionList = () => {
     // DELETE DOCUMENTS
     const deleteCol = async (id) => {
         await deleteDoc(doc(colRefCollection, id));
-        alert('The artwork has been deleted!');
+        alert('The collection has been deleted!');
     };
 
     return (

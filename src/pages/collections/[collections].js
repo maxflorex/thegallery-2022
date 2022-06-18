@@ -69,7 +69,7 @@ const CollectionsAll = () => {
                         getPagination?.map((data, i) => (
                             <Link
                                 key={i}
-                                className="hover:scale-105"
+                                className="hover:scale-105 px-8"
                                 to={`/art/${data.id}`}
                             >
                                 <ArtCard art={data} />

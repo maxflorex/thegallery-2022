@@ -96,6 +96,8 @@ function App() {
     }
   }, [cartCol?.cart?.length])
 
+  console.log(userName);
+
   return (
     <AppContext.Provider value={{ dataArtists, setW, w, artist, art, collection, user, userExists, userName, cartExists }}>
       <Router>

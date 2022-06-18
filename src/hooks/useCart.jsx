@@ -7,8 +7,7 @@ import { useSelector } from 'react-redux';
 
 const useCart = () => {
     //
-    const user = useSelector((state) => state.user.user);
-    const userName = user?.displayName?.toLowerCase().replace(/ /g, '');
+    const { userName } = useContext(AppContext);
     const cart = useFirestoreId('cart', `${userName}`);
     const [l, setL] = useState(0);
 
@@ -22,18 +21,22 @@ const useCart = () => {
 
     // CART FUNCTION
     const HandleCart = async (art) => {
-        if (l > 0) {
-            await updateDoc(cartDocRef, {
-                cart: arrayUnion(art),
-            }).then(() => {
-                alert('New item added to your 🛒');
-            });
-        } else {
-            await setDoc(cartDocRef, {
-                cart: [art],
-            }).then(() => {
-                alert('Your 🛒 has been created');
-            });
+        if (userName !== undefined) {
+            if (l > 0) {
+                await updateDoc(cartDocRef, {
+                    cart: arrayUnion(art),
+                }).then(() => {
+                    alert('New item added to your 🛒');
+                });
+            } else {
+                await setDoc(cartDocRef, {
+                    cart: [art],
+                }).then(() => {
+                    alert('Your 🛒 has been created');
+                });
+            }
+        } else if (userName === undefined) {
+            alert('Login to add to cart 🛒');
         }
     };
 

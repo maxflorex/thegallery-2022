@@ -9,18 +9,22 @@ const useFavorite = () => {
 
     // FAVORITE FUNCTION
     const HandleFavorite = async (art) => {
-        if (userExists) {
-            await updateDoc(favDocRef, {
-                favorites: arrayUnion(art),
-            }).then(() => {
-                alert('❤️');
-            });
-        } else {
-            await setDoc(favDocRef, {
-                favorites: art,
-            }).then(() => {
-                alert('New 💟');
-            });
+        if (userName !== undefined) {
+            if (userExists) {
+                await updateDoc(favDocRef, {
+                    favorites: arrayUnion(art),
+                }).then(() => {
+                    alert('❤️');
+                });
+            } else {
+                await setDoc(favDocRef, {
+                    favorites: art,
+                }).then(() => {
+                    alert('New 💟');
+                });
+            }
+        } else if(userName === undefined) {
+            alert('Login to add to ❤️')
         }
     };
 
