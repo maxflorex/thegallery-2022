@@ -61,7 +61,7 @@ const Hero = () => {
                                         //     onSelectionHanlder({ name, url, id })
                                         // }
                                     >
-                                        <a
+                                        <span
                                             className=" flex items-center justify-center gap-4"
                                             onClick={() => handleClick(id)}
                                         >
@@ -73,7 +73,7 @@ const Hero = () => {
                                                 alt="Profile"
                                                 className="w-10 h-10 object-cover rounded-full"
                                             />
-                                        </a>
+                                        </span>
                                     </li>
                                 ))}
                         </ul>

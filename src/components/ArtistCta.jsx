@@ -9,53 +9,51 @@ const ArtistCta = ({ by, moreByArtist }) => {
     const [showC, setShowC] = useState(false);
 
     return (
-        <div className="bg-cream-100 py-24 snap-center">
+        <div className="bg-cream-100 py-40 snap-center">
             {by && (
-                <div className="container p-4 mx-auto grid md:grid-cols-3 grid-cols-2 gap-16 md:gap-8 relative">
-                    {/* COL 1 */}
-                    <div className="w-full flex flex-col md:flex-row gap-8 items-center justify-center col-span-3 lg:col-span-1">
-                        <Link
-                            to={`/artist/${by.name
-                                .replace(/ /g, '-')
-                                .toLowerCase()}`}
-                        >
-                            <div className="p-4">
+                <div className="grid lg:grid-cols-4 container p-4 mx-auto gap-8">
+                    <section className="flex gap-8 relative col-span-2 lg:col-span-1 w-full">
+                        <div className="w-full flex flex-col gap-2 items-center justify-center">
+                            <h1 className="text-sm font-light italic">
+                                Meet the artist
+                            </h1>
+                            <Link
+                                to={`/artist/${by.name
+                                    .replace(/ /g, '-')
+                                    .toLowerCase()}`}
+                            >
+                                <p className="capitalize text-2xl font-light">
+                                    {by.name.toLowerCase()}
+                                </p>
+                            </Link>
+                            <div className="p-2 relative">
                                 <img
                                     src={by.url}
                                     alt="Artist"
-                                    className="max-h-80 rounded-lg max-w-1/2 grayscale opacity-50 hover:grayscale-0 hover:opacity-100"
+                                    className="h-56 grayscale opacity-50 hover:grayscale-0 hover:opacity-100 rounded-md"
                                 />
+                                <Link
+                                    to={`/artist/${by.name
+                                        .replace(/ /g, '-')
+                                        .toLowerCase()}`}
+                                    className="bg-cream-500 px-3 py-2 text-sm hover:scale-110 rounded-lg absolute bottom-6 right-6"
+                                >
+                                    See More
+                                </Link>
                             </div>
-                        </Link>
-                        <div className="flex flex-col gap-2 items-center lg:items-start">
-                            <h1 className="text-xl font-light italic">
-                                Meet the artist
-                            </h1>
-                            <p className="capitalize text-4xl font-light">
-                                {by.name.toLowerCase()}
-                            </p>
-                            <a
-                                href={`/artist/${by.name
-                                    .replace(/ /g, '-')
-                                    .toLowerCase()}`}
-                                className="bg-cream-500 px-3 py-2 text-sm hover:scale-110 rounded-lg lg:mr-auto mr-0 mt-4"
-                            >
-                                See More
-                            </a>
                         </div>
-                    </div>
-
-                    {/* COL 2 */}
-                    <InputSeacrhArtByArtist by={by} artist={moreByArtist} />
-                    {/* COL 3 */}
+                    </section>
                     <div
-                        className="bg-white rounded-lg flex flex-col items-center justify-center col-span-3 lg:col-span-1 p-8 shadow-sm mx-8 py-24 bg-cover text-white hover:scale-105"
+                        className="bg-white rounded-lg flex flex-col items-center justify-center shadow-sm mx-8 bg-cover text-white col-span-2 "
                         style={{ backgroundImage: `url(${bg})` }}
                     >
-                        <p className="italic">
+                        <InputSeacrhArtByArtist by={by} artist={moreByArtist} />
+                    </div>
+                    <div className="bg-cream-300 rounded-lg hidden lg:flex gap-2 flex-col items-center justify-center p-8 shadow-sm mx-8 bg-cover text-white">
+                        <p className="italic text-black text-sm">
                             Looking for something specific?
                         </p>
-                        <h1 className="text-4xl font-thin">
+                        <h1 className="text-2xl font-thin text-black text-center">
                             Get a commission piece
                         </h1>
                         <button

@@ -29,7 +29,7 @@ const Artworks = () => {
           <h1 className="text-left text-4xl font-thin w-full container pt-40 pb-12 px-8">
             Browse All Artworks
           </h1>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-16 container mx-auto content-center place-content-center place-items-end">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 container mx-auto content-center place-content-center place-items-end">
             {art &&
               getPagination?.map((data, i) => (
                 <section

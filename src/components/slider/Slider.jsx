@@ -10,19 +10,15 @@ import { FiHeart, FiShoppingCart } from 'react-icons/fi';
 
 const Slider = () => {
     const { art } = useContext(AppContext);
-    const [data, setData] = useState({});
     const [width, setWidth] = useState('');
     const [clickedItem, setClickedItem] = useState('');
     const [HandleFavorite] = useFavorite();
     const [HandleCart] = useCart();
     const [show, setShow] = useState('');
+    const [random, setRandom] = useState({});
 
     // GET CONTEXT VALUE
     const { w } = useContext(AppContext);
-
-    useEffect(() => {
-        art && setData(art);
-    }, [art]);
 
     // CHANGE SLIDE WIDTH WITH SCREEN CHANGE
     useEffect(() => {
@@ -34,6 +30,21 @@ const Slider = () => {
             setWidth(w / 2);
         }
     }, [w]);
+
+    // RANDOMIZE FILTERED DATA
+    useEffect(() => {
+        const shuffle = (aToShuffle) => {
+            for (let i = aToShuffle.length - 1; i > 0; i--) {
+                let randomPosition = Math.floor(Math.random() * (i + 1));
+                let temp = aToShuffle[i];
+                // SWAP ELEMENTS
+                aToShuffle[i] = aToShuffle[randomPosition];
+                aToShuffle[randomPosition] = temp;
+            }
+            return aToShuffle;
+        };
+        setRandom(shuffle(art));
+    }, [art]);
 
     return (
         <>
@@ -49,8 +60,8 @@ const Slider = () => {
                     </Link>
                 </div>
                 <Slideshow autoplay={false} navigation={true}>
-                    {data.length > 1 &&
-                        data.map((data, i) => (
+                    {random?.length > 1 &&
+                        art?.map((data, i) => (
                             <div
                                 key={i}
                                 className="relative"

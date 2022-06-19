@@ -64,16 +64,15 @@ const CollectionsAll = () => {
 
             <div className="mx-auto container py-24">
 
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-16 container mx-auto content-center place-content-center place-items-end">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-12 container mx-auto content-center place-content-center place-items-end">
                     {art &&
                         getPagination?.map((data, i) => (
-                            <Link
+                            <span
                                 key={i}
-                                className="hover:scale-105 px-8"
-                                to={`/art/${data.id}`}
+                                className="hover:scale-105"
                             >
                                 <ArtCard art={data} />
-                            </Link>
+                            </span>
                         ))}
                 </div>
             </div>

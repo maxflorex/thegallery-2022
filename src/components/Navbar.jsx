@@ -34,7 +34,7 @@ const Navbar = () => {
                     !actualY && '-top-40'
                 }  ease-in-out`}
             >
-                <div className="flex gap-4 items-center">
+                <section className="flex gap-4 items-center">
                     <div className="burger" onClick={handleShowMenu}>
                         <HiMenuAlt4 className=" bg-off-1 py-1 px-2 rounded-lg w-8 h-8 fill-navy-500 duration-200 hover:scale-110 cursor-pointer" />
                     </div>
@@ -49,7 +49,7 @@ const Navbar = () => {
                             <FiShoppingCart />
                         </Link>
                     </div>
-                </div>
+                </section>
                 <Link className="hover:scale-110" to="/">
                     <img
                         src={logo}

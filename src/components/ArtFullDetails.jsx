@@ -7,6 +7,7 @@ import ArtInquery from './forms/ArtInquery';
 import { Link } from 'react-router-dom';
 import useFavorite from '../hooks/useFavorite';
 import useCart from '../hooks/useCart';
+import SliderArtists from './slider/SliderArtists';
 
 const ArtFullDetails = ({ art, id }) => {
     const [showForm, setShowForm] = useState(false);
@@ -38,39 +39,40 @@ const ArtFullDetails = ({ art, id }) => {
             {title && (
                 <div ref={topPage} className="snap-center">
                     <div className="flex flex-col md:flex-row w-full">
-                        <div className="w-full md:w-[50vw] py-16 md:py-40 flex items-center justify-evenly bg-off-1 lg:h-screen h-auto">
-                            <div className="py-24 md:py-4 px-8">
+                        <div className="w-full md:w-[50vw] py-16 md:py-40 flex items-center justify-evenly bg-off-1 lg:h-screen h-auto bg-repeat" style={{backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-dark.png)'}}>
+                            <div className="pt-24 pb-8 md:py-4 px-16">
                                 <img
                                     src={url}
                                     alt="Artwork"
-                                    className="max-w-full object-contain rounded-lg max-h-[70vh]"
+                                    className="max-w-full object-contain rounded-lg max-h-[70vh] shadow"
                                 />
                             </div>
                         </div>
                         <div className="md:w-1/2 w-full h-full flex flex-col items-start md:justify-center justify-start p-16 gap-4 my-auto	">
-                            <p>
-                                <span className="text-xs italic">Medium:</span>{' '}
-                                {medium}
-                            </p>
-                            <h1 className="text-4xl capitalize">
-                                {title?.toLowerCase()}
-                            </h1>
                             <Link
                                 to={`/artist/${by.name
                                     .replace(/ /g, '-')
                                     .toLowerCase()}`}
                             >
                                 <div className="flex items-center justify-center gap-4 my-auto">
-                                    <h1 className="italic text-sm capitalize">
-                                        by : {by?.name?.toLowerCase()}
-                                    </h1>
                                     <img
                                         src={by.url}
                                         alt="artist"
                                         className="w-8 h-8 rounded-full object-cover"
                                     />
+                                    <h1 className="italic text-sm capitalize">
+                                        {by?.name?.toLowerCase()}
+                                    </h1>
                                 </div>
                             </Link>
+
+                            <h1 className="text-4xl capitalize">
+                                {title?.toLowerCase()}
+                            </h1>
+                            <p>
+                                <span className="text-xs italic">Medium:</span>{' '}
+                                {medium}
+                            </p>
 
                             {/* TABLE STARTS */}
                             <table className="table-auto border-[1px] border-off-1 my-8">
@@ -92,31 +94,35 @@ const ArtFullDetails = ({ art, id }) => {
                                 </tbody>
                             </table>
                             {/* TABLE ENDS */}
-                            <h2 className="text-2xl mb-8 font-semibold">
+                            <h2 className="text-2xl  font-normal -mt-4 mb-8">
                                 ${price}
                             </h2>
                             <button
-                                className="py-2 px-4 bg-off-1 rounded-md hover:bg-blue-200"
+                                className="py-2 px-4 bg-cream-100 rounded-md hover:bg-blue-200"
                                 onClick={() => handleClick()}
                             >
                                 Acquire this artwork
                             </button>
                             <div className="flex gap-4 items-center p-2 mt-4">
-                                <FiHeart
-                                    className="hover:scale-125 cursor-pointer hover:fill-pink-500"
+                                <div
+                                    className="p-4 bg-off-1 rounded-full box-content group cursor-pointer"
                                     onClick={() => HandleFavorite(art)}
-                                />
-                                <FiShoppingCart
-                                    className="hover:scale-125 cursor-pointer hover:fill-blue-500"
+                                >
+                                    <FiHeart className="group-hover:scale-125 group-hover:stroke-pink-500" />
+                                </div>
+                                <div
+                                    className="p-4 bg-off-1 rounded-full box-content group cursor-pointer"
                                     onClick={() => HandleCart(art)}
-                                />
+                                >
+                                    <FiShoppingCart className="group-hover:scale-125 group-hover:stroke-blue-500" />
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             )}
-            <ArtistCta by={by} moreByArtist={moreByArtist} />
             <OtherArtworkByArtist moreByArtist={moreByArtist} />
+            <ArtistCta by={by} moreByArtist={moreByArtist} />
             {showForm && <ArtInquery setShowForm={setShowForm} art={art} />}
         </div>
     );

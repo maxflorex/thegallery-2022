@@ -49,9 +49,9 @@ const Register = ({ show, setShow }) => {
     };
 
     return (
-        <div className="w-full h-[75vh]">
+        <div className="w-full h-[75vh] text-white">
             <div className="flex flex-col h-full justify-center items-center">
-                <form className="grid grid-cols-1 gap-4 bg-off-1 px-24 py-32 rounded-xl">
+                <form className="grid grid-cols-1 gap-4 bg-navy-500 px-24 py-32 rounded-xl">
                     <h1 className="text-6xl text-center pb-8">Register</h1>
                     <label>Name</label>
                     <input
@@ -60,11 +60,11 @@ const Register = ({ show, setShow }) => {
                         placeholder="Enter your Email"
                         onChange={(e) => setName(e.target.value)}
                     />
-                    <label>Picture</label>
+                    <label>Picture <span className='text-xs'>(optional)</span></label>
                     <input
                         className={inputtw}
                         type="text"
-                        placeholder="Enter an URL"
+                        placeholder="Enter an picture URL"
                         onChange={(e) => setProfilePic(e.target.value)}
                     />
                     <label>Email</label>

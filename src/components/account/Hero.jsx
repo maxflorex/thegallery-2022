@@ -18,16 +18,21 @@ const Hero = () => {
         <div className="h-96 bg-center bg-cover w-full relative">
             <div className=" w-full h-full flex-wrap relative overflow-hidden">
                 {user != null ? (
-                    <div className="h-full w-full bg-navy-500/90 backdrop-blur-sm flex flex-col md:gap-4 gap-2 justify-center items-center">
+                    <div className="h-full w-full bg-navy-500 backdrop-blur-sm flex flex-col md:gap-4 gap-2 justify-center items-center">
                         <div className="flex items-center gap-2">
-                            <h1 className="text-xl md:text-2xl font-semibold text-cream-100 drop-shadow-sm">
-                                Welcome, {user?.displayName}
+                            <h1 className="text-xl md:text-2xl font-semibold text-cream-100 drop-shadow-sm ">
+                                Welcome,{' '}
+                                <span className="uppercase">
+                                    {user?.displayName}
+                                </span>
                             </h1>
-                            <img
-                                src={user.photoUrl}
-                                alt="Photo"
-                                className="w-12 h-12 rounded-full object-cover"
-                            />
+                            {user.photoUrl && (
+                                <img
+                                    src={user.photoUrl}
+                                    alt="Photo"
+                                    className="w-16 h-16 rounded-full object-cover box-border"
+                                />
+                            )}
                         </div>
                         <button
                             className="p-2 bg-white/10 rounded-lg hover:scale-105 text-white"

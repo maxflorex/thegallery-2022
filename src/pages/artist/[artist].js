@@ -103,10 +103,10 @@ const Artist = () => {
 			</>}
 
 
-			<div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:m-16 m-8 lg:col-span-3 gap-8 col-span-4 dismiss">
+			<div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 lg:m-16 m-8 lg:col-span-3 gap-8 col-span-4 dismiss items-start">
 				{moreByArtist && moreByArtist.map((data, i) => (
 					<section key={i} className='cursor-pointer first:col-span-2 group last:row-span-4 dismiss' onMouseEnter={() => setShow(i)} onMouseLeave={() => setShow('')}>
-						<div className='flex w-full flex-col gap-4 p-4 border-[1px] border-black/10 group-hover:bg-off-1 rounded-lg dismiss' >
+						<div className='flex w-full flex-col gap-4 p-4 border-[1px] border-off-1 group-hover:bg-off-1 rounded-lg dismiss' >
 							<div className="overflow-hidden rounded-lg relative dismiss">
 								<img src={data.url} alt="Artwork" className='rounded-lg max-h-64 object-cover group-hover:scale-110 w-full opacity-80 group-hover:opacity-100 dismiss' onClick={(e) => handleNavigate(data.id, e)} />
 								{show === i &&
@@ -122,7 +122,7 @@ const Artist = () => {
 									</div>
 								}
 							</div>
-							<h2 className='capitalize'>{data?.title?.toLowerCase()}</h2>
+							<h2 className='capitalize text-xs'>{data?.title?.toLowerCase()}</h2>
 						</div>
 					</section>
 				))}
@@ -130,8 +130,8 @@ const Artist = () => {
 		</div>
 
 		{/* SUBSCRIBE */}
-		<div className="bg-navy-100 py-40 min-h-80 flex flex-col justify-center items-center">
-			<h1 className='italic lg:text-xl text-md w-3/4 text-center'>Subscribe to know about new releases from <span className='capitalize underline'>{data?.name?.toLowerCase()}</span></h1>
+		<div className="bg-off-1 py-40 min-h-80 flex flex-col justify-center items-center" style={{backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-dark.png)'}}>
+			<h1 className='italic lg:text-xl text-md w-3/4 text-center font-normal'>Subscribe to know about new releases from <span className='capitalize underline'>{data?.name?.toLowerCase()}</span></h1>
 			<div className="flex gap-4 mt-8">
 				<input type="email" placeholder='Enter your email...' required value={email} className={inputtw} onChange={(e) => setEmail(e.target.value)} />
 

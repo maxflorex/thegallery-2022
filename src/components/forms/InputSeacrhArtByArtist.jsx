@@ -28,7 +28,7 @@ export const InputSeacrhArtByArtist = ({ by, artist }) => {
 
     return (
         <div className="flex flex-col items-center justify-center col-span-3 lg:col-span-1 p-8 gap-4 relative lg:w-96 w-full mx-auto">
-            <p className="italic">
+            <p className="italic text-2xl font-thin">
                 Search more from{' '}
                 <span className="capitalize">{by.name.toLowerCase()}</span>
             </p>
@@ -40,9 +40,8 @@ export const InputSeacrhArtByArtist = ({ by, artist }) => {
                     value={text}
                     onChange={(e) => onChangeHandler(e.target.value)}
                 />
-                <FiSearch className="absolute top-0 h-full right-4 hidden lg:block w-full" />
                 {text && suggestions[0] && (
-                    <ul className="flex flex-col scroll  gap-4 absolute top-36 lg:top-60 w-full z-40 max-h-80 overflow-y-auto py-4 bg-blue-100/90 rounded-xl mx-auto">
+                    <ul className="flex flex-col scroll  gap-4 absolute top-16  w-full z-40 max-h-80 overflow-y-auto py-4 bg-blue-100/90 rounded-xl mx-auto">
                         {suggestions &&
                             suggestions.map(({ title, id, url }) => (
                                 <li
@@ -52,11 +51,11 @@ export const InputSeacrhArtByArtist = ({ by, artist }) => {
                                     //     onSelectionHanlder({ name, url, id })
                                     // }
                                 >
-                                    <a
+                                    <span
                                         className=" flex items-center justify-center gap-4"
                                         onClick={() => handleClick(id)}
                                     >
-                                        <h1 className="text-sm font-semibold pl-4 capitalize">
+                                        <h1 className="text-sm font-semibold pl-4 capitalize text-black">
                                             {title.toLowerCase()}
                                         </h1>
                                         <img
@@ -64,7 +63,7 @@ export const InputSeacrhArtByArtist = ({ by, artist }) => {
                                             alt="Profile"
                                             className="w-10 h-10 object-cover rounded-full"
                                         />
-                                    </a>
+                                    </span>
                                 </li>
                             ))}
                     </ul>

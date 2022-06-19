@@ -1,26 +1,19 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom';
-import { auth } from '../firebase/config';
+import { useContext } from 'react';
+import { useSelector } from 'react-redux';
 import Hero from '../components/account/Hero'
 import Users from '../components/users/Users';
-import Admin from '../components/users/Admin';
-import Guests from '../components/users/Guests';
 
 const Dashboard = () => {
 
-  const navigate = useNavigate()
-
-  // LOGOUT FUNCTION
-  const logoutApp = () => {
-    auth.signOut();
-    navigate('/login')
-
-  };
+  const user = useSelector((state) => state.user.user)
 
   return (
     <>
       <Hero />
-      <Users />
+      {user?.email === 'prints@artcaymanco.com' &&
+        <Users />
+      }
       {/* <Admin />
       <Guests /> */}
     </>

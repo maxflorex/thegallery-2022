@@ -5,6 +5,7 @@ import { auth } from '../../firebase/config';
 import Register from './Register';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import bg from '../../assets/bg-2.svg'
 
 const Login = ({ show, setShow }) => {
     const [password, setPassword] = useState('');
@@ -33,7 +34,7 @@ const Login = ({ show, setShow }) => {
     return (
         <div className="w-full h-[75vh]">
             <div className="flex flex-col h-full justify-center items-center">
-                <form className="grid grid-cols-1 gap-4 bg-off-1 px-24 py-32 rounded-xl">
+                <form className="grid grid-cols-1 gap-4 bg-blue-500 px-24 py-32 rounded-xl">
                     {user !== null && <h1>Hello, {user.email}</h1>}
                     <h1 className="text-6xl text-center pb-8">Login</h1>
                     <label>Email</label>

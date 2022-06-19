@@ -82,24 +82,31 @@ const ModalMenu = ({ setShowMenu }) => {
                         {user !== null ? (
                             <div>
                                 <div
-                                    className="flex gap-4 items-center px-4 py-3 rounded-lg hover:bg-cream-500 cursor-pointer bg-off-1 mb-4"
+                                    className="flex gap-4 items-center px-4 py-3 rounded-lg cursor-pointer bg-off-1 mb-4"
                                     onClick={() => navigateTo('/dashboard')}
                                 >
                                     <h1>Hello, {user.displayName}</h1>
-                                    <img
-                                        src={user.photoUrl}
-                                        alt="Profile"
-                                        className="w-12 h-12 rounded-full object-cover"
-                                    />
+                                    {user.photoUrl && (
+                                        <img
+                                            src={user.photoUrl}
+                                            alt="Profile"
+                                            className="w-12 h-12 rounded-full object-cover"
+                                        />
+                                    )}
                                 </div>
                                 <div className="flex flex-col gap-4 p-2">
                                     <button
-                                    className='hover:bg-white hover:shadow-sm p-2 rounded-lg'
+                                        className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
                                         onClick={() => navigateTo('/dashboard')}
                                     >
                                         Dashboard
                                     </button>
-                                    <button onClick={logoutApp} className='hover:bg-white hover:shadow-sm p-2 rounded-lg'>Logout</button>
+                                    <button
+                                        onClick={logoutApp}
+                                        className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
+                                    >
+                                        Logout
+                                    </button>
                                 </div>
                             </div>
                         ) : (

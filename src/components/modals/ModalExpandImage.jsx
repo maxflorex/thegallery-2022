@@ -4,6 +4,10 @@ import useCart from '../../hooks/useCart';
 import useFavorite from '../../hooks/useFavorite';
 
 const ModalExpandImage = ({ data, setClicked }) => {
+    
+    const [HandleFavorite] = useFavorite();
+    const [HandleCart] = useCart();
+
     const handleClick = (e) => {
         if (e.target.classList.contains('dismiss')) {
             setClicked('');
@@ -16,8 +20,6 @@ const ModalExpandImage = ({ data, setClicked }) => {
     // SHOW SPECIFIC NUMBER OF ITEMS FROM ARRAY
     const tags = data?.tag?.slice(0, 4);
 
-    const [HandleFavorite] = useFavorite();
-    const [HandleCart] = useCart();
 
     return (
         <div

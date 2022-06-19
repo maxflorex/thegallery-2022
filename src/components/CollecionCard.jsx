@@ -26,11 +26,11 @@ const CollecionCard = (props) => {
 
     return (
         <div>
-            <div className="relative">
+            <div className="relative group">
                 <img
                     src={random.url}
                     alt="Collection"
-                    className="w-full object-cover h-64 rounded-md relative overflow-hidden opacity-70 hover:opacity-100"
+                    className="w-full object-cover h-64 rounded-md relative overflow-hidden opacity-70 group-hover:opacity-90"
                 />
                 <div className="flex w-full h-full justify-center items-end gap-2 bg-gradient-to-t from-black/40 rounded-md absolute bottom-0 left-0 p-4">
                     <h1 className="text-white text-lg  lg:text-xl font-light drop-shadow-lg tracking-wide italic">
