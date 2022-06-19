@@ -80,8 +80,6 @@ const ModalShowArtDetail = ({
         document.body.style.height = 'auto';
     };
 
-console.log(tag?.length > 0);
-
     return (
         <div
             className="fixed w-full h-full overflow-hidden bg-off-2/90 z-50 dismiss top-0 left-0 no-scrollbar backdrop-blur-sm"

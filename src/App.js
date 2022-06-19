@@ -28,6 +28,8 @@ import LegalNotices from './pages/LegalNotices';
 import Collections from './pages/Collections';
 import ScrollToTop from './components/ScrollToTop';
 import ArtistAll from './pages/Artist';
+import Register from './pages/Register';
+import RegisterPage from './pages/Register';
 
 function App() {
   const dispatch = useDispatch();
@@ -108,6 +110,7 @@ function App() {
             <Route path={'/artist'} element={<ArtistAll />} />
             <Route path={'/about'} element={<About />} />
             <Route path={'/login'} element={<Account />} />
+            <Route path={'/register'} element={<RegisterPage />} />
             <Route path={'/dashboard'} element={<Dashboard />} />
             <Route path={'/art/:id'} element={<Art />} />
             <Route path={'/artist/:id'} element={<Artist />} />

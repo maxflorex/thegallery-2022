@@ -72,8 +72,6 @@ const Artist = () => {
 		}
 	};
 
-	console.log(artist1);
-
 	return (<>
 		<div className="bg-navy-100 h-80 flex justify-center items-center bg-cover overflow-hidden bg-center relative" style={{ backgroundImage: `url(${random?.url})` }}>
 			<div className="bg-white/60 p-8 h-full w-full backdrop-blur-md flex flex-col justify-center items-center gap-4">
@@ -81,10 +79,12 @@ const Artist = () => {
 					<p className='italic'>- Local Artist -</p>
 					<h1 className='text-center capitalize text-4xl font-light'>{data?.name?.toLowerCase()}</h1>
 					<div className="flex gap-2 items-center">
-						<img src={`https://flagcdn.com/${data?.flag?.toLowerCase()}.svg`} alt="Flag" className='h-4' />
+						{data?.flag &&
+							<img src={`https://flagcdn.com/${data?.flag?.toLowerCase()}.svg`} alt="Flag" className='h-4' />
+						}
 						<p>{data?.nationality}</p>
 					</div>
-					<p className='mb-6 absolute right-8 bottom-4'>Artworks on display: <span className='font-bold px-2 py-1 rounded-2xl bg-white ml-2'>{moreByArtist && moreByArtist?.length}</span> </p>
+					<p className='mb-6 absolute right-8 bottom-4'>Artworks on display: <span className='font-semibold px-2 py-1 rounded-2xl bg-white ml-2'>{moreByArtist && moreByArtist?.length}</span> </p>
 				</>)}
 
 			</div>
@@ -130,7 +130,7 @@ const Artist = () => {
 		</div>
 
 		{/* SUBSCRIBE */}
-		<div className="bg-off-1 py-40 min-h-80 flex flex-col justify-center items-center" style={{backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-dark.png)'}}>
+		<div className="bg-off-1 py-40 min-h-80 flex flex-col justify-center items-center" style={{ backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-dark.png)' }}>
 			<h1 className='italic lg:text-xl text-md w-3/4 text-center font-normal'>Subscribe to know about new releases from <span className='capitalize underline'>{data?.name?.toLowerCase()}</span></h1>
 			<div className="flex gap-4 mt-8">
 				<input type="email" placeholder='Enter your email...' required value={email} className={inputtw} onChange={(e) => setEmail(e.target.value)} />

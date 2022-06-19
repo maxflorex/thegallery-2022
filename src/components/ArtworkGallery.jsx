@@ -55,7 +55,7 @@ const ArtworkGallery = () => {
                     <FiPlay className="text-off-3 group-hover:text-white" />
                 </Link>
             </div>
-            <div className="grid xl:grid-cols-6 grid-cols-2 gap-8 flex-wrap overflow-hidden py-12 justify-center container mx-auto">
+            <div className="grid lg:grid-cols-6 grid-cols-2 gap-8 flex-wrap overflow-hidden py-12 justify-center container mx-auto">
                 {random.length > 0 &&
                     random.slice(0, 5).map((data, index) => (
                         <div

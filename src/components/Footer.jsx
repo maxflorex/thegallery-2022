@@ -1,12 +1,17 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import logo from '../assets/tg-logo-white.svg';
 import ritzlogo from '../assets/cdnlogo.com_the-ritz-carlton.svg';
 import { useState } from 'react';
 import ModalContact from './modals/ModalContact';
+import { useSelector } from 'react-redux';
+import { auth } from '../firebase/config';
 
 const Footer = () => {
     const [showContact, setShowContact] = useState(false);
+    const user = useSelector((state) => state.user.user);
+
+    const navigate = useNavigate();
 
     const hideScroll = () => {
         document.body.style.overflow = 'hidden';
@@ -16,6 +21,13 @@ const Footer = () => {
     const handleShow = () => {
         setShowContact(true);
         hideScroll();
+    };
+
+    // LOGOUT FUNCTION
+    const logoutApp = () => {
+        auth.signOut();
+        navigate('/');
+        alert('Logged out 👋');
     };
 
     return (
@@ -44,8 +56,30 @@ const Footer = () => {
                         </span>
                     </div>
                     <div className="flex flex-col gap-2">
-                        <Link to="/dashboard">My Profile</Link>
-                        <Link to="/login">Login</Link>
+                        {user?.email === 'prints@artcaymanco.com' && (
+                            <Link to="/dashboard">Dashboard</Link>
+                        )}
+                        {user === null ? (
+                            <>
+                                <Link to="/login">Login</Link>
+                                <Link to="/register">Create Account</Link>
+                            </>
+                        ) : (
+                            <>
+                                <h1>
+                                    Welcome,{' '}
+                                    <span className="uppercase">
+                                        {user?.displayName}
+                                    </span>
+                                </h1>
+                                <span
+                                    className="cursor-pointer"
+                                    onClick={logoutApp}
+                                >
+                                    Logout
+                                </span>
+                            </>
+                        )}
                     </div>
                 </div>
                 <img src={ritzlogo} alt="Logo" className="h-32" />

@@ -15,6 +15,9 @@ const ModalMenu = ({ setShowMenu }) => {
     // LOGOUT FUNCTION
     const logoutApp = () => {
         auth.signOut();
+        navigate('/')
+        alert('Logged out 👋')
+        handleClick2()
     };
 
     const navigate = useNavigate();

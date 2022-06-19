@@ -5,13 +5,12 @@ import { auth } from '../../firebase/config';
 import Register from './Register';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import bg from '../../assets/bg-2.svg'
 
 const Login = ({ show, setShow }) => {
     const [password, setPassword] = useState('');
     const [email, setEmail] = useState('');
 
-    const user = useSelector((state) => state.user.user)
+    const user = useSelector((state) => state.user.user);
     const navigate = useNavigate();
 
     //   LOGIN FUNCTION
@@ -19,7 +18,16 @@ const Login = ({ show, setShow }) => {
         e.preventDefault();
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            navigate('/dashboard');
+            try {
+                if (user?.email === 'prints@artcaymanco.com') {
+                    navigate('/dashboard');
+                } else {
+                    navigate('/');
+                }
+            } catch (error) {
+                console.log(error.message);
+                alert('Wrong Credentials!');
+            }
         } catch (error) {
             console.log(error.message);
             alert('Wrong Credentials!');
@@ -29,6 +37,7 @@ const Login = ({ show, setShow }) => {
     // LOGOUT FUNCTION
     const logoutApp = () => {
         auth.signOut();
+        navigate('/');
     };
 
     return (

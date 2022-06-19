@@ -44,7 +44,7 @@ const Slider = () => {
             return aToShuffle;
         };
         setRandom(shuffle(art));
-    }, [art]);
+    }, [art?.length > 0]);
 
     return (
         <>

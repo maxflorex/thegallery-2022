@@ -65,8 +65,6 @@ const FormUpdateArt = ({ setShowEdit, data }) => {
         }
     }, [data]);
 
-    console.log(tags);
-
     // CLOSE MODAL
     const handleClick = (e) => {
         if (e.target.classList.contains('dismiss')) {

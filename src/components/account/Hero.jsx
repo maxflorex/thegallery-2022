@@ -4,14 +4,17 @@ import rough2 from '../../assets/rough-line-01.svg';
 import { useSelector } from 'react-redux';
 import { buttontw3 } from '../../style/styles';
 import { auth } from '../../firebase/config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Hero = () => {
     const user = useSelector((state) => state.user.user);
+    const navigate = useNavigate()
 
     // LOGOUT FUNCTION
     const logoutApp = () => {
         auth.signOut();
+        navigate('/')
+        alert('Logged out 👋')
     };
 
     return (
