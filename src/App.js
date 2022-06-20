@@ -118,7 +118,7 @@ function App() {
             <Route path={'/cart'} element={<Cart />} />
             <Route path={'/success'} element={<Success />} />
             <Route path={'/collections/:id'} element={<CollectionsAll />} />
-            <Route path={'/Terms-and-conditions'} element={<TermsConditions />} />
+            <Route path={'/terms-and-conditions'} element={<TermsConditions />} />
             <Route path={'/cookies-policy'} element={<Cookies />} />
             <Route path={'/legal-notices'} element={<LegalNotices />} />
             <Route path={'/collections'} element={<Collections />} />

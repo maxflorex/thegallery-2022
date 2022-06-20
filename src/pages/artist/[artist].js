@@ -84,7 +84,7 @@ const Artist = () => {
 						}
 						<p>{data?.nationality}</p>
 					</div>
-					<p className='mb-6 absolute right-8 bottom-4'>Artworks on display: <span className='font-semibold px-2 py-1 rounded-2xl bg-white ml-2'>{moreByArtist && moreByArtist?.length}</span> </p>
+					<p className='mb-6 absolute right-8 bottom-4 hidden md:block'>Artworks on display: <span className='font-semibold px-2 py-1 rounded-2xl bg-white ml-2'>{moreByArtist && moreByArtist?.length}</span> </p>
 				</>)}
 
 			</div>
@@ -95,7 +95,7 @@ const Artist = () => {
 
 
 			{data && <>
-				<div className='w-full flex flex-col items-center my-24 gap-4 col-span-4 lg:col-span-1'>
+				<div className='w-full flex flex-col items-center my-16 nd:my-24 gap-4 col-span-4 lg:col-span-1'>
 					<img src={data?.url} alt="Artist" className='w-48 h-48 rounded-full object-cover p-4 bg-cream-100' />
 					<h1 className='capitalize text-2xl font-thin italic'>{data?.name?.toLowerCase()}</h1>
 					<p className='max-h-[40vh] overflow-y-auto scroll text-justify leading-10 px-8 py-4 mx-8 lg:mx-0'>{data?.bio}</p>
@@ -103,7 +103,7 @@ const Artist = () => {
 			</>}
 
 
-			<div className="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 lg:m-16 m-8 lg:col-span-3 gap-8 col-span-4 dismiss items-start">
+			<div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 lg:m-16 m-8 lg:col-span-3 gap-8 col-span-4 dismiss items-start">
 				{moreByArtist && moreByArtist.map((data, i) => (
 					<section key={i} className='cursor-pointer first:col-span-2 group last:row-span-4 dismiss' onMouseEnter={() => setShow(i)} onMouseLeave={() => setShow('')}>
 						<div className='flex w-full flex-col gap-4 p-4 border-[1px] border-off-1 group-hover:bg-off-1 rounded-lg dismiss' >

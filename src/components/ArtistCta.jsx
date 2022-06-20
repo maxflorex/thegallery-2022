@@ -9,7 +9,7 @@ const ArtistCta = ({ by, moreByArtist }) => {
     const [showC, setShowC] = useState(false);
 
     return (
-        <div className="bg-cream-100 py-40 snap-center">
+        <div className="bg-cream-100 py-40 snap-center hidden md:block">
             {by && (
                 <div className="grid lg:grid-cols-4 container p-4 mx-auto gap-8">
                     <section className="flex gap-8 relative col-span-2 lg:col-span-1 w-full">

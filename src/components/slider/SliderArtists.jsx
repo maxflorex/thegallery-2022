@@ -15,11 +15,11 @@ const SliderArtists = () => {
     // CHANGE SLIDE WIDTH WITH SCREEN CHANGE
     useEffect(() => {
         if (w >= 1280) {
-            setWidth(w / 12);
+            setWidth(w / 10);
         } else if (w > 650) {
-            setWidth(w / 8);
+            setWidth(w / 6);
         } else if (w < 650) {
-            setWidth(w / 4);
+            setWidth(w / 3);
         }
     }, [w]);
 
@@ -27,12 +27,12 @@ const SliderArtists = () => {
         <div className="bg-blue-100 py-40">
             <div className="w-full rounded-xl container mx-auto">
                 {/* TITLE */}
-                <div className="flex justify-between items-center w-full">
+                <div className="flex justify-between items-center w-full px-8">
                     <div className="flex items-end gap-4">
-                        <h1 className="text-3xl font-light capitalize">
+                        <h1 className="text-2xl md:text-3xl font-light capitalize">
                             Local Artists
                         </h1>
-                        <div className="flex gap-4 items-center">
+                        <div className="hidden md:flex gap-4 items-center">
                             {/* <TbClick className="text-off-5 -mr-2" /> */}
                             <p className="text-sm italic text-navy-200">
                                 Click the arrows to see more artists
@@ -46,7 +46,6 @@ const SliderArtists = () => {
                         <h1 className="text-sm text-navy-500">
                             See All Artists
                         </h1>
-                        <FiPlay className="text-off-3 group-hover:text-white" />
                     </Link>
                 </div>
                 {/* SLIDESHOW */}
@@ -64,7 +63,7 @@ const SliderArtists = () => {
                                 onMouseLeave={() => setShow('')}
                             >
                                 <div
-                                    className="p-8  hover:bg-off-1/0 border-[1px] border-off-1/0 hover:border-[1px] hover:border-off-2 md:hover:bg-off-1 rounded-md flex flex-col items-center justify-center relative"
+                                    className="px-4 xl:px-8 py-8   hover:bg-off-1/0 border-[1px] border-off-1/0 hover:border-[1px] hover:border-off-2 md:hover:bg-off-1 rounded-md flex flex-col items-center justify-center relative"
                                     style={{ width: `${width}px` }}
                                 >
                                     <img

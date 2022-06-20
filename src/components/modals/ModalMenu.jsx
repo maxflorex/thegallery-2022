@@ -2,8 +2,11 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../firebase/config';
 import logo from '../../assets/tg-logo-navy.svg';
+import ModalContact from './ModalContact';
+import { useState } from 'react';
 
 const ModalMenu = ({ setShowMenu }) => {
+    const [showContact, setShowContact] = useState(false);
     const user = useSelector((state) => state.user.user);
 
     const handleClick2 = () => {
@@ -15,9 +18,9 @@ const ModalMenu = ({ setShowMenu }) => {
     // LOGOUT FUNCTION
     const logoutApp = () => {
         auth.signOut();
-        navigate('/')
-        alert('Logged out 👋')
-        handleClick2()
+        navigate('/');
+        alert('Logged out 👋');
+        handleClick2();
     };
 
     const navigate = useNavigate();
@@ -29,10 +32,14 @@ const ModalMenu = ({ setShowMenu }) => {
         document.body.style.height = '100%';
     };
 
+    const handleShow = () => {
+        setShowContact(true);
+    };
+
     return (
         <>
             <div
-                className="absolute bg-[#0000]/80 w-full h-[100vh] -top-4 backdrop-blur-sm"
+                className="fixed bg-[#0000]/40 w-full h-[100vh] top-0 backdrop-blur-sm"
                 onClick={handleClick2}
             />
             <div className="absolute w-96 min-h-[100vh] -top-4 left-0 bg-off-1/90 backdrop-blur-sm ">
@@ -47,7 +54,7 @@ const ModalMenu = ({ setShowMenu }) => {
                         <hr className="text-off-2 font-extralight" />
                         <button
                             className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
-                            onClick={() => navigateTo('/contact')}
+                            onClick={handleShow}
                         >
                             Contact
                         </button>
@@ -61,21 +68,15 @@ const ModalMenu = ({ setShowMenu }) => {
                         <hr className="text-off-2 font-extralight" />
                         <button
                             className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
-                            onClick={() => navigateTo('/artists')}
+                            onClick={() => navigateTo('/artist')}
                         >
                             Artists
                         </button>
                         <hr className="text-off-2 font-extralight" />
-                        <button
-                            className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
-                            onClick={() => navigateTo('/artists')}
-                        >
-                            Exhibitions
-                        </button>
                         <hr className="text-off-2 font-extralight" />
                         <button
                             className="hover:bg-white hover:shadow-sm p-2 rounded-lg"
-                            onClick={() => navigateTo('/exhibitions')}
+                            onClick={() => navigateTo('/about')}
                         >
                             About
                         </button>
@@ -85,7 +86,7 @@ const ModalMenu = ({ setShowMenu }) => {
                         {user !== null ? (
                             <div>
                                 <div
-                                    className="flex gap-4 items-center px-4 py-3 rounded-lg cursor-pointer bg-off-1 mb-4"
+                                    className="flex gap-4 items-center px-4 py-3 rounded-lg cursor-pointer bg-cream-300 mb-4"
                                     onClick={() => navigateTo('/dashboard')}
                                 >
                                     <h1>Hello, {user.displayName}</h1>
@@ -93,7 +94,7 @@ const ModalMenu = ({ setShowMenu }) => {
                                         <img
                                             src={user.photoUrl}
                                             alt="Profile"
-                                            className="w-12 h-12 rounded-full object-cover"
+                                            className="w-12 h-12 rounded-full object-cover bg-blue-500"
                                         />
                                     )}
                                 </div>
@@ -149,6 +150,7 @@ const ModalMenu = ({ setShowMenu }) => {
                     className="fixed bottom-0 w-40 p-8"
                 />
             </div>
+            {showContact && <ModalContact setShow={setShowContact} />}
         </>
     );
 };

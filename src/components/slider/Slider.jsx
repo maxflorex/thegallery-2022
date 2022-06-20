@@ -50,13 +50,12 @@ const Slider = () => {
         <>
             <div className="w-full rounded-md py-24 container mx-auto">
                 <div className="flex w-full justify-between items-center px-8 group">
-                    <h1 className="text-3xl font-light">Featured Artworks</h1>
+                    <h1 className="text-2xl md:text-3xl font-light">Featured Artworks</h1>
                     <Link
                         to="/art"
                         className="flex gap-2 items-center px-4 py-2 bg-off-1 rounded-md hover:bg-cream-500"
                     >
-                        <h1 className="text-sm text-navy-500">See All</h1>
-                        <FiPlay className="text-off-3 group-hover:text-white" />
+                        <h1 className="text-sm text-navy-500">See All Artworks</h1>
                     </Link>
                 </div>
                 <Slideshow autoplay={false} navigation={true}>
@@ -76,7 +75,7 @@ const Slider = () => {
                                         className="p-8 border-[1px] border-off-1/0 hover:border-[1px] hover:border-off-2 md:hover:bg-off-1 rounded-md"
                                         style={{ width: `${width}px` }}
                                     >
-                                        <div className="flex h-64 md:h-40 my-4 overflow-hidden rounded-md">
+                                        <div className="flex h-40 md:h-64 my-4 overflow-hidden rounded-md">
                                             <img
                                                 src={data.url}
                                                 onError={(event) =>

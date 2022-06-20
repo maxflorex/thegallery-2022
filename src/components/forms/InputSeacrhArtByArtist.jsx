@@ -28,7 +28,7 @@ export const InputSeacrhArtByArtist = ({ by, artist }) => {
 
     return (
         <div className="flex flex-col items-center justify-center col-span-3 lg:col-span-1 p-8 gap-4 relative lg:w-96 w-full mx-auto">
-            <p className="italic text-2xl font-thin">
+            <p className="italic text-2xl font-thin text-center">
                 Search more from{' '}
                 <span className="capitalize">{by.name.toLowerCase()}</span>
             </p>

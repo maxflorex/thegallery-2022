@@ -39,12 +39,12 @@ const ArtFullDetails = ({ art, id }) => {
             {title && (
                 <div ref={topPage} className="snap-center">
                     <div className="flex flex-col md:flex-row w-full">
-                        <div className="w-full md:w-[50vw] py-16 md:py-40 flex items-center justify-evenly bg-off-1 lg:h-screen h-auto bg-repeat" style={{backgroundImage: 'url(https://www.transparenttextures.com/patterns/asfalt-dark.png)'}}>
-                            <div className="pt-24 pb-8 md:py-4 px-16">
+                        <div className="w-full md:w-[50vw] py-16 md:py-40 flex items-center justify-evenly bg-off-1 lg:h-screen h-auto bg-repeat">
+                            <div className="pt-24 pb-8 md:py-4 px-8 md:px-12 lg:px-16">
                                 <img
                                     src={url}
                                     alt="Artwork"
-                                    className="max-w-full object-contain rounded-lg max-h-[70vh] shadow"
+                                    className="max-w-full object-contain rounded-md max-h-[70vh] shadow"
                                 />
                             </div>
                         </div>
@@ -66,7 +66,7 @@ const ArtFullDetails = ({ art, id }) => {
                                 </div>
                             </Link>
 
-                            <h1 className="text-4xl capitalize">
+                            <h1 className="text-4xl capitalize leading-normal">
                                 {title?.toLowerCase()}
                             </h1>
                             <p>

@@ -22,7 +22,7 @@ export const OtherArtworkByArtist = ({ moreByArtist }) => {
         <div className="flex flex-col justify-center items-center h-full w-full py-16 px-8 snap-center bg-blue-100">
             <div className="flex w-full justify-between items-center group container mx-auto pt-16">
                 <div className="flex items-end gap-4">
-                    <h1 className="text-3xl font-light capitalize">
+                    <h1 className="text-xl md:text-3xl font-light capitalize">
                         Other Artworks By Artist
                     </h1>
                 </div>
@@ -31,7 +31,6 @@ export const OtherArtworkByArtist = ({ moreByArtist }) => {
                     className="flex gap-2 items-center px-4 py-2 bg-off-1 rounded-md hover:bg-cream-500"
                 >
                     <h1 className="text-sm text-navy-500">See All Artworks</h1>
-                    <FiPlay className="text-off-3 group-hover:text-white" />
                 </Link>
             </div>
             {data?.length > 0 ? (
@@ -51,7 +50,7 @@ export const OtherArtworkByArtist = ({ moreByArtist }) => {
                                     <img
                                         src={data.url}
                                         alt="Artwork"
-                                        className="h-24 object-cover rounded-md w-full grayscale group-hover:grayscale-0 opacity-30 group-hover:opacity-100"
+                                        className="shadow h-24 object-cover rounded-md w-full grayscale group-hover:grayscale-0 opacity-30 group-hover:opacity-100"
                                     />
                                     {show === i && (
                                         <div className="flex gap-4 absolute items-center justify-center bottom-4 right-4 bg-white rounded-full py-2 px-4">
@@ -69,7 +68,7 @@ export const OtherArtworkByArtist = ({ moreByArtist }) => {
                                     )}
                                 </div>
                                 <div className="flex justify-between flex-wrap items-center gap-2">
-                                    <h1 className="capitalize text-sm">
+                                    <h1 className="capitalize text-xs md:text-sm">
                                         {data?.title?.toLowerCase()}
                                     </h1>
                                     <p className="text-xs italic">

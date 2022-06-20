@@ -56,8 +56,8 @@ const ModalContact = ({ setShow }) => {
         >
             <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <div className="relative bg-white p-16 rounded-lg">
-                    <h1 className='text-2xl font-thin text-center mb-16'>Get in touch!</h1>
-                    <form className="flex flex-col gap-4 w-96 rounded-lg">
+                    <h1 className='text-2xl font-thin text-center mb-16 text-black'>Get in touch!</h1>
+                    <form className="flex flex-col gap-4 w-96 rounded-lg text-black">
                         {/* NAME */}
                         <label>Name</label>
                         <input

@@ -37,7 +37,7 @@ const Collections = () => {
         <div className="bg-off-1 mt-32">
             <div className="container mx-auto p-8">
                 <div className="flex w-full justify-between items-center group pt-24 pb-14">
-                    <h1 className="text-3xl font-light capitalize">
+                    <h1 className="text-2xl md:text-3xl font-light capitalize">
                         Browse by collections
                     </h1>
                     <Link
@@ -47,7 +47,6 @@ const Collections = () => {
                         <h1 className="text-sm text-navy-500">
                             See All Collections
                         </h1>
-                        <FiPlay className="text-off-3 group-hover:text-white" />
                     </Link>
                 </div>
                 <div className="grid grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-16 pb-20">

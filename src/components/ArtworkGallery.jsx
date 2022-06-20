@@ -35,10 +35,10 @@ const ArtworkGallery = () => {
         <div className="relative overflow-hidden p-8 mt-32 mb-24">
             <div className="flex w-full justify-between items-center group container mx-auto">
                 <div className="flex items-end gap-4">
-                    <h1 className="text-3xl font-light capitalize">
+                    <h1 className="text-2xl md:text-3xl font-light capitalize">
                         Artworks On Display
                     </h1>
-                    <div className="flex gap-4 items-center">
+                    <div className="hidden md:flex gap-4 items-center">
                         <TbClick className="text-off-5 -mr-2" />
                         <p className="text-sm italic text-off-5">
                             Click to expand the image
@@ -52,7 +52,6 @@ const ArtworkGallery = () => {
                     <h1 className="text-sm text-navy-500">
                         See All Artworks
                     </h1>
-                    <FiPlay className="text-off-3 group-hover:text-white" />
                 </Link>
             </div>
             <div className="grid lg:grid-cols-6 grid-cols-2 gap-8 flex-wrap overflow-hidden py-12 justify-center container mx-auto">
@@ -70,7 +69,7 @@ const ArtworkGallery = () => {
                                         'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
                                 }
                                 alt="Artwork"
-                                className="w-auto h-56 object-cover overflow-hidden opacity-70 hover:opacity-100"
+                                className="w-auto h-32 lg:h-56 object-cover overflow-hidden opacity-70 hover:opacity-100"
                             />
                         </div>
                     ))}

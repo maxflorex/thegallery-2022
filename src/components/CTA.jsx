@@ -5,12 +5,12 @@ import { Link } from 'react-router-dom';
 const CTA = () => {
     return (
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 container mx-auto mb-24 px-8">
-            <img src={pic} alt="The Gallery" className='w-full h-96 object-cover rounded-lg' />
+            <img src={pic} alt="The Gallery" className='w-full h-56 md:h-96 object-cover rounded-lg' />
             <div className="flex gap-8 flex-col  h-full my-auto items-start justify-center">
-                <h1 className="text-3xl font-light capitalize">
+                <h1 className="text-2xl md:text-3xl font-light capitalize">
                     Showcasing local art
                 </h1>
-                <p className="font-normal leading-loose">
+                <p className="text-sm md:text-md font-normal leading-loose">
                     The lush landscape, vibrant coast, rich seafaring culture
                     and sheer luminescence of colour and light found within the
                     Cayman Islands landscape has inspired many an artist to put

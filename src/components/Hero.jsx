@@ -35,7 +35,7 @@ const Hero = () => {
             className="h-[50vh] bg-center bg-cover w-full"
         >
             <div className="flex flex-col md:gap-4 gap-2 justify-center w-full items-center h-full flex-wrap relative">
-                <h1 className="text-8xl font-thin text-cream-100 drop-shadow-sm">
+                <h1 className="md:text-8xl text-6xl font-thin text-cream-100 drop-shadow-sm">
                     The Gallery
                 </h1>
                 <p className="text-white text-xl italic font-light">

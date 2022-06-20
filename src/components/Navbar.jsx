@@ -1,15 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo-typo-line-01.svg';
 import ModalMenu from './modals/ModalMenu';
 import { HiMenuAlt4 } from 'react-icons/hi';
 import { FiHeart, FiShoppingCart } from 'react-icons/fi';
 import { useScrollPosition } from '../hooks/useScrollPosition';
+import { AppContext } from '../context/appContext';
 
 const Navbar = () => {
     const [showMenu, setShowMenu] = useState(false);
     const [actualY, setActuallY] = useState(true);
-    const [current, setCurrent] = useState(0);
+    const { user } = useContext(AppContext);
 
     const handleShowMenu = () => {
         setShowMenu(true);
@@ -49,6 +50,18 @@ const Navbar = () => {
                             <FiShoppingCart />
                         </Link>
                     </div>
+                    {user && (
+                        <div className="md:flex gap-2 items-center justify-center text-black hidden">
+                            {user?.photoUrl && (
+                                <img
+                                    src={user?.photoUrl}
+                                    alt="User profile"
+                                    className="w-8 h-8 rounded-full object-cover bg-blue-500"
+                                />
+                            )}
+                            <h1 className='text-xs italic text-navy-500'>Hello, {user?.displayName?.toUpperCase()}</h1>
+                        </div>
+                    )}
                 </section>
                 <Link className="hover:scale-110" to="/">
                     <img
@@ -57,6 +70,7 @@ const Navbar = () => {
                         className="w-32 bg-navy-500 py-3 px-4 rounded-md"
                     />
                 </Link>
+
                 {showMenu && (
                     <ModalMenu setShowMenu={setShowMenu} showMenu={showMenu} />
                 )}
