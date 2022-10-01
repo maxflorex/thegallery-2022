@@ -29,6 +29,8 @@ const Hero = () => {
         navigate(`/art/${id}`);
         setText('');
     };
+
+    const sb = process.env.REACT_APP_STORAGE_BUCKET;
     return (
         <div
             style={{ backgroundImage: `url(${bg})` }}
@@ -53,29 +55,34 @@ const Hero = () => {
                     {text && suggestions[0] && (
                         <ul className="flex flex-col scroll  gap-4 absolute top-16 w-full z-40 max-h-80 overflow-y-auto py-4 bg-blue-100/90 rounded-xl mx-auto">
                             {suggestions &&
-                                suggestions.map(({ title, id, url }) => (
-                                    <li
-                                        key={id}
-                                        className="cursor-pointer bg-white p-2 rounded-full mx-auto hover:bg-off-2 flex-wrap"
-                                        // onClick={() =>
-                                        //     onSelectionHanlder({ name, url, id })
-                                        // }
-                                    >
-                                        <span
-                                            className=" flex items-center justify-center gap-4"
-                                            onClick={() => handleClick(id)}
+                                suggestions.map(({ title, id, url }) => {
+
+                                    const link = url?.replace(
+                                        `https://firebasestorage.googleapis.com/v0/b/${sb}/`,
+                                        ''
+                                    );
+
+                                    return (
+                                        <li
+                                            key={id}
+                                            className="cursor-pointer bg-white p-2 rounded-full mx-auto hover:bg-off-2 flex-wrap"
                                         >
-                                            <h1 className="text-sm font-semibold pl-4 capitalize">
-                                                {title.toLowerCase()}
-                                            </h1>
-                                            <img
-                                                src={url}
-                                                alt="Profile"
-                                                className="w-10 h-10 object-cover rounded-full"
-                                            />
-                                        </span>
-                                    </li>
-                                ))}
+                                            <span
+                                                className=" flex items-center justify-center gap-4"
+                                                onClick={() => handleClick(id)}
+                                            >
+                                                <h1 className="text-sm font-semibold pl-4 capitalize">
+                                                    {title.toLowerCase()}
+                                                </h1>
+                                                <img
+                                                    src={`https://ik.imagekit.io/acc/tr:w-100/${link}`}
+                                                    alt="Profile"
+                                                    className="w-10 h-10 object-cover rounded-full"
+                                                />
+                                            </span>
+                                        </li>
+                                    );
+                                })}
                         </ul>
                     )}
                     {/* MODAL */}

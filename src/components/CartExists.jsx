@@ -7,6 +7,8 @@ const CartExists = ({ art }) => {
         return total + Number(arr.price);
     }, 0);
 
+    console.log(art);
+
     return (
         <div className="mx-auto container z-20 lg:my-16">
             <div className="flex items-center pt-32 pb-16 px-16">

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { AppContext } from '../context/appContext';
 
 const CollecionCard = (props) => {
+
     const [filtered, setFiltered] = useState([]);
     const { art } = useContext(AppContext);
     const [random, setRandom] = useState([]);
@@ -24,11 +25,17 @@ const CollecionCard = (props) => {
         }
     }, [filtered.length > 0, art]);
 
+    const sb = process.env.REACT_APP_STORAGE_BUCKET;
+    const link = random?.url?.replace(
+        `https://firebasestorage.googleapis.com/v0/b/${sb}/`,
+        ''
+    );
+    
     return (
         <div>
             <div className="relative group">
                 <img
-                    src={random.url}
+                    src={`https://ik.imagekit.io/acc/tr:w-500/${link}`}
                     alt="Collection"
                     className="w-full object-cover h-40 md:h-64 rounded-md relative overflow-hidden opacity-70 group-hover:opacity-90"
                 />

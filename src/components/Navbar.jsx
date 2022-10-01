@@ -55,6 +55,10 @@ const Navbar = () => {
                             {user?.photoUrl && (
                                 <img
                                     src={user?.photoUrl}
+                                    onError={(event) =>
+                                        (event.target.src =
+                                            'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
+                                    }
                                     alt="User profile"
                                     className="w-8 h-8 rounded-full object-cover bg-blue-500"
                                 />

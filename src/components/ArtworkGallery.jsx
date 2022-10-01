@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AppContext } from '../context/appContext';
 import ModalExpandImage from './../components/modals/ModalExpandImage';
-import { FiPlay } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 import { TbClick } from 'react-icons/tb';
 
@@ -31,6 +30,8 @@ const ArtworkGallery = () => {
         setRandom(shuffle(art));
     }, [art?.length]);
 
+    const sb = process.env.REACT_APP_STORAGE_BUCKET;
+
     return (
         <div className="relative overflow-hidden p-8 mt-32 mb-24">
             <div className="flex w-full justify-between items-center group container mx-auto">
@@ -49,30 +50,33 @@ const ArtworkGallery = () => {
                     to="/art"
                     className="flex gap-2 items-center px-4 py-2 bg-off-1 rounded-md hover:bg-cream-500"
                 >
-                    <h1 className="text-sm text-navy-500">
-                        See All Artworks
-                    </h1>
+                    <h1 className="text-sm text-navy-500">See All Artworks</h1>
                 </Link>
             </div>
             <div className="grid lg:grid-cols-6 grid-cols-2 gap-8 flex-wrap overflow-hidden py-12 justify-center container mx-auto">
                 {random.length > 0 &&
-                    random.slice(0, 5).map((data, index) => (
-                        <div
-                            key={index}
-                            className="flex flex-col p-2 md:p-4 border-[1px] border-off-2 hover:border-off-3 rounded-lg cursor-pointer hover:bg-off-2 overflow-hidden first:col-span-2 first:bg-off-1"
-                            onClick={() => handleClick(data)}
-                        >
-                            <img
-                                src={data.url}
-                                onError={(event) =>
-                                    (event.target.src =
-                                        'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
-                                }
-                                alt="Artwork"
-                                className="w-auto h-32 lg:h-56 object-cover overflow-hidden opacity-70 hover:opacity-100"
-                            />
-                        </div>
-                    ))}
+                    random.slice(0, 5).map((data, index) => {
+
+                        const link = data.url.replace(`https://firebasestorage.googleapis.com/v0/b/${sb}/`,'')
+
+                        return (
+                            <div
+                                key={index}
+                                className="flex flex-col p-2 md:p-4 border-[1px] border-off-2 hover:border-off-3 rounded-lg cursor-pointer hover:bg-off-2 overflow-hidden first:col-span-2 first:bg-off-1"
+                                onClick={() => handleClick(data)}
+                            >
+                                <img
+                                    src={`https://ik.imagekit.io/acc/tr:w-500/${link}`}
+                                    onError={(event) =>
+                                        (event.target.src =
+                                            'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')
+                                    }
+                                    alt="Artwork"
+                                    className="w-auto h-32 lg:h-56 object-cover overflow-hidden opacity-70 hover:opacity-100"
+                                />
+                            </div>
+                        );
+                    })}
                 {clickedItem && (
                     <ModalExpandImage
                         setClicked={setClickedItem}

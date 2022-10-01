@@ -20,6 +20,10 @@ const ModalExpandImage = ({ data, setClicked }) => {
     // SHOW SPECIFIC NUMBER OF ITEMS FROM ARRAY
     const tags = data?.tag?.slice(0, 4);
 
+    const sb = process.env.REACT_APP_STORAGE_BUCKET;
+    const link = data.url.replace(`https://firebasestorage.googleapis.com/v0/b/${sb}/`,'')
+
+    console.log(link);
 
     return (
         <div
@@ -29,7 +33,10 @@ const ModalExpandImage = ({ data, setClicked }) => {
             <div className="flex flex-col fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
                 <div className="relative">
                     <img
-                        src={data.url}
+                        src={`https://ik.imagekit.io/acc/tr:w-600/${link}`}
+                        srcSet={`https://ik.imagekit.io/acc/tr:w-800/${link} 800w,
+                        https://ik.imagekit.io/acc/tr:w-1000/${link} 1200,
+                        `}
                         onError={(event) =>
                             (event.target.src =
                                 'https://www.unfe.org/wp-content/uploads/2019/04/SM-placeholder.png')

@@ -72,6 +72,9 @@ const Artist = () => {
 		}
 	};
 
+	const sb = process.env.REACT_APP_STORAGE_BUCKET
+	const link = data?.url?.replace(`https://firebasestorage.googleapis.com/v0/b/${sb}/`, '')
+
 	return (<>
 		<div className="bg-navy-100 h-80 flex justify-center items-center bg-cover overflow-hidden bg-center relative" style={{ backgroundImage: `url(${random?.url})` }}>
 			<div className="bg-white/60 p-8 h-full w-full backdrop-blur-md flex flex-col justify-center items-center gap-4">
@@ -96,7 +99,7 @@ const Artist = () => {
 
 			{data && <>
 				<div className='w-full flex flex-col items-center my-16 nd:my-24 gap-4 col-span-4 lg:col-span-1'>
-					<img src={data?.url} alt="Artist" className='w-48 h-48 rounded-full object-cover p-4 bg-cream-100' />
+					<img src={`https://ik.imagekit.io/acc/tr:w-240/${link}`} alt="Artist" className='w-48 h-48 rounded-full object-cover p-4 bg-cream-100' />
 					<h1 className='capitalize text-2xl font-thin italic'>{data?.name?.toLowerCase()}</h1>
 					<p className='max-h-[40vh] overflow-y-auto scroll text-justify leading-10 px-8 py-4 mx-8 lg:mx-0'>{data?.bio}</p>
 				</div>
@@ -104,28 +107,33 @@ const Artist = () => {
 
 
 			<div className="grid grid-cols-2 md:grid-cols-4 xl:grid-cols-5 lg:m-16 m-8 lg:col-span-3 gap-8 col-span-4 dismiss items-start">
-				{moreByArtist && moreByArtist.map((data, i) => (
-					<section key={i} className='cursor-pointer first:col-span-2 group last:row-span-4 dismiss' onMouseEnter={() => setShow(i)} onMouseLeave={() => setShow('')}>
-						<div className='flex w-full flex-col gap-4 p-4 border-[1px] border-off-1 group-hover:bg-off-1 rounded-lg dismiss' >
-							<div className="overflow-hidden rounded-lg relative dismiss">
-								<img src={data.url} alt="Artwork" className='rounded-lg max-h-64 object-cover group-hover:scale-110 w-full opacity-80 group-hover:opacity-100 dismiss' onClick={(e) => handleNavigate(data.id, e)} />
-								{show === i &&
-									<div className="flex ml-auto gap-4 items-center mt-4 bg-off-1 rounded-2xl py-2 px-4 shadow absolute top-1 right-4 z-40">
-										<FiHeart
-											className="hover:scale-125 cursor-pointer hover:fill-pink-500"
-											onClick={() => HandleFavorite(data)}
-										/>
-										<FiShoppingCart
-											className="hover:scale-125 cursor-pointer hover:fill-blue-500"
-											onClick={() => HandleCart(data)}
-										/>
-									</div>
-								}
+				{moreByArtist && moreByArtist.map((data, i) => {
+
+					const link = data?.url?.replace(`https://firebasestorage.googleapis.com/v0/b/${sb}/`, '')
+
+					return (
+						<section key={i} className='cursor-pointer first:col-span-2 group last:row-span-4 dismiss' onMouseEnter={() => setShow(i)} onMouseLeave={() => setShow('')}>
+							<div className='flex w-full flex-col gap-4 p-4 border-[1px] border-off-1 group-hover:bg-off-1 rounded-lg dismiss' >
+								<div className="overflow-hidden rounded-lg relative dismiss">
+									<img src={`https://ik.imagekit.io/acc/tr:w-400/${link}`} alt="Artwork" className='rounded-lg max-h-64 object-cover group-hover:scale-110 w-full opacity-80 group-hover:opacity-100 dismiss' onClick={(e) => handleNavigate(data.id, e)} />
+									{show === i &&
+										<div className="flex ml-auto gap-4 items-center mt-4 bg-off-1 rounded-2xl py-2 px-4 shadow absolute top-1 right-4 z-40">
+											<FiHeart
+												className="hover:scale-125 cursor-pointer hover:fill-pink-500"
+												onClick={() => HandleFavorite(data)}
+											/>
+											<FiShoppingCart
+												className="hover:scale-125 cursor-pointer hover:fill-blue-500"
+												onClick={() => HandleCart(data)}
+											/>
+										</div>
+									}
+								</div>
+								<h2 className='capitalize text-xs'>{data?.title?.toLowerCase()}</h2>
 							</div>
-							<h2 className='capitalize text-xs'>{data?.title?.toLowerCase()}</h2>
-						</div>
-					</section>
-				))}
+						</section>
+					)
+				})}
 			</div>
 		</div>
 

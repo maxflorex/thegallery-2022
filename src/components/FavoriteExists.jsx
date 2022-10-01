@@ -9,6 +9,8 @@ const FavoriteExists = ({ art }) => {
     const [HandleCart] = useCart();
     const [handleRemoveFavorite] = useRemoveFavorite();
 
+    const sb = process.env.REACT_APP_STORAGE_BUCKET;
+
     return (
         <div className="flex justify-center items-center w-full h-full flex-1">
             <div className="w-full flex flex-col justify-center items-center gap-4 p-8">
@@ -16,49 +18,61 @@ const FavoriteExists = ({ art }) => {
                     Your Favorite Artworks
                 </h1>
                 <div className="container mx-auto grid grid-cols-2 md:grid-cols-4 xl:grid-cols-6 gap-4">
-                    {art?.favorites?.map((data, i) => (
-                        <div
-                            key={i}
-                            className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-off-1 rounded-lg hover:scale-105 cursor-pointer relative"
-                            onMouseEnter={() => setShow(i)}
-                            onMouseLeave={() => setShow('')}
-                        >
-                            <div className="flex md:flex-col gap-1 items-start md:justify-center justify-between">
-                                <div className="">
-                                    <h1 className="text-sm capitalize break-words">
-                                        {data.title?.toLowerCase()}
-                                    </h1>
-                                    <p className="text-xs italic">
-                                        {data.medium}
-                                    </p>
+                    {art?.favorites?.map((data, i) => {
+                        const link = data?.url.replace(
+                            `https://firebasestorage.googleapis.com/v0/b/${sb}/`,
+                            ''
+                        );
+
+                        const link2 = data.by.url.replace(
+                            `https://firebasestorage.googleapis.com/v0/b/${sb}/`,
+                            ''
+                        );
+
+                        return (
+                            <div
+                                key={i}
+                                className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-off-1 rounded-lg hover:scale-105 cursor-pointer relative"
+                                onMouseEnter={() => setShow(i)}
+                                onMouseLeave={() => setShow('')}
+                            >
+                                <div className="flex md:flex-col gap-1 items-start md:justify-center justify-between">
+                                    <div className="">
+                                        <h1 className="text-sm capitalize break-words">
+                                            {data.title?.toLowerCase()}
+                                        </h1>
+                                        <p className="text-xs italic">
+                                            {data.medium}
+                                        </p>
+                                    </div>
+                                    <img
+                                        src={`https://ik.imagekit.io/acc/tr:w-100/${link2}`}
+                                        alt="By"
+                                        className="w-8 h-8 rounded-md mt-2 object-cover"
+                                    />
                                 </div>
                                 <img
-                                    src={data.by.url}
-                                    alt="By"
-                                    className="w-8 h-8 rounded-md mt-2 object-cover"
+                                    src={`https://ik.imagekit.io/acc/tr:w-100/${link}`}
+                                    alt="Artwork"
+                                    className="w-full h-32 rounded-lg object-cover col-span-2"
                                 />
+                                {show === i && (
+                                    <div className="flex items-end absolute bottom-6 right-6 h-full gap-2">
+                                        <FiX
+                                            className="p-2 bg-navy-500 hover:bg-pink-500 rounded-full w-6 h-6 stroke-white"
+                                            onClick={() =>
+                                                handleRemoveFavorite(data)
+                                            }
+                                        />
+                                        <FiShoppingCart
+                                            className="p-2 bg-navy-500 hover:bg-blue-500 rounded-full w-6 h-6 stroke-white"
+                                            onClick={() => HandleCart(data)}
+                                        />
+                                    </div>
+                                )}
                             </div>
-                            <img
-                                src={data.url}
-                                alt="Artwork"
-                                className="w-full h-32 rounded-lg object-cover col-span-2"
-                            />
-                            {show === i && (
-                                <div className="flex items-end absolute bottom-6 right-6 h-full gap-2">
-                                    <FiX
-                                        className="p-2 bg-navy-500 hover:bg-pink-500 rounded-full w-6 h-6 stroke-white"
-                                        onClick={() =>
-                                            handleRemoveFavorite(data)
-                                        }
-                                    />
-                                    <FiShoppingCart
-                                        className="p-2 bg-navy-500 hover:bg-blue-500 rounded-full w-6 h-6 stroke-white"
-                                        onClick={() => HandleCart(data)}
-                                    />
-                                </div>
-                            )}
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
                 <div className="flex gap-4 items-center justify-center">
                     <Link

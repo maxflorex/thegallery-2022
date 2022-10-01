@@ -19,6 +19,16 @@ const ArtCard = ({ art }) => {
         }
     };
 
+    const sb = process.env.REACT_APP_STORAGE_BUCKET;
+    const link = art.url.replace(
+        `https://firebasestorage.googleapis.com/v0/b/${sb}/`,
+        ''
+    );
+    const picLink = art.by.url.replace(
+        `https://firebasestorage.googleapis.com/v0/b/${sb}/`,
+        ''
+    );
+
     return (
         <div
             onMouseEnter={() => setShowBy(art.title)}
@@ -26,7 +36,7 @@ const ArtCard = ({ art }) => {
         >
             <span className="relative">
                 <img
-                    src={art.url}
+                    src={`https://ik.imagekit.io/acc/tr:w-300/${link}`}
                     alt="Collection"
                     className="w-full object-cover h-full rounded-md relative overflow-hidden opacity-70 hover:opacity-100"
                 />
@@ -52,7 +62,7 @@ const ArtCard = ({ art }) => {
                                 className="relative"
                             >
                                 <img
-                                    src={art.by.url}
+                                    src={`https://ik.imagekit.io/acc/tr:w-100/${link}`}
                                     alt="Artist"
                                     className="w-8 h-8 rounded-full grayscale opacity-60 object-cover  hover:opacity-100"
                                     onMouseEnter={() => setShowName(true)}
